@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
 import Home from './components/Home';
+import HostMap from './components/HostMap'
+import GuestLoginReact from './components/GuestLoginReact';
+import Login from './components/Login';
 import GuestRegistration from './components/GuestRegistration';
 import HostRegistration from './components/HostRegistration';
+import Agenda from './components/Agenda';
 import Admin from './components/Admin';
 import Footer from './components/Footer';
 import './App.css';
@@ -20,6 +24,8 @@ const fakeGuestAuth = {
   isAuthenticated: false,
   authenticate(cb) {
     this.isAuthenticated = true
+    fakeHostAuth.isAuthenticated = false;
+    fakeAdminAuth.isAuthenticated = false;
     setTimeout(cb, 100)
   },
   signout(cb) {
@@ -32,6 +38,8 @@ const fakeHostAuth = {
   isAuthenticated: false,
   authenticate(cb) {
     this.isAuthenticated = true
+    fakeAdminAuth.isAuthenticated = false;
+    fakeGuestAuth.isAuthenticated = false;
     setTimeout(cb, 100)
   },
   signout(cb) {
@@ -44,6 +52,8 @@ const fakeAdminAuth = {
   isAuthenticated: false,
   authenticate(cb) {
     this.isAuthenticated = true
+    fakeGuestAuth.isAuthenticated = false;
+    fakeHostAuth.isAuthenticated = false;
     setTimeout(cb, 100)
   },
   signout(cb) {
@@ -71,10 +81,7 @@ class GuestLogin extends Component{
       return <Redirect to={from.pathname} />
     }
     return(
-      <div>
-        Welcome to Guest Login!
-        <button onClick={()=>this.login()} >Login</button>
-      </div>
+        <Login type='guest' login = {this.login} />
     );
   }
 }
@@ -98,10 +105,7 @@ class HostLogin extends Component{
       return <Redirect to={from.pathname} />
     }
     return(
-      <div>
-        Welcome to Host Login!
-        <button onClick={()=>this.login()} >Login</button>
-      </div>
+        <Login type='host' login = {this.login} />
     );
   }
 }
@@ -139,7 +143,7 @@ const GuestRoute = ({ component: Component, ...rest }) => (
     fakeGuestAuth.isAuthenticated === true
       ? <Component {...props} />
       : <Redirect to={{
-          pathname: '/guest_login',
+          pathname: '/login/guest',
           state: { from: props.location }
         }} />
   )}} />
@@ -150,7 +154,7 @@ const HostRoute = ({ component: Component, ...rest }) => (
     fakeHostAuth.isAuthenticated === true
       ? <Component {...props} />
       : <Redirect to={{
-          pathname: '/host_login',
+          pathname: '/login/host',
           state: { from: props.location }
         }} />
   )}} />
@@ -176,17 +180,23 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header/>
         <Router>
           <div>
+            <Route path='/guest' component = { Header } />
             <Route exact path='/' component = { Home } />
-            <Route path='/' component = { Footer } />
-            <Route path='/guest_login' component = { GuestLogin } />
-            <Route path='/host_login' component = { HostLogin } />
+            {/* <Route path='/' component = { Footer } /> */}
+            <Route path='/login/guest' component = { GuestLogin } />
+            <Route path='/login/host' component = { HostLogin } />
             <Route path='/admin_login' component = { AdminLogin } />
-            <GuestRoute path='/guest_reg' component = { GuestRegistration } />
-            <HostRoute path='/host_reg' component = { HostRegistration } />
-            <AdminRoute path='/admin' component = { Admin } />
+            <Route path='/guest/:registration' component = { Header } />
+            <GuestRoute exact path='/guest' component = { GuestRegistration } />
+            <Route exact path='/host' component = { Header } />
+            <Route exact path='/host/:registration' component = { Header } />
+            <HostRoute exact path='/host' component = { HostMap } />
+            <HostRoute path='/host/registration' component = { HostRegistration } />
+            <Route path='/agenda' component = { Header } />
+            <Route path='/agenda' component = { Agenda }/>
+            <Route path='/admin' component = { Admin } />
           </div>
         </Router>
       </div>

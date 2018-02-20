@@ -1,8 +1,3 @@
-.footer {
-  position: absolute;
-  bottom: 0px;
-}
-
 html * {
   font-family: 'Open Sans', sans-serif;
 }
@@ -139,6 +134,13 @@ body {
   padding: 0px;
 }
 
+.address_checker .checker_submit {
+  background-color: #4c4b4b;
+  padding: .5vw 1vw;
+  cursor: pointer;
+  color: #fff;
+}
+
 .address_checker .checker_addr {
   font-size: 1.75em;
 }
@@ -256,17 +258,6 @@ body {
   margin-top: 2.5vh;
 }
 
-.checker_submit {
-  background-color: #4c4b4b;
-  padding: .5vw 1vw;
-  cursor: pointer;
-  color: #fff;
-}
-
-.checker_submit:hover {
-  background-color: #000;
-}
-
 table {
   display: inline-block;
   margin-bottom: 2.5vh;
@@ -315,43 +306,4 @@ th:nth-child(7) {
 
 th:nth-child(8) {
   width: 12vw;
-}
-
-.login_window {
-  display: inline-block;
-  width: 65vw;
-  height: 35vh;
-}
-
-.login_window input {
-  border: 1px solid lightgrey;
-  margin: 4vw 2vw;
-}
-
-.table_input {
-  width: 80%;
-}
-
-.admin_passwords {
-  margin-bottom: 2.5vw;
-}
-
-.admin_passwords input {
-  margin-right: 2.5vw;
-}
-
-.admin_agenda_table {
-  margin: 0px 2.5vh 2.5vh 2.5vh;
-}
-
-.admin_agenda_table td {
-  padding: 0px;
-}
-
-.adm_submit {
-  margin-right: 2vw;
-}
-
-.agenda_date input {
-  width: 25vw;
 }

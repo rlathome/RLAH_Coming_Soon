@@ -7,18 +7,27 @@ export default class Home extends Component{
   }
 
   guest(){
-    this.props.history.push('/guest_reg')
+    this.props.history.push('/guest')
   }
   host(){
-    this.props.history.push('/host_reg');
+    this.props.history.push('/host');
   }
   render(){
     return(
-      <div>
-        <p>Welcome to DCOH Coming Soon!</p>
-        <button onClick = {this.guest.bind(this)}>Guests</button>
-        <button onClick = {this.host.bind(this)} >Hosts</button>
-      </div>
+      <main>
+        <h1 className="coming_soon_title">Coming Soon Tour</h1>
+        <div className="main-subtitle">Bi-weekly caravan tour to preview properties not listed in Bright MLS for agents</div>
+        <section className="visitor_buttons clearfix">
+          <div onClick={()=>{this.props.history.push('/host')}}>Host</div>
+          <div onClick={()=>{this.props.history.push('/guest')}}>Guest</div>
+        </section>
+        <section className="sponsored_by">
+          <h2>Sponsored By</h2>
+          <div>RLAH<br/>
+            Real setState
+          </div>
+        </section>
+      </main>
     );
   }
 }

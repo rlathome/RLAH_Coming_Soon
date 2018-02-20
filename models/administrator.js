@@ -12,6 +12,14 @@ var schema = new mongoose.Schema({
   admin_password:{
     type:String,
     required:false
+  },
+  agenda:{
+    type:Array,
+    required:false
+  },
+  event_date:{
+    type:String,
+    required:false
   }
 });
 

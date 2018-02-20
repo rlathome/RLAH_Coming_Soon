@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DCOH Coming Soon</title>
+    <link rel="stylesheet" href="./App.css" type="text/css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" title="Bootstrap" charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+  </head>
+  <header class="clearfix">
+  <body>
+    <ul class="menu">
+      <li>Home</li>
+      <li>Host</li>
+      <li>Guest</li>
+      <li>Agenda</li>
+    </ul>
+  </header>
+    <main>
+      <h1 class="coming_soon_title">Coming Soon Tour</h1>
+      <div class="host_title">
+        HOST
+      </div>
+      <div class="address_checker">
+        <div class="row">
+          <div class="col-sm-3">
+            <h3>Address:</h3>
+          </div>
+          <div class="col-sm-9">
+            <span class="checker_addr">
+              123 Main St</br>
+              Washington, DC 20011
+            </span>
+          </div>
+        </div>
+      </div>
+      <section class="host_form">
+        <form>
+          <p>*denotes required field for submission</p>
+          <div><div class="form_labels">Listing Agent Name&ast;:</div>&nbsp;<div class="form_inputs"><input type="text" /></div></div>
+          <div><div class="form_labels">Listing Agent Email&ast;:</div>&nbsp;<div class="form_inputs"><input type="text" /></div></div>
+          <div><div class="form_labels">Expected Price:</div>&nbsp;<div class="form_inputs"><input type="text" /></div></div>
+          <div><div class="form_labels">Estimated Size (sqft)&ast;:</div>&nbsp;<div class="form_inputs"><input type="text" /></div></div>
+          <div><div class="form_inputs">Will seller show home/consider
+offers prior to listing?&ast;:</div>&nbsp;
+            <div class="form_labels">
+              <div>
+                <input onChange={this.handleOptionChange.bind(this)} type="radio" value='no' checked = {this.state.selected_option==='yes'} id="radio_no" name="yes_no"/><label for="radio_no">Yes</label>
+                <input onChange={this.handleOptionChange.bind(this)} type="radio" value='yes' checked = {this.state.selected_option==='no'} id="radio_yes" name="yes_no"/><label for="radio_yes">No</label>
+              </div>
+            </div>
+        </form>
+      </section>
+      <section class="feedback">
+        <div class="feedback_msg">
+          Feedback host is seeking from peers on tour&ast;:
+        </div></br>
+        <div class="feedback_options row">
+          <div class="col-xs-2">
+
+          </div>
+          <form>
+          <div class="col-xs-4">
+            <div>
+              <input type="checkbox" id="radio_price"  name="radio_feedback" /><label for="price">Price</label></br>
+              <input type="checkbox" id="radio_staging" name="radio_feedback"/><label for="radio">Staging</label></br>
+              <input type="checkbox" id="radio_timing" value="radio_feedback" name="radio"  /><label for="radio_timing">Timing</label>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <input type="checkbox" id="radio_improvements" value="radio_improvements"  name="radio_feedback" /><label for="radio_improvements">Improvements</label></br>
+            <input type="checkbox" id="radio_buyers_interested" value="radio_buyers_interested" name="radio_feedback"  /><label for="radio_buyers_interested">Buyers Interested</label></br>
+            <input type="checkbox" id="radio_other" value="radio_other" name="radio_feedback" /><label for="radio_other">Other</label></br>
+          </div>
+        </form>
+        </div>
+      </section>
+      <section class="reminder">
+        REMINDER: Finalized tour logisitics will be determined and distributed after final property
+        is submitted, but no later than 6pm on the previous Monday. Tour details will be posted at
+        <a href="/agenda.html">comingsoontour.com/agenda</a> AND sent to all members via email in participating brokerage(s).
+      </section>
+      <section class="terms_conditions">
+        <input type="checkbox" id="terms_conditions_radio" value="terms_conditions_radio" name="terms_conditions_radio"  /><label class="terms_conditions_link">I agree to the terms and conditions</label>
+      </section>
+      <section class="submit_btn">
+        <span class="main_submit">SUBMIT</span>
+      </section>
+      <section class="sponsored_by">
+        <h2>Sponsored By</h2>
+        <div>RLAH</br>
+          Real setState
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

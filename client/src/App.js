@@ -129,10 +129,7 @@ class AdminLogin extends Component{
       return <Redirect to={from.pathname} />
     }
     return(
-      <div>
-        Welcome to Admin Login!
-        <button onClick={()=>this.login()} >Login</button>
-      </div>
+      <Login type='admin' login = {this.login} />
     );
   }
 }
@@ -188,15 +185,19 @@ class App extends Component {
             <Route path='/login/guest' component = { GuestLogin } />
             <Route path='/login/host' component = { HostLogin } />
             <Route path='/admin_login' component = { AdminLogin } />
+            {/* <AdminRoute path='/admin_login' component = { AdminLogin } /> */}
+            <Route path='/admin' component = { Admin } />
             <Route path='/guest/:registration' component = { Header } />
-            <GuestRoute exact path='/guest' component = { GuestRegistration } />
+            {/* <GuestRoute exact path='/guest' component = { GuestRegistration } /> */}
+            <Route exact path='/guest' component = { GuestRegistration } />
             <Route exact path='/host' component = { Header } />
             <Route exact path='/host/:registration' component = { Header } />
-            <HostRoute exact path='/host' component = { HostMap } />
-            <HostRoute path='/host/registration' component = { HostRegistration } />
+            {/* <HostRoute exact path='/host' component = { HostMap } />
+            <HostRoute path='/host/registration' component = { HostRegistration } /> */}
+            <Route exact path='/host' component = { HostMap } />
+            <Route path='/host/registration' component = { HostRegistration } />
             <Route path='/agenda' component = { Header } />
             <Route path='/agenda' component = { Agenda }/>
-            <Route path='/admin' component = { Admin } />
           </div>
         </Router>
       </div>

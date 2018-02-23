@@ -317,6 +317,10 @@ th:nth-child(8) {
   width: 12vw;
 }
 
+.login_window_container {
+  margin-top: 25vh;
+}
+
 .login_window {
   display: inline-block;
   width: 65vw;
@@ -354,4 +358,19 @@ th:nth-child(8) {
 
 .agenda_date input {
   width: 25vw;
+}
+
+.listing-map-object {
+  height: 100%;
+}
+
+.main_logo {
+  width: 20vw;
+  display: inline-block;
+}
+
+.out_of_bounds {
+  margin-top: 2.5vh;
+  font-size: 2vw;
+  color: red;
 }

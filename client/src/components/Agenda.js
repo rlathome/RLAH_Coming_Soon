@@ -12,14 +12,14 @@ export default class Agenda extends Component{
     axios.get('http://localhost:8080/info/admin_info').then((agenda)=>{
       console.log('the agenda: ',agenda.data[0].agenda);
       this.setState({
-        agenda:agenda.data[0].agenda
+        agenda:agenda.data[0]
       });
     }).catch((err)=>{
       console.log('err - ',err);
     })
   }
   render(){
-    let agenda = (this.state.agenda !=='') ? this.state.agenda.map((event)=>{
+    let agenda = (this.state.agenda !=='') ? this.state.agenda.agenda.map((event)=>{
       return(
         <tr>
           <td>{event.property_no}</td>
@@ -40,7 +40,7 @@ export default class Agenda extends Component{
           AGENDA
         </div>
         <div className="agenda_date">
-          02.19.18
+          { this.state.agenda.event_date }
         </div>
         <section className="agenda_table_container">
           <table className="agenda_table">

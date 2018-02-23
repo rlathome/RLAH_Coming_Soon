@@ -307,3 +307,8 @@ th:nth-child(7) {
 th:nth-child(8) {
   width: 12vw;
 }
+
+.listing-map-object {
+  height: 100% !important;
+  width: 100% !important;
+}

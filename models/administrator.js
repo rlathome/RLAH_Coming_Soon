@@ -20,6 +20,14 @@ var schema = new mongoose.Schema({
   event_date:{
     type:String,
     required:false
+  },
+  slots_available:{
+    type:String,
+    required:false
+  },
+  logo_url:{
+    type:String,
+    required:false
   }
 });
 

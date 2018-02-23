@@ -257,3 +257,7 @@ th{
   @include table_style(7,width,6vw);
   @include table_width(8,12vw);
 }
+.listing-map-object{
+  height:100% !important;
+  width:100% !important;
+}

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const url = process.env.URL;
+console.log('url: ',url);
+
 export default class Admin extends Component{
   constructor(props){
     super(props);
@@ -8,7 +11,9 @@ export default class Admin extends Component{
       host_password:'',
       guest_password:'',
       agenda:'',
-      event_date:''
+      event_date:'',
+      slots_avail:'',
+      logo:''
     }
   }
   componentDidMount(){
@@ -20,7 +25,9 @@ export default class Admin extends Component{
         guest_password:d.guest_password,
         admin_password:d.admin_password,
         agenda:d.agenda,
-        event_date:d.event_date
+        event_date:d.event_date,
+        slots_avail:d.slots_available,
+        logo:d.logo_url
       })
     }).catch((err)=>{
       console.log('err - ',err);
@@ -29,6 +36,8 @@ export default class Admin extends Component{
   submitEvent(){
     let event_num = 0;
     let agenda = [];
+    let event_date = this.refs.event_date.value;
+    let slots_avail = this.refs.slots_avail.value.toString();
     for(let i=1; i<5; i++){
       let property_no = 'property_no'+i;
       let arrival = 'arrival'+i;
@@ -59,7 +68,7 @@ export default class Admin extends Component{
       agenda.push(items);
     }
     console.log('our agenda: ',agenda);
-    axios.post('http://localhost:8080/info/submitagenda',agenda).then((response)=>{
+    axios.post('http://localhost:8080/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
       console.log('success: ',response);
       alert('your agenda has been updated');
     }).catch((err)=>{
@@ -155,9 +164,19 @@ export default class Admin extends Component{
     }
     let agenda_date = (this.state.event_date !=='') ? (
       <div className="agenda_date">
+        <span>Event date: </span>
         <input type="text" defaultValue={ this.state.event_date } ref="event_date" />
       </div>
     ) : '';
+    let slots_avail = (this.state.slots_avail !=='') ? (
+      <div className="slots_avail">
+        <span>Slots: </span>
+        <input type="text" defaultValue={ this.state.slots_avail } ref="slots_avail" />
+      </div>
+    ) : '';
+    
+    let logo = this.state.logo;
+
     return(
       <div>
         <h1>Welcome to Admin Page!</h1>
@@ -167,6 +186,7 @@ export default class Admin extends Component{
             AGENDA
           </div>
           { agenda_date }
+          { slots_avail }
           <section className="agenda_table_container">
             <table className="agenda_table admin_agenda_table">
               <tbody>
@@ -191,8 +211,9 @@ export default class Admin extends Component{
             { passwords }
           <section className="sponsored_by">
             <h2>Sponsored By</h2>
-            <div>RLAH<br/>
-              Real setState
+            <div className='main_logo' >
+
+              <img className="img-responsive" src={logo} alt="affiliate logo" />
             </div>
           </section>
         </div>

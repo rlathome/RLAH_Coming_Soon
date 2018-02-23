@@ -23,9 +23,11 @@ router.get('/admin_info',function(req,res,next){
 
 router.post('/submitagenda',function(req,res,next){
   console.log('agenda: ',req.body);
-  const agenda = req.body;
+  const agenda = req.body.agenda;
   Administrator.update({},{
-      'agenda':agenda
+      'agenda':agenda,
+      'event_date':req.body.event_date,
+      'slots_available':req.body.slots_avail
     },function(err){
     if(err) ()=>console.log('error: ',err);
     res.send('success');
@@ -42,8 +44,34 @@ router.post('/change_password',function(req,res,next){
     res.send('success');
   });
 });
-// router.get('/agenda',function(req,res,next){
-//   Administrator.find({})
-// })
+router.post('/login',function(req,res,next){
+  console.log('data: ',req.body)
+  let real_password;
+  let submitted_password = req.body.password;
+  let type = req.body.type;
+  let admin;
+  Administrator.find({},'',function(err,resp){
+    if(err) console.log('err, ',err)
+    admin = resp[0];
+    console.log('admin: ',admin)
+    switch(type){
+      case 'admin':
+      real_password = admin.admin_password;
+      break;
+      case 'guest':
+      real_password = admin.guest_password;
+      break;
+      case 'host':
+      real_password = admin.host_password;
+      break;
+    }
+    if(real_password===submitted_password){
+      res.send('success');
+    }else{
+      res.send('fail');
+    }
+  });
+
+})
 
 module.exports = router;

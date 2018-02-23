@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Footer from './Footer';
 
 export default class Home extends Component{
   constructor(props){
@@ -21,12 +22,7 @@ export default class Home extends Component{
           <div onClick={()=>{this.props.history.push('/host')}}>Host</div>
           <div onClick={()=>{this.props.history.push('/guest')}}>Guest</div>
         </section>
-        <section className="sponsored_by">
-          <h2>Sponsored By</h2>
-          <div>RLAH<br/>
-            Real setState
-          </div>
-        </section>
+        <Footer />
       </main>
     );
   }

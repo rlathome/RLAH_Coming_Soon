@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/info', index);
-app.use('/', express.static('client/build'));
+// app.use('/', express.static('client/build'));
 
 app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, 'build', 'index.html'))

@@ -197,7 +197,7 @@ class App extends Component {
             {/* <Route exact path='/host' component = { HostMap } />
             <Route path='/host/registration/:addr' component = { HostRegistration } /> */}
             <HostRoute exact path='/host' component = { HostMap } />
-            <HostRoute path='/host/registration' component = { HostRegistration } />
+            <HostRoute path='/host/registration/:addr' component = { HostRegistration } />
 
             <Route path='/agenda' component = { Agenda }/>
             {/* <Route path='/' component = { Footer } /> */}

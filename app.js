@@ -23,6 +23,7 @@ mongoose.connect(
 });
 app.use(cors());
 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -32,6 +33,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/info', index);
+app.use('/',express.static('client/build'));
+
+
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,11 +60,6 @@ app.use(function(err, req, res, next) {
 
 const PORT = process.env.PORT || 8088;
 
-
-app.get('*', function (req, res) {
-  const index = path.join(__dirname, 'build', 'index.html');
-  res.sendFile(index);
-});
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);

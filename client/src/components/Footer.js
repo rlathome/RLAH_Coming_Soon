@@ -8,9 +8,9 @@ export default class Footer extends Component{
       logo:''
     }
   }
-  componentWillMount(){
+  componentDidMount(){
     axios.get(url+'/info/admin_info').then((admin)=>{
-      console.log('footer admin:',admin)
+      console.log('footer admin:',admin.data[0].logo_url)
       this.setState({
         logo:admin.data[0].logo_url
       });

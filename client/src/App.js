@@ -181,24 +181,26 @@ class App extends Component {
           <div>
             <Route path='/guest' component = { Header } />
             <Route exact path='/' component = { Home } />
-            {/* <Route path='/' component = { Footer } /> */}
+            <Route exact path='/host' component = { Header } />
+            <Route exact path='/host/:registration' component = { Header } />
+            <Route path='/agenda' component = { Header } />
             <Route path='/login/guest' component = { GuestLogin } />
             <Route path='/login/host' component = { HostLogin } />
-            {/* <Route path='/admin_login' component = { AdminLogin } /> */}
             <Route path='/admin_login' component = { AdminLogin } />
-            <AdminRoute path='/admin' component = { Admin } />
+
             {/* <Route path='/admin' component = { Admin } /> */}
-            {/* <Route path='/guest/:registration' component = { Header } /> */}
+            <AdminRoute path='/admin' component = { Admin } />
+
+            {/* <Route exact path='/guest' component = { GuestRegistration } /> */}
             <GuestRoute exact path='/guest' component = { GuestRegistration } />
-            <Route exact path='/guest' component = { GuestRegistration } />
-            {/* <Route exact path='/host' component = { Header } />
-            <Route exact path='/host/:registration' component = { Header } /> */}
+
+            {/* <Route exact path='/host' component = { HostMap } />
+            <Route path='/host/registration/:addr' component = { HostRegistration } /> */}
             <HostRoute exact path='/host' component = { HostMap } />
             <HostRoute path='/host/registration' component = { HostRegistration } />
-            {/* <Route exact path='/host' component = { HostMap } />
-            <Route path='/host/registration' component = { HostRegistration } /> */}
-            <Route path='/agenda' component = { Header } />
+
             <Route path='/agenda' component = { Agenda }/>
+            {/* <Route path='/' component = { Footer } /> */}
           </div>
         </Router>
       </div>

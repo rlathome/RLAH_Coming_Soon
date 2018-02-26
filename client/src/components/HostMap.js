@@ -15,6 +15,7 @@ export default class HostRegistration extends Component{
     }
   }
   componentWillMount(){
+    console.log('joey: ',this.props.joey)
     axios.get(url+'/info/admin_info').then((admin)=>{
       console.log('map admin info: ',admin.data);
       const d = admin.data[0];
@@ -39,22 +40,27 @@ export default class HostRegistration extends Component{
     })
   }
   address_entered(){
+    const address = this.refs.addr.value;
     this.setState({
-      address_entered:true
+      address_entered:true,
+      address
     })
+  }
+  next(){
+    this.props.history.push('/host/registration/'+this.state.address);
   }
   render(){
     const out_of_bounds = (this.state.out_of_bounds) ? (
       <div className="out_of_bounds">Sorry, that address is outside of the 2 mile radius qualification</div>
     ) : '';
     let submit = (this.state.address_entered && !this.state.out_of_bounds) ? (
-      <span onClick={()=>this.props.history.push('/host/registration')} className="checker_submit">NEXT</span>
+      <span onClick={()=>this.next()} className="checker_submit">NEXT</span>
     ): (
       <span id="map-button" className="checker_submit no_click">SUBMIT</span>
     );
     let address_form = (
       <form className="address_checker checker_margin">
-        <h3>Address:</h3><input  id="pac-input" type="text" />
+        <h3>Address:</h3><input ref="addr" id="pac-input" type="text" />
         { submit }
       </form>
     )

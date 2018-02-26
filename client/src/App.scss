@@ -167,6 +167,9 @@ body{
     }
   }
 }
+.prop_address{
+  font-size:1.75em;
+}
 .guest_form{
   margin-bottom: 15vh;
 }
@@ -212,6 +215,13 @@ body{
   cursor: pointer;
   &:hover{
     background-color: #000;
+  }
+}
+.muted{
+  cursor:default;
+  background-color:grey;
+  &:hover{
+    background-color: grey;
   }
 }
 .feedback_options,.terms_conditions{

@@ -197,6 +197,10 @@ body {
   border: 1px solid #000;
 }
 
+.prop_address {
+  font-size: 1.75em;
+}
+
 .guest_form {
   margin-bottom: 15vh;
 }
@@ -243,6 +247,15 @@ body {
 
 .main_submit:hover {
   background-color: #000;
+}
+
+.muted {
+  cursor: default;
+  background-color: grey;
+}
+
+.muted:hover {
+  background-color: grey;
 }
 
 .feedback_options label, .terms_conditions label {

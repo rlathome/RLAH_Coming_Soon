@@ -66,7 +66,7 @@ export default class Admin extends Component{
       agenda.push(items);
     }
     console.log('our agenda: ',agenda);
-    axios.post('http://localhost:8080/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
+    axios.post(url+'/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
       console.log('success: ',response);
       alert('your agenda has been updated');
     }).catch((err)=>{
@@ -93,7 +93,7 @@ export default class Admin extends Component{
       type,
       password
     }
-    axios.post('http://localhost:8080/info/change_password',data).then((response)=>{
+    axios.post(url +'/info/change_password',data).then((response)=>{
       console.log('success: ',response);
       alert('your password has been updated');
     }).catch((err)=>{

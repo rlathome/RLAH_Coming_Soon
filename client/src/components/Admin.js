@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = 'https://polar-waters-86989.herokuapp.com';
+const url = 'https://polar-waters-86989.herokuapp.com/';
 
 export default class Admin extends Component{
   constructor(props){

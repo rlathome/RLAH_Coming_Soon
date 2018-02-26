@@ -76,11 +76,11 @@ body {
   cursor: pointer;
 }
 
-.sponsored_by {
+.logo-area {
   margin-top: 15vh;
 }
 
-.sponsored_by h2 {
+.logo-area h2 {
   font-family: 'Open Sans',sans-serif;
   font-weight: lighter;
   color: #ada8a8;

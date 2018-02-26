@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = 'https://polar-waters-86989.herokuapp.com';
+const url = 'https://polar-waters-86989.herokuapp.com/';
 export default class Footer extends Component{
   constructor(props){
     super(props);
@@ -19,7 +19,7 @@ export default class Footer extends Component{
   render(){
     let logo = this.state.logo;
     return(
-        <section className="sponsored_by">
+        <section className="logo-area">
           <h2>Sponsored By</h2>
           <div className='main_logo' >
             <img className="img-responsive" src={logo} alt="affiliate logo" />

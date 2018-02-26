@@ -3,7 +3,7 @@ import RadiusMap from './RadiusMap';
 import axios from 'axios';
 import Footer from './Footer';
 const google = window.google;
-const url = 'https://polar-waters-86989.herokuapp.com';
+const url = 'https://polar-waters-86989.herokuapp.com/';
 
 export default class HostRegistration extends Component{
   constructor(props){

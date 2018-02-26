@@ -39,10 +39,15 @@ body{
   font-size: 3.5em;
   margin-bottom:0px;
 }
+// .no_click{
+//   cursor: default !important;
+// }
 .main-subtitle{
   width:40vw;
   display: inline-block;
   margin-top:3.5vh;
+  font-size:1.35em;
+  font-weight: bold;
 }
 .visitor_buttons{
   display: flex;

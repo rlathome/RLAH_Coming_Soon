@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-const url = process.env.URL;
-console.log('url: ',url);
+const url = './';
 
 export default class Admin extends Component{
   constructor(props){
@@ -17,7 +15,7 @@ export default class Admin extends Component{
     }
   }
   componentDidMount(){
-    axios.get('http://localhost:8080/info/admin_info').then((admin)=>{
+    axios.get(url+'/info/admin_info').then((admin)=>{
       console.log('admin info: ',admin.data);
       const d = admin.data[0];
       this.setState({
@@ -174,7 +172,7 @@ export default class Admin extends Component{
         <input type="text" defaultValue={ this.state.slots_avail } ref="slots_avail" />
       </div>
     ) : '';
-    
+
     let logo = this.state.logo;
 
     return(

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import RadiusMap from './RadiusMap';
 import axios from 'axios';
+import Footer from './Footer';
 const google = window.google;
+const url = './';
 
 export default class HostRegistration extends Component{
   constructor(props){
@@ -13,12 +15,15 @@ export default class HostRegistration extends Component{
     }
   }
   componentWillMount(){
-    axios.get('http://localhost:8080/info/admin_info').then((admin)=>{
-      console.log('admin info: ',admin.data);
+    axios.get(url+'/info/admin_info').then((admin)=>{
+      console.log('map admin info: ',admin.data);
       const d = admin.data[0];
+      const avail = parseInt(d.slots_available);
+      const slots_full = (avail===0) ? true : false;
       this.setState({
-        slots_available:d.slots_available
-      })
+        slots_available:d.slots_available,
+        slots_full
+      });
     }).catch((err)=>{
       console.log('err - ',err);
     })
@@ -42,11 +47,20 @@ export default class HostRegistration extends Component{
     const out_of_bounds = (this.state.out_of_bounds) ? (
       <div className="out_of_bounds">Sorry, that address is outside of the 2 mile radius qualification</div>
     ) : '';
-    const submit = (this.state.address_entered && !this.state.out_of_bounds) ? (
+    let submit = (this.state.address_entered && !this.state.out_of_bounds) ? (
       <span onClick={()=>this.props.history.push('/host/registration')} className="checker_submit">NEXT</span>
     ): (
-      <span id="map-button" className="checker_submit">SUBMIT</span>
+      <span id="map-button" className="checker_submit no_click">SUBMIT</span>
     );
+    let address_form = (
+      <form className="address_checker checker_margin">
+        <h3>Address:</h3><input  id="pac-input" type="text" />
+        { submit }
+      </form>
+    )
+    if(this.state.slots_full){
+      address_form = '';
+    }
     const map_props = {
       out_of_bounds:this.out_of_bounds.bind(this),
       not_out_of_bounds:this.not_out_of_bounds.bind(this),
@@ -70,22 +84,14 @@ export default class HostRegistration extends Component{
         <section className="slots_avail"><h3>Current Property Slots Available:</h3> <span className="slots_number">
           { this.state.slots_available }
         </span></section>
-        <form className="address_checker checker_margin">
-          <h3>Address:</h3><input  id="pac-input" type="text" />
-          { submit }
-        </form>
+        { address_form }
         { out_of_bounds }
         <section className="radius_map">
           <div className="map_element">
             <RadiusMap  {...map_props} />
           </div>
         </section>
-        <section className="sponsored_by">
-          <h2>Sponsored By</h2>
-          <div>RLAH<br/>
-            Real setState
-          </div>
-        </section>
+        <Footer />
       </main>
     );
   }

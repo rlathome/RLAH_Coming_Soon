@@ -1,6 +1,6 @@
-
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 export default class HostRegistration extends Component{
   constructor(props){
@@ -8,9 +8,6 @@ export default class HostRegistration extends Component{
     this.state={
       selected_option:'yes'
     }
-  }
-  handleOptionChange(){
-
   }
   render(){
     return(
@@ -84,12 +81,7 @@ export default class HostRegistration extends Component{
         <section className="submit_btn">
           <span onClick={()=>this.props.history.push('/agenda')} className="main_submit">SUBMIT</span>
         </section>
-        <section className="sponsored_by">
-          <h2>Sponsored By</h2>
-          <div>RLAH<br/>
-            Real setState
-          </div>
-        </section>
+        <Footer />
       </main>
     );
   }

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 import React, { Component } from 'react';
 
 export default class GuestRegistration extends Component{
@@ -30,12 +31,7 @@ export default class GuestRegistration extends Component{
         <section className="submit_btn">
           <span className="main_submit">RSVP</span>
         </section>
-        <section className="sponsored_by">
-          <h2>Sponsored By</h2>
-          <div>RLAH<br/>
-            Real setState
-          </div>
-        </section>
+        <Footer />
       </main>
     );
   }

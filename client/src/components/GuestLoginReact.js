@@ -1,6 +1,3 @@
-
-
-
 import React, { Component } from 'react';
 import axios from 'axios';
 
@@ -18,8 +15,9 @@ export default class GuestLoginReact extends Component{
   render(){
     return(
       <main>
-        Welcome to Guest Login!
+        {/* Welcome to Guest Login!
         <button onClick={()=>this.props.login()} >Login</button>
+        <Login type='guest' login */}
       </main>
     );
   }

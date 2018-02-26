@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = 'http://localhost:8080/';
+const url = './';
 export default class Footer extends Component{
   constructor(props){
     super(props);
@@ -9,7 +9,7 @@ export default class Footer extends Component{
     }
   }
   componentWillMount(){
-    axios.get(url+'info/admin_info').then((admin)=>{
+    axios.get(url+'/info/admin_info').then((admin)=>{
       console.log('footer admin:',admin)
       this.setState({
         logo:admin.data[0].logo_url

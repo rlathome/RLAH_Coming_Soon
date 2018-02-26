@@ -3,7 +3,7 @@ import RadiusMap from './RadiusMap';
 import axios from 'axios';
 import Footer from './Footer';
 const google = window.google;
-const url = '.';
+const url = 'http://polar-waters-86989.herokuapp.com';
 
 export default class HostRegistration extends Component{
   constructor(props){
@@ -15,7 +15,7 @@ export default class HostRegistration extends Component{
     }
   }
   componentWillMount(){
-    axios.get(url+'/info/admin_info').then((admin)=>{
+    axios.get(url+'info/admin_info').then((admin)=>{
       console.log('map admin info: ',admin.data);
       const d = admin.data[0];
       const avail = parseInt(d.slots_available);

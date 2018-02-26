@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = '.';
+const url = 'http://polar-waters-86989.herokuapp.com';
 
 export default class Admin extends Component{
   constructor(props){
@@ -15,7 +15,7 @@ export default class Admin extends Component{
     }
   }
   componentDidMount(){
-    axios.get(url+'/info/admin_info').then((admin)=>{
+    axios.get(url+'info/admin_info').then((admin)=>{
       console.log('admin info: ',admin.data);
       const d = admin.data[0];
       this.setState({

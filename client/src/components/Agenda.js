@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = '.';
+const url = 'http://polar-waters-86989.herokuapp.com';
 
 export default class Agenda extends Component{
   constructor(props){
@@ -10,7 +10,7 @@ export default class Agenda extends Component{
     }
   }
   componentDidMount(){
-    axios.get(url+'/info/admin_info').then((agenda)=>{
+    axios.get(url+'info/admin_info').then((agenda)=>{
       console.log('the agenda: ',agenda.data[0].agenda);
       this.setState({
         agenda:agenda.data[0]

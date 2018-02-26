@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = '.';
+const url = 'http://polar-waters-86989.herokuapp.com';
 
 export default class Login extends Component{
   login(){
@@ -11,7 +11,7 @@ export default class Login extends Component{
       type,
       password
     }
-    axios.post(url+'/info/login',data).then((res)=>{
+    axios.post(url+'info/login',data).then((res)=>{
       console.log(res);
       if(res.data === 'success'){
         this.props.login();

@@ -70,9 +70,16 @@ router.post('/login',function(req,res,next){
 
 });
 
-router.post('/submitform',function(req,res,next){
+router.post('/submithostform',function(req,res,next){
   let form_data = req.body;
   console.log('submitting: ',form_data);
+  res.send("Queued. Thank you.");
+})
+
+router.post('/submitguestform',function(req,res,next){
+  let form_data = req.body;
+  console.log('submitting: ',form_data);
+  res.send("Queued. Thank you.");
 })
 
 module.exports = router;

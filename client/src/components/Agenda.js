@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Footer from './Footer';
 const url = 'https://polar-waters-86989.herokuapp.com';
 
 export default class Agenda extends Component{
@@ -65,12 +66,7 @@ export default class Agenda extends Component{
         <section className="submit_btn">
           <span onClick={()=>window.print()} className="main_submit">PRINT</span>
         </section>
-        <section className="sponsored_by">
-          <h2>Sponsored By</h2>
-          <div>RLAH<br/>
-            Real setState
-          </div>
-        </section>
+        <Footer />
       </main>
     );
   }

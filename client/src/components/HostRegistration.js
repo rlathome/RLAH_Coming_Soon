@@ -96,9 +96,12 @@ export default class HostRegistration extends Component{
       feedback_wanted
     }
     console.log('you submitted: ',data);
-      axios.post(url + '/info/submitform',data).then((response)=>{
-        if(response.data.message === "Queued. Thank you."){
-          this.props.history.push('/agenda');
+      axios.post(url + '/info/submithostform',data).then((response)=>{
+        if(response.data === "Queued. Thank you."){
+          alert('Thank you for your submission! We\'ll be in touch shortly.');
+          setTimeout(()=>{
+            this.props.history.push('/agenda');
+          },2000);
         }
       }).catch((err)=>{
         console.log('form submission error - ',err);

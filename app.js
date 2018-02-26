@@ -33,11 +33,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/info', index);
-// app.use('/', express.static('client/build'));
-
-app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, 'build', 'index.html'))
-})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,6 +53,12 @@ app.use(function(err, req, res, next) {
 });
 
 const PORT = process.env.PORT || 8088;
+
+
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+  res.sendFile(index);
+})
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);

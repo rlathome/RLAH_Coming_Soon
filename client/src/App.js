@@ -184,18 +184,18 @@ class App extends Component {
             {/* <Route path='/' component = { Footer } /> */}
             <Route path='/login/guest' component = { GuestLogin } />
             <Route path='/login/host' component = { HostLogin } />
-            <Route path='/admin_login' component = { AdminLogin } />
-            {/* <AdminRoute path='/admin_login' component = { AdminLogin } /> */}
+            {/* <Route path='/admin_login' component = { AdminLogin } /> */}
+            <AdminRoute path='/admin_login' component = { AdminLogin } />
             <Route path='/admin' component = { Admin } />
-            <Route path='/guest/:registration' component = { Header } />
-            {/* <GuestRoute exact path='/guest' component = { GuestRegistration } /> */}
+            {/* <Route path='/guest/:registration' component = { Header } /> */}
+            <GuestRoute exact path='/guest' component = { GuestRegistration } />
             <Route exact path='/guest' component = { GuestRegistration } />
-            <Route exact path='/host' component = { Header } />
-            <Route exact path='/host/:registration' component = { Header } />
-            {/* <HostRoute exact path='/host' component = { HostMap } />
-            <HostRoute path='/host/registration' component = { HostRegistration } /> */}
-            <Route exact path='/host' component = { HostMap } />
-            <Route path='/host/registration' component = { HostRegistration } />
+            {/* <Route exact path='/host' component = { Header } />
+            <Route exact path='/host/:registration' component = { Header } /> */}
+            <HostRoute exact path='/host' component = { HostMap } />
+            <HostRoute path='/host/registration' component = { HostRegistration } />
+            {/* <Route exact path='/host' component = { HostMap } />
+            <Route path='/host/registration' component = { HostRegistration } /> */}
             <Route path='/agenda' component = { Header } />
             <Route path='/agenda' component = { Agenda }/>
           </div>

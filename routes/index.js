@@ -3,10 +3,6 @@ var router = express.Router();
 var https = require('https');
 var Administrator = require('../models/administrator.js');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
 router.get('/test',function(req,res,next){
   console.log('getting request');

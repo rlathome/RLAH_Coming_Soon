@@ -24,6 +24,13 @@ header{
     }
   }
 }
+main{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:95vw;
+  }
+}
 .top_padding{
   margin-top:$section_padding;
 }
@@ -38,6 +45,11 @@ body{
 .coming_soon_title{
   font-size: 3.5em;
   margin-bottom:0px;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:2.5em;
+  }
 }
 // .no_click{
 //   cursor: default !important;
@@ -48,11 +60,24 @@ body{
   margin-top:3.5vh;
   font-size:1.35em;
   font-weight: bold;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:1em;
+  }
+}
+#pac-input{
+  border:1px solid #000;
 }
 .visitor_buttons{
   display: flex;
   justify-content: space-around;
   margin-top:15vh;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    margin-top:5vh;
+  }
   *{
     text-transform:uppercase;
     height:15vh;
@@ -64,6 +89,12 @@ body{
     color:#fff;
     font-size:3vw;
     cursor: pointer;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      width:35vw;
+      font-size:1.25em;
+    }
   }
 }
 .logo-area{
@@ -73,9 +104,19 @@ body{
     font-weight: lighter;
     color:#ada8a8;
   }
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    margin-top:5vh;
+  }
 }
 .host_title{
   font-size:4.5em;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:2.5em;
+  }
 }
 .qualifications_msg{
   h3{
@@ -86,6 +127,12 @@ body{
   text-align:left;
   width:65vw;
   display:inline-block;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:.75em;
+    width: 90vw;
+  }
 }
 .slots_avail{
   margin-top:$section_padding;
@@ -98,6 +145,12 @@ body{
     border:1px solid #000;
     font-size:3.5vw;
     font-weight: bold;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      font-size:4.5vw;
+      padding:0vw 1.35vw;
+    }
   }
 }
 .address_checker{
@@ -106,13 +159,31 @@ body{
     display: inline;
     margin-right:2vw;
     font-weight: lighter;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      font-size:1.25em;
+    }
   }
   input{
     margin-right:.75vw;
     width:40vw;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      width:37vw;
+      margin-right:3vw;
+      font-size: 1em;
+      padding:0vw .5vw;
+    }
   }
   .row{
     width:45vw;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      width:75vw;
+    }
     display: inline-block;
     *{
       text-align: left;
@@ -134,13 +205,23 @@ body{
     border:1px solid #000;
     height:30vw;
     width:45vw;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      width:75vw;
+      height:100vw;
+    }
   }
 }
 .host_form, .guest_form{
-  // margin-top:$section_padding;
   form{
     text-align:left;
     width:45vw;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      width:75vw;
+    }
     display:inline-block;
     *{
       display:inline-block;
@@ -172,6 +253,11 @@ body{
 }
 .guest_form{
   margin-bottom: 15vh;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    margin-bottom:$section_padding;
+  }
 }
 
 .form_labels, .form_inputs{
@@ -190,10 +276,23 @@ body{
 .feedback{
   .feedback_msg, .feedback_options{
     width:45vw;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      width:75vw;
+      margin-top:$section_padding;
+    }
     display: inline-block;
     text-align:left;
   }
   input,label{
+  }
+}
+.feedback_wanted{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:.75em;
   }
 }
 .terms_conditions{
@@ -236,6 +335,12 @@ body{
 .agenda_table_container{
   text-align: center;
   margin-top: $section_padding;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size: .75em;
+    width:100vw;
+  }
 }
 .checker_submit{
   background-color:$button_color;
@@ -245,6 +350,11 @@ body{
   color:#fff;
   &:hover{
     background-color: #000;
+  }
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    padding:.5vw 2vw;
   }
 
 }
@@ -256,9 +366,15 @@ table,th,td{
   border:1px solid #000;
   text-align: center !important;
 }
-@mixin table_width($row,$val){
+@mixin table_width($row,$val,$val2){
   &:nth-child(#{$row}){
     width:$val;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      width:$val2;
+      font-size: .85em;
+    }
   }
 }
 @mixin table_style($row,$attr,$val){
@@ -269,16 +385,24 @@ table,th,td{
 td{
   @include table_style(1,font-size,1.75em);
   @include table_style(1,padding,.25em 0em);
+  @include table_width(1,8vw,3vw);
+  @include table_width(2,10vw,4vw);
+  @include table_width(3,12vw,5vw);
+  @include table_width(4,20vw,10vw);
+  @include table_width(5,15vw,7.5vw);
+  @include table_width(6,10vw,5vw);
+  @include table_width(7,6vw,3vw);
+  @include table_width(8,12vw,6vw);
 }
 th{
-  @include table_width(1,8vw);
-  @include table_width(2,10vw);
-  @include table_width(3,12vw);
-  @include table_width(4,20vw);
-  @include table_width(5,15vw);
-  @include table_style(6,width,10vw);
-  @include table_style(7,width,6vw);
-  @include table_width(8,12vw);
+  @include table_width(1,8vw,3vw);
+  @include table_width(2,10vw,4vw);
+  @include table_width(3,12vw,5vw);
+  @include table_width(4,20vw,10vw);
+  @include table_width(5,15vw,7.5vw);
+  @include table_width(6,10vw,5vw);
+  @include table_width(7,6vw,3vw);
+  @include table_width(8,12vw,6vw);
 }
 .login_window_container{
   margin-top:25vh;

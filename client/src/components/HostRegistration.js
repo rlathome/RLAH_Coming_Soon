@@ -154,18 +154,18 @@ export default class HostRegistration extends Component{
             Feedback host is seeking from peers on tour*:
           </div><br/>
           <div className="feedback_options row">
-            <div className="col-xs-2">
+            <div className="col-sm-2 hidden-xs">
 
             </div>
-            <form>
-            <div className="col-xs-4">
+            <form className="feedback_wanted">
+            <div className="col-sm-4 col-xs-5">
               <div>
                 <input onChange={this.handleRadioChange.bind(this)} ref='price' type="checkbox" id="price"  name="radio_feedback" /><label for="price">Price</label><br/>
                 <input onChange={this.handleRadioChange.bind(this)} ref='staging' type="checkbox" id="staging" name="radio_feedback"/><label for="radio">Staging</label><br/>
                 <input onChange={this.handleRadioChange.bind(this)} ref='timing' type="checkbox" id="timing" value="radio_feedback" name="radio"  /><label for="radio_timing">Timing</label>
               </div>
             </div>
-            <div className="col-xs-6">
+            <div className="col-sm-6 col-xs-7">
               <input onChange={this.handleRadioChange.bind(this)} ref='improvements' type="checkbox" id="improvements" value="radio_improvements"  name="radio_feedback" /><label for="radio_improvements">Improvements</label><br/>
               <input onChange={this.handleRadioChange.bind(this)} ref='buyers_interested' type="checkbox" id="buyers_interested" value="radio_buyers_interested" name="radio_feedback"  /><label for="radio_buyers_interested">Buyers Interested</label><br/>
               <input onChange={this.handleRadioChange.bind(this)} ref='other' type="checkbox" id="other" value="radio_other" name="radio_feedback" /><label for="radio_other">Other</label><br/>
@@ -176,7 +176,7 @@ export default class HostRegistration extends Component{
         <section className="reminder">
           REMINDER: Finalized tour logisitics will be determined and distributed after final property
           is submitted, but no later than 6pm on the previous Monday. Tour details will be posted at
-          <Link to="/agenda">comingsoontour.com/agenda</Link> AND sent to all members via email in participating brokerage(s).
+          <Link to="/agenda"> comingsoontour.com/agenda</Link> AND sent to all members via email in participating brokerage(s).
         </section>
         <section className="terms_conditions">
           <input onChange={this.handleAgree.bind(this)} type="checkbox" id="terms_conditions_radio" value="terms_conditions_radio" name="terms_conditions_radio"  /><label className="terms_conditions_link">I agree to the terms and conditions</label>

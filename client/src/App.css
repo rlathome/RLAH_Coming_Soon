@@ -27,6 +27,12 @@ header ul li {
   cursor: pointer;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  main {
+    width: 95vw;
+  }
+}
+
 .top_padding {
   margin-top: 2.5vh;
 }
@@ -49,6 +55,12 @@ body {
   margin-bottom: 0px;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .coming_soon_title {
+    font-size: 2.5em;
+  }
+}
+
 .main-subtitle {
   width: 40vw;
   display: inline-block;
@@ -57,10 +69,26 @@ body {
   font-weight: bold;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main-subtitle {
+    font-size: 1em;
+  }
+}
+
+#pac-input {
+  border: 1px solid #000;
+}
+
 .visitor_buttons {
   display: flex;
   justify-content: space-around;
   margin-top: 15vh;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .visitor_buttons {
+    margin-top: 5vh;
+  }
 }
 
 .visitor_buttons * {
@@ -76,6 +104,13 @@ body {
   cursor: pointer;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .visitor_buttons * {
+    width: 35vw;
+    font-size: 1.25em;
+  }
+}
+
 .logo-area {
   margin-top: 15vh;
 }
@@ -86,8 +121,20 @@ body {
   color: #ada8a8;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .logo-area {
+    margin-top: 5vh;
+  }
+}
+
 .host_title {
   font-size: 4.5em;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .host_title {
+    font-size: 2.5em;
+  }
 }
 
 .qualifications_msg h3 {
@@ -98,6 +145,13 @@ body {
   text-align: left;
   width: 65vw;
   display: inline-block;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .qualifications_list {
+    font-size: .75em;
+    width: 90vw;
+  }
 }
 
 .slots_avail {
@@ -116,6 +170,13 @@ body {
   font-weight: bold;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .slots_avail .slots_number {
+    font-size: 4.5vw;
+    padding: 0vw 1.35vw;
+  }
+}
+
 .address_checker {
   font-weight: lighter;
 }
@@ -126,14 +187,35 @@ body {
   font-weight: lighter;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .address_checker h3 {
+    font-size: 1.25em;
+  }
+}
+
 .address_checker input {
   margin-right: .75vw;
   width: 40vw;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .address_checker input {
+    width: 37vw;
+    margin-right: 3vw;
+    font-size: 1em;
+    padding: 0vw .5vw;
+  }
+}
+
 .address_checker .row {
   width: 45vw;
   display: inline-block;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .address_checker .row {
+    width: 75vw;
+  }
 }
 
 .address_checker .row * {
@@ -161,10 +243,23 @@ body {
   width: 45vw;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .radius_map .map_element {
+    width: 75vw;
+    height: 100vw;
+  }
+}
+
 .host_form form, .guest_form form {
   text-align: left;
   width: 45vw;
   display: inline-block;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .host_form form, .guest_form form {
+    width: 75vw;
+  }
 }
 
 .host_form form *, .guest_form form * {
@@ -206,6 +301,12 @@ body {
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
+  .guest_form {
+    margin-bottom: 2.5vh;
+  }
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
   .form_labels, .form_inputs {
     display: none;
   }
@@ -221,6 +322,19 @@ body {
   width: 45vw;
   display: inline-block;
   text-align: left;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .feedback .feedback_msg, .feedback .feedback_options {
+    width: 75vw;
+    margin-top: 2.5vh;
+  }
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .feedback_wanted {
+    font-size: .75em;
+  }
 }
 
 .terms_conditions {
@@ -271,6 +385,13 @@ body {
   margin-top: 2.5vh;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .agenda_table_container {
+    font-size: .75em;
+    width: 100vw;
+  }
+}
+
 .checker_submit {
   background-color: #4c4b4b;
   padding: .5vw 1vw;
@@ -280,6 +401,12 @@ body {
 
 .checker_submit:hover {
   background-color: #000;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .checker_submit {
+    padding: .5vw 2vw;
+  }
 }
 
 table {
@@ -300,36 +427,180 @@ td:nth-child(1) {
   padding: 0.25em 0em;
 }
 
+td:nth-child(1) {
+  width: 8vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  td:nth-child(1) {
+    width: 3vw;
+    font-size: .85em;
+  }
+}
+
+td:nth-child(2) {
+  width: 10vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  td:nth-child(2) {
+    width: 4vw;
+    font-size: .85em;
+  }
+}
+
+td:nth-child(3) {
+  width: 12vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  td:nth-child(3) {
+    width: 5vw;
+    font-size: .85em;
+  }
+}
+
+td:nth-child(4) {
+  width: 20vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  td:nth-child(4) {
+    width: 10vw;
+    font-size: .85em;
+  }
+}
+
+td:nth-child(5) {
+  width: 15vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  td:nth-child(5) {
+    width: 7.5vw;
+    font-size: .85em;
+  }
+}
+
+td:nth-child(6) {
+  width: 10vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  td:nth-child(6) {
+    width: 5vw;
+    font-size: .85em;
+  }
+}
+
+td:nth-child(7) {
+  width: 6vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  td:nth-child(7) {
+    width: 3vw;
+    font-size: .85em;
+  }
+}
+
+td:nth-child(8) {
+  width: 12vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  td:nth-child(8) {
+    width: 6vw;
+    font-size: .85em;
+  }
+}
+
 th:nth-child(1) {
   width: 8vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th:nth-child(1) {
+    width: 3vw;
+    font-size: .85em;
+  }
 }
 
 th:nth-child(2) {
   width: 10vw;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th:nth-child(2) {
+    width: 4vw;
+    font-size: .85em;
+  }
+}
+
 th:nth-child(3) {
   width: 12vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th:nth-child(3) {
+    width: 5vw;
+    font-size: .85em;
+  }
 }
 
 th:nth-child(4) {
   width: 20vw;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th:nth-child(4) {
+    width: 10vw;
+    font-size: .85em;
+  }
+}
+
 th:nth-child(5) {
   width: 15vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th:nth-child(5) {
+    width: 7.5vw;
+    font-size: .85em;
+  }
 }
 
 th:nth-child(6) {
   width: 10vw;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th:nth-child(6) {
+    width: 5vw;
+    font-size: .85em;
+  }
+}
+
 th:nth-child(7) {
   width: 6vw;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th:nth-child(7) {
+    width: 3vw;
+    font-size: .85em;
+  }
+}
+
 th:nth-child(8) {
   width: 12vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th:nth-child(8) {
+    width: 6vw;
+    font-size: .85em;
+  }
 }
 
 .login_window_container {

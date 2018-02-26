@@ -15,7 +15,7 @@ export default class Admin extends Component{
     }
   }
   componentDidMount(){
-    axios.get(url+'info/admin_info').then((admin)=>{
+    axios.get(url+'/info/admin_info').then((admin)=>{
       console.log('admin info: ',admin.data);
       const d = admin.data[0];
       this.setState({

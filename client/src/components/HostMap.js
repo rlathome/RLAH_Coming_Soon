@@ -15,7 +15,7 @@ export default class HostRegistration extends Component{
     }
   }
   componentWillMount(){
-    axios.get(url+'info/admin_info').then((admin)=>{
+    axios.get(url+'/info/admin_info').then((admin)=>{
       console.log('map admin info: ',admin.data);
       const d = admin.data[0];
       const avail = parseInt(d.slots_available);

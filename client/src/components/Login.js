@@ -11,7 +11,7 @@ export default class Login extends Component{
       type,
       password
     }
-    axios.post(url+'info/login',data).then((res)=>{
+    axios.post(url+'/info/login',data).then((res)=>{
       console.log(res);
       if(res.data === 'success'){
         this.props.login();

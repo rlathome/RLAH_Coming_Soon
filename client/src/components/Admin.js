@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-const url = process.env.URL;
-console.log('url: ',url);
+const url = 'https://polar-waters-86989.herokuapp.com';
 
 export default class Admin extends Component{
   constructor(props){
@@ -17,7 +15,7 @@ export default class Admin extends Component{
     }
   }
   componentDidMount(){
-    axios.get('http://localhost:8080/info/admin_info').then((admin)=>{
+    axios.get(url+'/info/admin_info').then((admin)=>{
       console.log('admin info: ',admin.data);
       const d = admin.data[0];
       this.setState({
@@ -68,7 +66,7 @@ export default class Admin extends Component{
       agenda.push(items);
     }
     console.log('our agenda: ',agenda);
-    axios.post('http://localhost:8080/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
+    axios.post(url+'/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
       console.log('success: ',response);
       alert('your agenda has been updated');
     }).catch((err)=>{
@@ -95,9 +93,21 @@ export default class Admin extends Component{
       type,
       password
     }
-    axios.post('http://localhost:8080/info/change_password',data).then((response)=>{
+    axios.post(url +'/info/change_password',data).then((response)=>{
       console.log('success: ',response);
       alert('your password has been updated');
+    }).catch((err)=>{
+      console.log('err - ',err);
+    });
+  }
+  changeLogo(){
+    const logo_url = this.refs.logo_url.value;
+    const data = { logo_url };
+    axios.post(url +'/info/change_logo',data).then((response)=>{
+      console.log('success: ',response);
+      if(response.data.message === 'success'){
+        alert('your logo has been updated');
+      }
     }).catch((err)=>{
       console.log('err - ',err);
     });
@@ -174,9 +184,14 @@ export default class Admin extends Component{
         <input type="text" defaultValue={ this.state.slots_avail } ref="slots_avail" />
       </div>
     ) : '';
-    
+
     let logo = this.state.logo;
 
+    const logo_edit = (this.state.logo) ? (
+      <div>
+        <input className="input-logo" type="text" ref="logo_url" defaultValue={logo} /><span onClick={()=>this.changeLogo()} className="btn btn-primary">Update</span>
+      </div>
+    ) : '';
     return(
       <div>
         <h1>Welcome to Admin Page!</h1>
@@ -211,8 +226,8 @@ export default class Admin extends Component{
             { passwords }
           <section className="sponsored_by">
             <h2>Sponsored By</h2>
-            <div className='main_logo' >
-
+            <div className='main_logo flex_col' >
+              {logo_edit}
               <img className="img-responsive" src={logo} alt="affiliate logo" />
             </div>
           </section>

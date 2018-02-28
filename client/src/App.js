@@ -188,16 +188,16 @@ class App extends Component {
             <Route path='/login/host' component = { HostLogin } />
             <Route path='/admin_login' component = { AdminLogin } />
 
-            {/* <Route path='/admin' component = { Admin } /> */}
-            <AdminRoute path='/admin' component = { Admin } />
+            <Route path='/admin' component = { Admin } />
+            {/* <AdminRoute path='/admin' component = { Admin } /> */}
 
-            {/* <Route exact path='/guest' component = { GuestRegistration } /> */}
-            <GuestRoute exact path='/guest' component = { GuestRegistration } />
+            <Route exact path='/guest' component = { GuestRegistration } />
+            {/* <GuestRoute exact path='/guest' component = { GuestRegistration } /> */}
 
-            {/* <Route exact path='/host' component = { HostMap } />
-            <Route path='/host/registration/:addr' component = { HostRegistration } /> */}
-            <HostRoute exact path='/host' component = { HostMap } />
-            <HostRoute path='/host/registration/:addr' component = { HostRegistration } />
+            <Route exact path='/host' component = { HostMap } />
+            <Route path='/host/registration/:addr' component = { HostRegistration } />
+            {/* <HostRoute exact path='/host' component = { HostMap } />
+            <HostRoute path='/host/registration/:addr' component = { HostRegistration } /> */}
 
             <Route path='/agenda' component = { Agenda }/>
             {/* <Route path='/' component = { Footer } /> */}

@@ -46,8 +46,13 @@ export default class GuestRegistration extends Component{
     }
     console.log('you submitted: ',data);
       axios.post(url + '/info/submitguestform',data).then((response)=>{
-        if(response.data === "Queued. Thank you."){
-          alert('Thank you for your submission! We\'ll be in touch shortly.');
+        if(response.data.message === "Queued. Thank you."){
+          // alert('Thank you for your submission! We\'ll be in touch shortly.');
+          //show modal
+          this.setState({
+            submitted_form:true
+          });
+          //route to agenda
           setTimeout(()=>{
             this.props.history.push('/agenda');
           },2000);
@@ -58,13 +63,19 @@ export default class GuestRegistration extends Component{
 
   }
   render(){
+    const submit_modal = (this.state.submitted_form) ? (
+      <div className = 'submit_modal flex-col'>
+        <span>Thank you for your submission! We'll be in touch shortly.</span>
+      </div>
+    ) : '';
     const rsvp = (this.state.next_ok) ? (
       <span onClick = {()=>this.submitRSVP()} className="main_submit">RSVP</span>
     ) : (
       <span className="main_submit muted">RSVP</span>
-    )
+    );
     return(
       <main>
+        { submit_modal }
         <h1 className="coming_soon_title">Coming Soon Tour</h1>
         <div className="host_title">
           GUEST

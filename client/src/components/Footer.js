@@ -20,7 +20,7 @@ export default class Footer extends Component{
     let logo = this.state.logo;
     return(
         <section className="logo-area">
-          <h2>Sponsored By</h2>
+          <h2>Sponsored by</h2>
           <div className='main_logo' >
             <img className="img-responsive" src={logo} alt="affiliate logo" />
           </div>

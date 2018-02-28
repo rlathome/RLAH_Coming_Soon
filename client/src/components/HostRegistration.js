@@ -17,7 +17,8 @@ export default class HostRegistration extends Component{
       buyers_interested:false,
       other:false,
       agrees:false,
-      next_ok:false
+      next_ok:false,
+      submitted_form:false
     }
   }
   componentDidMount(){
@@ -82,7 +83,7 @@ export default class HostRegistration extends Component{
     let will_show_before_listing = this.state.selected_option;
     let feedback_wanted = [];
     for(let i in this.state){
-      if(this.state[i]==true && i!=='agrees' && i !=='next_ok'){
+      if(this.state[i]==true && i!=='agrees' && i !=='next_ok' && i !=='submitted_form'){
         feedback_wanted.push(i);
       }
     }
@@ -97,8 +98,11 @@ export default class HostRegistration extends Component{
     }
     console.log('you submitted: ',data);
       axios.post(url + '/info/submithostform',data).then((response)=>{
-        if(response.data === "Queued. Thank you."){
-          alert('Thank you for your submission! We\'ll be in touch shortly.');
+        if(response.data.message === "Queued. Thank you."){
+          // alert('Thank you for your submission! We\'ll be in touch shortly.');
+          this.setState({
+            submitted_form:true
+          });
           setTimeout(()=>{
             this.props.history.push('/agenda');
           },2000);
@@ -109,6 +113,11 @@ export default class HostRegistration extends Component{
 
   }
   render(){
+    const submit_modal = (this.state.submitted_form) ? (
+      <div className = 'submit_modal flex-col'>
+        <span>Thank you for your submission! We'll be in touch shortly.</span>
+      </div>
+    ) : '';
     const submit = (this.state.next_ok) ? (
       <span onClick={()=>this.submitRegistration()} className="main_submit">SUBMIT</span>
     ):(
@@ -116,6 +125,7 @@ export default class HostRegistration extends Component{
     )
     return(
       <main>
+        { submit_modal }
         <h1 className="coming_soon_title">Coming Soon Tour</h1>
         <div className="host_title">
           HOST

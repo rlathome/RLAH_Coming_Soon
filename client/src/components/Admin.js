@@ -100,6 +100,18 @@ export default class Admin extends Component{
       console.log('err - ',err);
     });
   }
+  changeLogo(){
+    const logo_url = this.refs.logo_url.value;
+    const data = { logo_url };
+    axios.post(url +'/info/change_logo',data).then((response)=>{
+      console.log('success: ',response);
+      if(response.data.message === 'success'){
+        alert('your logo has been updated');
+      }
+    }).catch((err)=>{
+      console.log('err - ',err);
+    });
+  }
   render(){
     let event_num = 0;
     let ts_agenda = this.state.agenda;
@@ -175,6 +187,11 @@ export default class Admin extends Component{
 
     let logo = this.state.logo;
 
+    const logo_edit = (this.state.logo) ? (
+      <div>
+        <input className="input-logo" type="text" ref="logo_url" defaultValue={logo} /><span onClick={()=>this.changeLogo()} className="btn btn-primary">Update</span>
+      </div>
+    ) : '';
     return(
       <div>
         <h1>Welcome to Admin Page!</h1>
@@ -209,8 +226,8 @@ export default class Admin extends Component{
             { passwords }
           <section className="sponsored_by">
             <h2>Sponsored By</h2>
-            <div className='main_logo' >
-
+            <div className='main_logo flex_col' >
+              {logo_edit}
               <img className="img-responsive" src={logo} alt="affiliate logo" />
             </div>
           </section>

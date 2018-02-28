@@ -225,7 +225,7 @@ export default class Admin extends Component{
           <h1>Passwords</h1>
             { passwords }
           <section className="logo-area">
-            <h2>Sponsored By</h2>
+            <h2>Sponsored by</h2>
             <div className='main_logo flex_col' >
               {logo_edit}
               <img className="img-responsive" src={logo} alt="affiliate logo" />

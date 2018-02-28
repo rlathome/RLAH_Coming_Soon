@@ -18,7 +18,8 @@ export default class HostRegistration extends Component{
       other:false,
       agrees:false,
       next_ok:false,
-      submitted_form:false
+      submitted_form:false,
+      terms_conditions:false
     }
   }
   componentDidMount(){
@@ -83,7 +84,7 @@ export default class HostRegistration extends Component{
     let will_show_before_listing = this.state.selected_option;
     let feedback_wanted = [];
     for(let i in this.state){
-      if(this.state[i]==true && i!=='agrees' && i !=='next_ok' && i !=='submitted_form'){
+      if(this.state[i]==true && i!=='agrees' && i !=='next_ok' && i !=='submitted_form' && i !=='terms_conditions'){
         feedback_wanted.push(i);
       }
     }
@@ -112,10 +113,22 @@ export default class HostRegistration extends Component{
       });
 
   }
+  toggleTerms(){
+    this.setState({
+      terms_conditions:!this.state.terms_conditions
+    });
+  }
   render(){
     const submit_modal = (this.state.submitted_form) ? (
       <div className = 'submit_modal flex-col'>
         <span>Thank you for your submission! We'll be in touch shortly.</span>
+      </div>
+    ) : '';
+    const terms_conditions = (this.state.terms_conditions) ? (
+      <div className = 'flex-col terms_conditions_modal'>
+        <span>THIS TOUR IS PROVIDED ON “AS IS” AND  “AS AVAILABLE” BASIS, AND BROKER EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. NEITHER PARTY SHALL BE LIABLE TO THE OTHER PARTY FOR ANY CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OR LOST PROFITS ARISING OUT OF ANY BREACH OF THIS AGREEMENT OR ITS TERMINATION, WHETHER FOR BREACH OF WARRANTY OR ANY OBLIGATION OR OTHERWISE, WHETHER LIABILITY IS ASSERTED IN CONTRACT OR TORT AND REGARDLESS OF WHETHER OR NOT THE PARTY HAS ADVISED OR HAS BEEN ADVISED OF THE POSSIBILITY OF ANY SUCH LOSS OR DAMAGE.</span>
+        <br/>
+        <span className="checker_submit" onClick={()=>this.toggleTerms()}>Close</span>
       </div>
     ) : '';
     const submit = (this.state.next_ok) ? (
@@ -126,6 +139,7 @@ export default class HostRegistration extends Component{
     return(
       <main>
         { submit_modal }
+        { terms_conditions }
         <h1 className="coming_soon_title">Coming Soon Tour</h1>
         <div className="host_title">
           HOST
@@ -189,7 +203,7 @@ export default class HostRegistration extends Component{
           <Link to="/agenda"> comingsoontour.com/agenda</Link> AND sent to all members via email in participating brokerage(s).
         </section>
         <section className="terms_conditions">
-          <input onChange={this.handleAgree.bind(this)} type="checkbox" id="terms_conditions_radio" value="terms_conditions_radio" name="terms_conditions_radio"  /><label className="terms_conditions_link">I agree to the terms and conditions</label>
+          <input onChange={this.handleAgree.bind(this)} type="checkbox" id="terms_conditions_radio" value="terms_conditions_radio" name="terms_conditions_radio"  /><label onClick={this.toggleTerms.bind(this)} className="terms_conditions_link">I agree to the terms and conditions</label>
         </section>
         <section className="submit_btn">
           { submit }

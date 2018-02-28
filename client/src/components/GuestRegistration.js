@@ -9,7 +9,8 @@ export default class GuestRegistration extends Component{
     super(props);
     this.state={
       next_ok:false,
-      agrees:false
+      agrees:false,
+      terms_conditions:false
     }
   }
   isFormFilled(){
@@ -62,10 +63,22 @@ export default class GuestRegistration extends Component{
       });
 
   }
+  toggleTerms(){
+    this.setState({
+      terms_conditions:!this.state.terms_conditions
+    });
+  }
   render(){
     const submit_modal = (this.state.submitted_form) ? (
       <div className = 'submit_modal flex-col'>
         <span>Thank you for your submission! We'll be in touch shortly.</span>
+      </div>
+    ) : '';
+    const terms_conditions = (this.state.terms_conditions) ? (
+      <div className = 'flex-col terms_conditions_modal'>
+        <span>THIS TOUR IS PROVIDED ON “AS IS” AND  “AS AVAILABLE” BASIS, AND BROKER EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. NEITHER PARTY SHALL BE LIABLE TO THE OTHER PARTY FOR ANY CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OR LOST PROFITS ARISING OUT OF ANY BREACH OF THIS AGREEMENT OR ITS TERMINATION, WHETHER FOR BREACH OF WARRANTY OR ANY OBLIGATION OR OTHERWISE, WHETHER LIABILITY IS ASSERTED IN CONTRACT OR TORT AND REGARDLESS OF WHETHER OR NOT THE PARTY HAS ADVISED OR HAS BEEN ADVISED OF THE POSSIBILITY OF ANY SUCH LOSS OR DAMAGE.</span>
+        <br/>
+        <span className="checker_submit" onClick={()=>this.toggleTerms()}>Close</span>
       </div>
     ) : '';
     const rsvp = (this.state.next_ok) ? (
@@ -76,6 +89,7 @@ export default class GuestRegistration extends Component{
     return(
       <main>
         { submit_modal }
+        { terms_conditions }
         <h1 className="coming_soon_title">Coming Soon Tour</h1>
         <div className="host_title">
           GUEST
@@ -84,19 +98,19 @@ export default class GuestRegistration extends Component{
         <section className="guest_form top_padding">
           <form>
             <p>*denotes required field for submission</p>
-            <div><div className="form_labels">Listing Agent Name*:</div>&nbsp;<div className="form_inputs"><input ref="agent_name" type="text" /></div></div>
-            <div><div className="form_labels">Listing Agent Email*:</div>&nbsp;<div className="form_inputs"><input ref="email" type="text" /></div></div>
+            <div><div className="form_labels">Agent Name*:</div>&nbsp;<div className="form_inputs"><input ref="agent_name" type="text" /></div></div>
+            <div><div className="form_labels">Agent Email*:</div>&nbsp;<div className="form_inputs"><input ref="email" type="text" /></div></div>
 
           </form>
         </section>
 
         <section className="reminder">
           REMINDER: Finalized tour logisitics will be determined and distributed after final property
-          is submitted, but no later than 6pm on the previous Monday. Tour details will be posted at &nbsp;
+          is submitted, but no later than 6pm on the previous Monday. Tour details will be posted at&nbsp;
           <Link to="/agenda">comingsoontour.com/agenda</Link> AND sent to all members via email in participating brokerage(s).
         </section>
         <section className="terms_conditions">
-          <input onChange={this.handleAgree.bind(this)} type="checkbox" id="terms_conditions_radio" value="terms_conditions_radio" name="terms_conditions_radio"  /><label className="terms_conditions_link">I agree to the terms and conditions</label>
+          <input onChange={this.handleAgree.bind(this)} type="checkbox" id="terms_conditions_radio" value="terms_conditions_radio" name="terms_conditions_radio"  /><label onClick={this.toggleTerms.bind(this)} className="terms_conditions_link">I agree to the terms and conditions</label>
         </section>
         <section className="submit_btn">
           { rsvp }

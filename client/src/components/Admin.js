@@ -187,7 +187,7 @@ export default class Admin extends Component{
 
     let logo = this.state.logo;
 
-    const logo_edit = (this.state.logo) ? (
+    const logo_edit = (logo) ? (
       <div>
         <input className="input-logo" type="text" ref="logo_url" defaultValue={logo} /><span onClick={()=>this.changeLogo()} className="btn btn-primary">Update</span>
       </div>
@@ -224,7 +224,7 @@ export default class Admin extends Component{
             <span onClick={()=>window.print()} className="main_submit">PRINT</span>
           <h1>Passwords</h1>
             { passwords }
-          <section className="sponsored_by">
+          <section className="logo-area">
             <h2>Sponsored By</h2>
             <div className='main_logo flex_col' >
               {logo_edit}

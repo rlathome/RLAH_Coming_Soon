@@ -60,7 +60,7 @@ export default class HostRegistration extends Component{
     );
     let address_form = (
       <form className="address_checker checker_margin">
-        <h3>Address:</h3><input ref="addr" id="pac-input" type="text" />
+        <h3>Address:</h3><input placeholder="Enter a property address to see if it qualifies" ref="addr" id="pac-input" type="text" />
         { submit }
       </form>
     )
@@ -82,7 +82,7 @@ export default class HostRegistration extends Component{
         <section className="qualifications_msg">
           <h3>Qualifications</h3>
           <ol className="qualifications_list">
-            <li>Property is located within the 2 mile map</li>
+            <li>Property is located within the 2 Miler Map below</li>
             <li>Property is NOT listed in Bright MLS (except "Coming Soon") at time of tour</li>
             <li>Property must be submitted by 12pm the previous Monday or until 4 total qualifying properties have been submitted, whichever comes first</li>
           </ol>

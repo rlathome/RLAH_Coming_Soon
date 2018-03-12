@@ -53,7 +53,7 @@ class RadiusMap extends Component{
             var duPont = new google.maps.Circle({
               center:{lat:38.9101361,lng:-77.04250990000003},
               radius:3218.69,
-              strokeColor:'#000',
+              strokeColor:'rgba(100,100,100,1)',
               strokeOpacity: 0.8,
               strokeWeight: 2,
               fillColor: 'rgb(53,202,252)',
@@ -63,7 +63,7 @@ class RadiusMap extends Component{
             var rhodeIsland = new google.maps.Circle({
               center:{lat:38.9089377,lng:-77.03237089999999},
               radius:3218.69,
-              strokeColor:'grey',
+              strokeColor:'rgba(100,100,100,1)',
               strokeOpacity: 0.8,
               strokeWeight: 2,
               fillColor: 'rgb(53,202,252)',

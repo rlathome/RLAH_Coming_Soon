@@ -27,7 +27,7 @@ export default class Login extends Component{
       <div className="login_window_container">
         <div className="login_window panel panel-default clearfix">
           <h2>Please Enter Password</h2>
-          <input type="text" ref="password" />
+          <input type="password" ref="password" />
           <span onClick={()=>this.login()} className="checker_submit">
             Login
           </span>

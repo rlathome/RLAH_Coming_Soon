@@ -79,7 +79,7 @@ export default class Home extends Component{
       <div className="login_window_container">
         <div className="login_window panel panel-default clearfix">
           <h2>Please Enter Password</h2>
-          <input type="text" ref="password" />
+          <input type="password" ref="password" />
           <span onClick={()=>this.login('guest')} className="checker_submit">
             Login
           </span>
@@ -90,7 +90,7 @@ export default class Home extends Component{
       <div className="login_window_container">
         <div className="login_window panel panel-default clearfix">
           <h2>Please Enter Password</h2>
-          <input type="text" ref="password" />
+          <input type="password" ref="password" />
           <span onClick={()=>this.login('host')} className="checker_submit">
             Login
           </span>

@@ -475,18 +475,21 @@ th{
   height:33vh;
   top:33vh;
   left:33vw;
+  position: fixed;
 }
 .terms_conditions_modal{
   width:50vw;
   left:25vw;
-  top:10vh;
+  top:15vh;
+  position:fixed;
+  font-size:.95em;
   // iphone 6 portrait
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
     width:100vw;
     left:0vw;
-    top:30vh;
+    top:20vh;
     font-size:1em;
   }
 }

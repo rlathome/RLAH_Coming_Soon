@@ -520,3 +520,11 @@ th{
   font-size: .85em;
   margin-top:.85em;
 }
+// iphone 6 portrait
+@media only screen
+and (min-width : 355px)
+and (max-width : 668px){
+  input[type="text"] {
+  font-size: 16px;
+}
+}

@@ -32,6 +32,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.use('*', express.static('client/build')); // Added this
+}
+
 app.use('/info', index);
 
 app.use('/',express.static('client/build'));
@@ -48,10 +53,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-  app.use('*', express.static('client/build')); // Added this
-}
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

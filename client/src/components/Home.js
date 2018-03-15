@@ -73,6 +73,9 @@ export default class Home extends Component{
           <div onClick={()=>{this.open_guest()}}>Guest</div>
         </section>
         <Footer />
+        <section className="join_coming_soon">
+          If you or your brokerage is interested in joining Coming Soon Tour <a href="#">click here</a>
+        </section>
       </div>
     ) : '';
     let guest_pass = (this.state.guest_pass) ? (

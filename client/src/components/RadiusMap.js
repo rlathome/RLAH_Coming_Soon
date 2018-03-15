@@ -106,6 +106,7 @@ class RadiusMap extends Component{
                // For each place, get the icon, name and location.
                var bounds = new google.maps.LatLngBounds();
                places.every(function(place) {
+                 console.log(place,' is one of ',places.length, ' in places')
                  out_of_bounds();
                  var icon = {
                    url: place.icon,
@@ -122,6 +123,15 @@ class RadiusMap extends Component{
                    title: place.name,
                    position: place.geometry.location
                  }));
+
+
+                 const va = new RegExp('VA');
+                 if(va.test(place.formatted_address)){
+                   console.log('its in VA')
+                   return false;
+                 }else{
+                   console.log('its in DC')
+                 }
 
                  if (place.geometry.viewport) {
                    // Only geocodes have viewport.

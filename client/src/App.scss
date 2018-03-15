@@ -54,16 +54,34 @@ body{
 // .no_click{
 //   cursor: default !important;
 // }
-.main-subtitle{
-  width:40vw;
+.main-subtitle,.join_coming_soon{
   display: inline-block;
-  margin-top:3.5vh;
   font-size:1.35em;
   font-weight: bold;
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
     font-size:1em;
+  }
+}
+.main-subtitle{
+  width:40vw;
+  margin-top:3.5vh;
+}
+.join_coming_soon{
+  width:100%;
+  position: absolute;
+  bottom:4vw;
+  left:0vw;
+  a{
+    text-decoration: none;
+    color:gray;
+    font-weight: lighter;
+  }
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    padding:0vw 5vw;
   }
 }
 #pac-input{
@@ -77,6 +95,11 @@ body{
   and (min-width : 355px)
   and (max-width : 668px){
     margin-top:5vh;
+  }
+  div{
+    &:hover{
+      background-color: #000;
+    }
   }
   *{
     text-transform:uppercase;
@@ -492,4 +515,8 @@ th{
     top:20vh;
     font-size:1em;
   }
+}
+.after_tour_info{
+  font-size: .85em;
+  margin-top:.85em;
 }

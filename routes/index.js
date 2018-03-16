@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var https = require('https');
 var Administrator = require('../models/administrator.js');
-var admin_information = {};
+
 
 
 router.get('/test',function(req,res,next){
@@ -11,15 +11,11 @@ router.get('/test',function(req,res,next){
 });
 
 router.get('/admin_info',function(req,res,next){
-  console.log('getting ADMIN_INFO')
-  Administrator.find({},'',function(err,admin_info){
-    admin_info = admin_info[0];
+  Administrator.find({},'',function(err,admin){
     if(err) console.log('err! - , ',err)
-    console.log('admin_info: ',admin_info);
-    res.json(admin_info);
-  }).catch((err)=>{
-    console.log('error getting admin info: ',err)
-  });
+    console.log('admin: ',admin);
+    res.json(admin);
+  })
 });
 
 router.post('/submitagenda',function(req,res,next){
@@ -62,7 +58,7 @@ router.post('/login',function(req,res,next){
   Administrator.find({},'',function(err,resp){
     if(err) console.log('err, ',err)
     admin = resp[0];
-    console.log('admin for LOGIN: ',admin)
+    console.log('admin: ',admin)
     switch(type){
       case 'admin':
       real_password = admin.admin_password;

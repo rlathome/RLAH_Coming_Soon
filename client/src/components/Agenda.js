@@ -12,7 +12,7 @@ export default class Agenda extends Component{
   }
   componentDidMount(){
     axios.get(url+'/info/admin_info').then((agenda)=>{
-      console.log('the agenda: ',agenda.data[0].agenda);
+      console.log('the agenda: ',agenda.data.agenda);
       this.setState({
         agenda:agenda.data
       });

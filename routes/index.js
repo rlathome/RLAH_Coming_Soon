@@ -11,15 +11,15 @@ router.get('/test',function(req,res,next){
 });
 
 router.get('/admin_info',function(req,res,next){
-  console.log('getting admin info')
+  console.log('getting ADMIN_INFO')
   Administrator.find({},'',function(err,admin){
     admin = admin[0];
     if(err) console.log('err! - , ',err)
     console.log('admin: ',admin);
     res.json(admin);
-  }).catch((err)=>{
-    console.log('error getting admin info: ',err)
   })
+}).catch((err)=>{
+  console.log('error getting admin info: ',err)
 });
 
 router.post('/submitagenda',function(req,res,next){

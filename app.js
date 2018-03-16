@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-  app.use('*', express.static('client/build')); // Added this
+  // app.use('*', express.static('client/build')); // Added this
 }
 
 app.use('/info', index);

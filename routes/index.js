@@ -17,6 +17,8 @@ router.get('/admin_info',function(req,res,next){
     if(err) console.log('err! - , ',err)
     console.log('admin: ',admin);
     res.json(admin);
+  }).catch((err)=>{
+    console.log('error getting admin info: ',err)
   })
 });
 

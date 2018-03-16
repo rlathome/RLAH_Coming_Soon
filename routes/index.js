@@ -12,11 +12,11 @@ router.get('/test',function(req,res,next){
 
 router.get('/admin_info',function(req,res,next){
   console.log('getting ADMIN_INFO')
-  Administrator.find({},'',function(err,admin){
-    admin = admin[0];
+  Administrator.find({},'',function(err,admin_info){
+    admin_info = admin_info[0];
     if(err) console.log('err! - , ',err)
-    console.log('admin: ',admin);
-    res.json(admin);
+    console.log('admin_info: ',admin_info);
+    res.json(admin_info);
   }).catch((err)=>{
     console.log('error getting admin info: ',err)
   });

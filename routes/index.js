@@ -11,7 +11,7 @@ router.get('/test',function(req,res,next){
 
 router.get('/admin_info',function(req,res,next){
   Administrator.find({},'',function(err,admin){
-    if(err) console.log('err, ',err)
+    if(err) console.log('err! - , ',err)
     console.log('admin: ',admin);
     res.json(admin);
   })

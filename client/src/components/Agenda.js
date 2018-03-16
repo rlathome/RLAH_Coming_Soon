@@ -21,7 +21,7 @@ export default class Agenda extends Component{
     })
   }
   render(){
-    let agenda = (this.state.agenda !=='') ? this.state.agenda.agenda.map((event)=>{
+    let agenda = (this.state.agenda !=='' && this.state.agenda.agenda !==undefined) ? this.state.agenda.agenda.map((event)=>{
       return(
         <tr>
           <td>{event.property_no}</td>

@@ -134,14 +134,14 @@ export default class Admin extends Component{
       const will_sell = 'will_sell'+event_num;
       return(
         <tr>
-          <td><input ref={property_no} className="table_input" type="text" defaultValue={event.property_no} /></td>
-          <td><input ref={arrival} className="table_input" type="text" defaultValue={event.arrival}/></td>
-          <td><input ref={departure} className="table_input" type="text" defaultValue={event.departure}/></td>
-          <td><input ref={address} className="table_input" type="text" defaultValue={event.address}/></td>
-          <td><input ref={listing_agt} className="table_input" type="text" defaultValue={event.listing_agt}/></td>
-          <td><input ref={est_price} className="table_input" type="text" defaultValue={event.est_price}/></td>
-          <td><input ref={est_sq_ft} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
-          <td><input ref={will_sell} className="table_input" type="text" defaultValue={event.will_sell}/></td>
+          <td><textarea ref={property_no} className="table_input" type="text" defaultValue={event.property_no} /></td>
+          <td><textarea ref={arrival} className="table_input" type="text" defaultValue={event.arrival}/></td>
+          <td><textarea ref={departure} className="table_input" type="text" defaultValue={event.departure}/></td>
+          <td><textarea ref={address} className="table_input" type="text" defaultValue={event.address}/></td>
+          <td><textarea ref={listing_agt} className="table_input" type="text" defaultValue={event.listing_agt}/></td>
+          <td><textarea ref={est_price} className="table_input" type="text" defaultValue={event.est_price}/></td>
+          <td><textarea ref={est_sq_ft} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
+          <td><textarea ref={will_sell} className="table_input" type="text" defaultValue={event.will_sell}/></td>
         </tr>
       );
     }) : '';

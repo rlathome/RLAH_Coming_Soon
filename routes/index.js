@@ -62,7 +62,7 @@ router.post('/login',function(req,res,next){
   Administrator.find({},'',function(err,resp){
     if(err) console.log('err, ',err)
     admin = resp[0];
-    console.log('admin: ',admin)
+    console.log('admin for LOGIN: ',admin)
     switch(type){
       case 'admin':
       real_password = admin.admin_password;

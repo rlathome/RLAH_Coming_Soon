@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var https = require('https');
 var Administrator = require('../models/administrator.js');
+var admin_information = {};
 
 
 router.get('/test',function(req,res,next){
@@ -10,7 +11,9 @@ router.get('/test',function(req,res,next){
 });
 
 router.get('/admin_info',function(req,res,next){
+  console.log('getting admin info')
   Administrator.find({},'',function(err,admin){
+    admin = admin[0];
     if(err) console.log('err! - , ',err)
     console.log('admin: ',admin);
     res.json(admin);

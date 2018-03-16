@@ -17,7 +17,7 @@ export default class Admin extends Component{
   componentDidMount(){
     axios.get(url+'/info/admin_info').then((admin)=>{
       console.log('admin info: ',admin.data);
-      const d = admin.data[0];
+      const d = admin.data;
       this.setState({
         host_password:d.host_password,
         guest_password:d.guest_password,
@@ -122,7 +122,7 @@ export default class Admin extends Component{
         <div className="admin_passwords">Admin password: <input ref="admin_pass" type="text" defaultValue={this.state.admin_password} /><span onClick={()=>this.changePassword('admin_password')} className="btn btn-primary">Update</span></div>
       </div>
     ) : '';
-    let agenda = (ts_agenda !=='' && ts_agenda !== undefined) ? ts_agenda.map((event)=>{
+    let agenda = (ts_agenda !=='') ? ts_agenda.map((event)=>{
       event_num++;
       const property_no = 'property_no'+event_num;
       const arrival = 'arrival'+event_num;

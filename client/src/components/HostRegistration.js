@@ -23,8 +23,7 @@ export default class HostRegistration extends Component{
     }
   }
   componentDidMount(){
-    let a
-    console.log('address: ',this.props.match.params.addr)
+    window.scrollTo(0,0);
   }
   handleOptionChange(e){
     console.log(e.target.value)

@@ -29,6 +29,7 @@ main{
   and (min-width : 355px)
   and (max-width : 668px){
     width:95vw;
+    margin: auto;
   }
 }
 .top_padding{
@@ -178,6 +179,14 @@ body{
 }
 .address_checker{
   font-weight: lighter;
+  .col-sm-9{
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      margin-bottom:5vw;
+      font-size: .75em;
+    }
+  }
   h3{
     display: inline;
     margin-right:2vw;
@@ -194,8 +203,9 @@ body{
     @media only screen
     and (min-width : 355px)
     and (max-width : 668px){
-      width:37vw;
-      margin-right:3vw;
+      width:85vw;
+      // margin-right:3vw;
+      margin-bottom:2.5vw;
       font-size: 1em;
       padding:0vw .5vw;
     }
@@ -339,6 +349,11 @@ body{
     background-color: #000;
   }
 }
+.main_close_btn{
+  width: 60%;
+  margin: auto;
+  margin-bottom: 2vw;
+}
 .muted{
   cursor:default;
   background-color:grey;
@@ -367,7 +382,7 @@ body{
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
-    font-size: .75em;
+    font-size: 1em;
     width:100vw;
   }
 }
@@ -488,6 +503,7 @@ th,td{
   and (min-width : 355px)
   and (max-width : 668px){
     width:95vw;
+    margin: auto;
     div,input,img{
       margin-bottom:1vh;
     }
@@ -535,7 +551,7 @@ th,td{
 .terms_conditions_modal{
   width:50vw;
   left:25vw;
-  top:15vh;
+  top:25vh;
   position:fixed;
   font-size:.95em;
   // iphone 6 portrait
@@ -544,8 +560,8 @@ th,td{
   and (max-width : 668px){
     width:100vw;
     left:0vw;
-    top:20vh;
     font-size:1em;
+    top:15vw;
   }
 }
 .after_tour_info{

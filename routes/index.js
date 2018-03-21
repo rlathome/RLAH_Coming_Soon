@@ -87,7 +87,7 @@ router.post('/submithostform',function(req,res,next){
 
   // res.send("Queued. Thank you.");
 
-  let to = 'info.dcopenhouselist.com'
+  let to = 'info@rlahre.com'
   // let to = 'josh@allenb.com';
   let subject = "A new host has signed up on RLAH Coming Soon!";
 
@@ -95,7 +95,7 @@ router.post('/submithostform',function(req,res,next){
 
   var mailcomposer = require('mailcomposer');
 
-  var domain = 'info.rlahre.com';
+  var domain = 'info.dcopenhouselist.com';
   var apiKey = 'key-602b6fef248551d53fee98ac2dbdef70';
   var mailgun = require('mailgun-js')({apiKey:apiKey, domain:domain});
   //
@@ -104,7 +104,7 @@ router.post('/submithostform',function(req,res,next){
   var host_mail = mailcomposer({
     subject:host_subject,
     to:agent_email,
-    from:'The RLAH Team'+' <'+to+'>',
+    from:'The RLAH Team at '+' <'+to+'>',
     html:'<div>Thank you for submitting your property to be a part of our next tour. We will review your submission and get back to you shortly!</div><br/><br/>'
     +'<div>'
     +'Name: '+form_data.agent_name+'<br/>'

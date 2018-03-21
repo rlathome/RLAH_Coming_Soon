@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Footer from './Footer';
-const url = 'https://www.comingsoontour.com';
+const url = 'http://www.comingsoontour.com';
 
 export default class Agenda extends Component{
   constructor(props){

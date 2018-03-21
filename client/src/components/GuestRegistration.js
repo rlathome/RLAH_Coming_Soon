@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = 'https://www.comingsoontour.com';
+const url = 'http://www.comingsoontour.com';
 
 export default class GuestRegistration extends Component{
   constructor(props){

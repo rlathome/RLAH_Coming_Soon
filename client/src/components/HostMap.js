@@ -3,7 +3,7 @@ import RadiusMap from './RadiusMap';
 import axios from 'axios';
 import Footer from './Footer';
 const google = window.google;
-const url = 'https://www.comingsoontour.com';
+const url = 'http://www.comingsoontour.com';
 
 export default class HostRegistration extends Component{
   constructor(props){

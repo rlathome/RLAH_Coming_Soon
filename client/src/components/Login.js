@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = 'https://www.comingsoontour.com';
+const url = 'http://www.comingsoontour.com';
 
 export default class Login extends Component{
   login(){

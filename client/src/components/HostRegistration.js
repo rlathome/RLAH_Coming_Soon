@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import axios from 'axios';
-const url = 'https://www.comingsoontour.com';
+const url = 'http://www.comingsoontour.com';
 
 export default class HostRegistration extends Component{
   constructor(props){

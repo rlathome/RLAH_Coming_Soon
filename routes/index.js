@@ -96,7 +96,7 @@ router.post('/submithostform',function(req,res,next){
   var mailcomposer = require('mailcomposer');
 
   var domain = 'info.comingsoontour.com';
-  var apiKey = 'key-602b6fef248551d53fee98ac2dbdef70';
+  var apiKey = 'key-30c5713300a403cced1a5f5adaa0ffa8';
   var mailgun = require('mailgun-js')({apiKey:apiKey, domain:domain});
   //
   //************Send confirmation email to host:
@@ -179,7 +179,7 @@ router.post('/submitguestform',function(req,res,next){
   var mailcomposer = require('mailcomposer');
 
   var domain = 'info.comingsoontour.com';
-  var apiKey = 'key-602b6fef248551d53fee98ac2dbdef70';
+  var apiKey = 'key-30c5713300a403cced1a5f5adaa0ffa8';
   var mailgun = require('mailgun-js')({apiKey:apiKey, domain:domain});
 
   //*********** Send confirmation email to guest:

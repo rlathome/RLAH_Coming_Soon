@@ -384,7 +384,6 @@ body{
   and (min-width : 355px)
   and (max-width : 668px){
     font-size: .8em;
-    width:100vw;
   }
 }
 .checker_submit{
@@ -435,7 +434,7 @@ table,th,td{
 }
 @mixin table_width_collection{
   @include table_width(1,8vw,2vw);
-  @include table_width(2,10vw,15vw);
+  @include table_width(2,10vw,12vw);
   @include table_width(3,12vw,5vw);
   @include table_width(4,20vw,15vw);
   @include table_width(5,15vw,10vw);

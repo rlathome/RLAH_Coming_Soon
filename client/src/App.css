@@ -230,6 +230,7 @@ body {
 .address_checker input {
   margin-right: .75vw;
   width: 40vw;
+  padding-left: .75vw;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
@@ -433,7 +434,7 @@ body {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .agenda_table_container {
-    font-size: 1em;
+    font-size: .8em;
     width: 100vw;
   }
 }

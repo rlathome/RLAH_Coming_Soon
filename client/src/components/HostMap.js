@@ -3,7 +3,7 @@ import RadiusMap from './RadiusMap';
 import axios from 'axios';
 import Footer from './Footer';
 const google = window.google;
-const url = 'https://polar-waters-86989.herokuapp.com';
+const url = 'https://www.comingsoontour.com';
 
 export default class HostRegistration extends Component{
   constructor(props){
@@ -60,7 +60,7 @@ export default class HostRegistration extends Component{
     );
     let address_form = (
       <form className="address_checker checker_margin">
-        <h3>Address:</h3><input placeholder="Enter a property address to see if it qualifies" ref="addr" id="pac-input" type="text" />
+        <h3>Address:</h3><input placeholder="Enter an address to see if it qualifies" ref="addr" id="pac-input" type="text" />
         { submit }
       </form>
     )

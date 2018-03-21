@@ -74,7 +74,7 @@ export default class Home extends Component{
         </section>
         <Footer />
         <section className="join_coming_soon">
-          If you or your brokerage is interested in joining Coming Soon Tour <a href="#">click here</a>
+          If you or your brokerage is interested in joining Coming Soon Tour <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWeIYF79hZpKvguPsM93XLrq8_YM6nbRxNKw_f4REqjw3KMQ/viewform" alt="form link">click here</a>
         </section>
       </div>
     ) : '';

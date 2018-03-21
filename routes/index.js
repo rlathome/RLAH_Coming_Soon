@@ -178,7 +178,7 @@ router.post('/submitguestform',function(req,res,next){
 
   var mailcomposer = require('mailcomposer');
 
-  var domain = 'info@rlahre.com';
+  var domain = 'info.dcopenhouselist.com';
   var apiKey = 'key-602b6fef248551d53fee98ac2dbdef70';
   var mailgun = require('mailgun-js')({apiKey:apiKey, domain:domain});
 

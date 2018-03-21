@@ -85,11 +85,9 @@ router.post('/submithostform',function(req,res,next){
   const agent_email = form_data.email;
   const agent_name = form_data.agent_name;
 
-
-
   // res.send("Queued. Thank you.");
 
-  let to = 'info@rlahre.com'
+  let to = 'info.dcopenhouselist.com'
   // let to = 'josh@allenb.com';
   let subject = "A new host has signed up on RLAH Coming Soon!";
 

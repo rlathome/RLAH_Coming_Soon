@@ -10,7 +10,7 @@ html * {
 header {
   text-align: center;
   border-bottom: 1px solid grey;
-  padding: 1vw;
+  padding: 2vw 1vw 1vw 1vw;
   width: 100%;
   font-size: 1.25em;
 }
@@ -495,7 +495,7 @@ td:nth-child(2) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(2) {
-    width: 12vw;
+    width: 10vw;
     font-size: .75em;
   }
 }
@@ -511,7 +511,7 @@ td:nth-child(3) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(3) {
-    width: 5vw;
+    width: 10vw;
     font-size: .75em;
   }
 }
@@ -527,7 +527,7 @@ td:nth-child(4) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(4) {
-    width: 15vw;
+    width: 17vw;
     font-size: .75em;
   }
 }
@@ -543,7 +543,7 @@ td:nth-child(5) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(5) {
-    width: 10vw;
+    width: 17vw;
     font-size: .75em;
   }
 }
@@ -575,7 +575,7 @@ td:nth-child(7) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(7) {
-    width: 12vw;
+    width: 10vw;
     font-size: .75em;
   }
 }
@@ -623,7 +623,7 @@ th:nth-child(2) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(2) {
-    width: 12vw;
+    width: 10vw;
     font-size: .75em;
   }
 }
@@ -639,7 +639,7 @@ th:nth-child(3) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(3) {
-    width: 5vw;
+    width: 10vw;
     font-size: .75em;
   }
 }
@@ -655,7 +655,7 @@ th:nth-child(4) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(4) {
-    width: 15vw;
+    width: 17vw;
     font-size: .75em;
   }
 }
@@ -671,7 +671,7 @@ th:nth-child(5) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(5) {
-    width: 10vw;
+    width: 17vw;
     font-size: .75em;
   }
 }
@@ -703,7 +703,7 @@ th:nth-child(7) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(7) {
-    width: 12vw;
+    width: 10vw;
     font-size: .75em;
   }
 }
@@ -733,6 +733,14 @@ th:nth-child(8) textarea {
   th, td {
     height: 15vw;
   }
+}
+
+tbody > tr:nth-child(1) {
+  font-size: 1em !important;
+}
+
+tr > th:nth-child(1) {
+  font-size: .55em !important;
 }
 
 .login_window_container {
@@ -881,5 +889,11 @@ th:nth-child(8) textarea {
   select:focus,
   textarea {
     font-size: 16px;
+  }
+}
+
+@media print {
+  .logo-area {
+    margin-top: 1vh;
   }
 }

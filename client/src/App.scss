@@ -10,7 +10,7 @@ $section_padding:2.5vh;
 header{
   text-align: center;
   border-bottom:1px solid grey;
-  padding:1vw;
+  padding:2vw 1vw 1vw 1vw;
   width:100%;
   font-size: 1.25em;
   ul{
@@ -434,12 +434,12 @@ table,th,td{
 }
 @mixin table_width_collection{
   @include table_width(1,8vw,2vw);
-  @include table_width(2,10vw,12vw);
-  @include table_width(3,12vw,5vw);
-  @include table_width(4,20vw,15vw);
-  @include table_width(5,15vw,10vw);
+  @include table_width(2,10vw,10vw);
+  @include table_width(3,12vw,10vw);
+  @include table_width(4,20vw,17vw);
+  @include table_width(5,15vw,17vw);
   @include table_width(6,10vw,15vw);
-  @include table_width(7,6vw,12vw);
+  @include table_width(7,6vw,10vw);
   @include table_width(8,12vw,6vw);
 }
 td{
@@ -456,6 +456,12 @@ th,td{
   and (max-width : 668px){
     height:15vw;
   }
+}
+tbody>tr:nth-child(1){
+  font-size:1em !important;
+}
+tr>th:nth-child(1){
+  font-size:.55em !important;
 }
 .login_window_container{
   margin-top:25vh;
@@ -589,5 +595,10 @@ and (max-width : 668px){
   select:focus,
   textarea {
     font-size: 16px;
+  }
+}
+@media print{
+  .logo-area{
+    margin-top:1vh;
   }
 }

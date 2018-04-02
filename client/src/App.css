@@ -314,6 +314,10 @@ body {
   float: right;
 }
 
+.host_form form .form_labels div #radio_invisible, .guest_form form .form_labels div #radio_invisible {
+  display: none;
+}
+
 .host_form form .form_labels div input, .host_form form .form_labels div label, .guest_form form .form_labels div input, .guest_form form .form_labels div label {
   margin-left: .75em;
 }
@@ -815,6 +819,12 @@ tbody > tr:nth-child(1) {
   margin-top: 2.5vh;
   font-size: 2vw;
   color: red;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .out_of_bounds {
+    font-size: 4vw;
+  }
 }
 
 .flex-col {

@@ -89,7 +89,7 @@ router.post('/submithostform',function(req,res,next){
 
   let to = 'info@rlahre.com'
   // let to = 'josh@allenb.com';
-  let subject = "A new host has signed up on RLAH Coming Soon!";
+  let subject = "A new host has signed up on the Coming Soon Tour!";
 
   let host_subject = "Thank you for signing up!";
 
@@ -104,7 +104,7 @@ router.post('/submithostform',function(req,res,next){
   var host_mail = mailcomposer({
     subject:host_subject,
     to:agent_email,
-    from:'The RLAH Team at '+' <'+to+'>',
+    from:'<'+to+'>',
     html:'<div>Thank you for submitting your property to be a part of our next tour. We will review your submission and get back to you shortly!</div><br/><br/>'
     +'<div>'
     +'Name: '+form_data.agent_name+'<br/>'
@@ -173,7 +173,7 @@ router.post('/submitguestform',function(req,res,next){
   let email = form_data.email;
   let to = 'info@rlahre.com';
   // let to = 'josh@allenb.com';
-  let subject = "A new guest has signed up on RLAH Coming Soon!";
+  let subject = "A new guest has signed up on the Coming Soon Tour!";
   let guest_subject = "Thank you for signing up!";
 
   var mailcomposer = require('mailcomposer');
@@ -187,7 +187,7 @@ router.post('/submitguestform',function(req,res,next){
   var guest_mail = mailcomposer({
     subject:guest_subject,
     to:email,
-    from:'The RLAH Team'+' <'+to+'>',
+    from:'<'+to+'>',
     html:'<div>Thank you for submitting your property to be a part of our next Coming Soon Tour. We will review your submission and get back to you shortly!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email
   });
 

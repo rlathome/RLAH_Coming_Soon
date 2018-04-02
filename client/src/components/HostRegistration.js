@@ -9,7 +9,7 @@ export default class HostRegistration extends Component{
     super(props);
     this.state={
       address:this.props.match.params.addr,
-      selected_option:'yes',
+      selected_option:'invisible',
       price:false,
       staging:false,
       timing:false,
@@ -24,12 +24,24 @@ export default class HostRegistration extends Component{
   }
   componentDidMount(){
     window.scrollTo(0,0);
+    var checkbox1 = document.getElementById("radio_yes");
+    // checkbox1.unchecked = true;
+    checkbox1.indeterminate = true;
+    var checkbox2 = document.getElementById("radio_no");
+    // checkbox2.unchecked = true;
+    checkbox2.indeterminate = true;
   }
   handleOptionChange(e){
     console.log(e.target.value)
-    this.setState({
-      selected_option:e.target.value
-    });
+    if(e.target.value===this.state.selected_option){
+      this.setState({
+        selected_option:'invisible'
+      });
+    }else{
+      this.setState({
+        selected_option:e.target.value
+      });
+    }
     setTimeout(()=>{
       this.isFormFilled();
     },20);
@@ -134,7 +146,8 @@ export default class HostRegistration extends Component{
       <span onClick={()=>this.submitRegistration()} className="main_submit">SUBMIT</span>
     ):(
       <span className="main_submit muted">SUBMIT</span>
-    )
+    );
+    console.log('radio selected: ',this.state.selected_option);
     return(
       <main>
         { submit_modal }
@@ -168,6 +181,7 @@ export default class HostRegistration extends Component{
                 <div>
                   <input onChange={this.handleOptionChange.bind(this)} type="radio" value='yes' checked = {this.state.selected_option==='yes'} id="radio_no" name="yes_no" /><label for="radio_no">Yes</label>
                   <input onChange={this.handleOptionChange.bind(this)} type="radio" value='no' checked = {this.state.selected_option==='no'} id="radio_yes" name="yes_no" /><label for="radio_yes">No</label>
+                  <input onChange={this.handleOptionChange.bind(this)} type="radio" value='no' checked = {this.state.selected_option==='invisible'} id="radio_invisible" name="yes_no" />
                 </div>
               </div>
           </form>

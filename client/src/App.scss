@@ -267,6 +267,9 @@ body{
     .form_labels{
       width:40%;
       div{
+        #radio_invisible{
+          display:none;
+        }
         float:right;
         input,label{
           margin-left:.75em;
@@ -528,7 +531,13 @@ tbody>tr:nth-child(1){
   margin-top:$section_padding;
   font-size:2vw;
   color:red;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:4vw;
+  }
 }
+
 .flex-col{
   display: flex;
   flex-direction: column;

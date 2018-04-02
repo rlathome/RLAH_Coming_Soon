@@ -85,6 +85,7 @@ export default class HostRegistration extends Component{
             <li>Property is located within the 2 Miler Map below (no VA addresses)</li>
             <li>Property is NOT listed in Bright MLS (except "Coming Soon") at time of tour</li>
             <li>Property must be submitted by 12pm the previous Monday or until 4 total qualifying properties have been submitted, whichever comes first</li>
+            <li>Occurs every 1st and 3rd Tuesday of each month beginning at 9:30AM and ending at approximately 11:30AM. Each property will have a stop of about 15-20 minutes.</li>
           </ol>
         </section>
         <section className="slots_avail"><h3>Current Property Slots Available:</h3> <span className="slots_number">

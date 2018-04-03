@@ -19,6 +19,7 @@ class RadiusMap extends Component{
     let out_of_bounds = this.props.out_of_bounds;
     let not_out_of_bounds = this.props.not_out_of_bounds;
     let address_entered = this.props.address_entered;
+    let no_address_entered = this.props.no_address_entered;
       return(
       // GoogleMap component has a 100% height style.
       // You have to set the DOM parent height.
@@ -99,6 +100,7 @@ class RadiusMap extends Component{
             }
 
             goo.event.addDomListener(input, 'keydown', function(event) {
+              no_address_entered();
               out_of_bounds();
               clearMarkers();
               if (event.keyCode === 13) {

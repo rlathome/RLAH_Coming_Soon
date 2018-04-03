@@ -46,11 +46,16 @@ export default class HostRegistration extends Component{
       address
     })
   }
+  no_address_entered(){
+    this.setState({
+      address_entered:false
+    });
+  }
   next(){
     this.props.history.push('/host/registration/'+this.state.address);
   }
   render(){
-    const out_of_bounds = (this.state.out_of_bounds) ? (
+    const out_of_bounds = (this.state.address_entered && this.state.out_of_bounds) ? (
       <div className="out_of_bounds">Sorry, that address is not within our tour area.</div>
     ) : '';
     let submit = (this.state.address_entered && !this.state.out_of_bounds) ? (
@@ -70,6 +75,7 @@ export default class HostRegistration extends Component{
     const map_props = {
       out_of_bounds:this.out_of_bounds.bind(this),
       not_out_of_bounds:this.not_out_of_bounds.bind(this),
+      no_address_entered :this.no_address_entered.bind(this),
       address_entered :this.address_entered.bind(this),
       center:{lat:38.910136,lng:-77.042510}
     }

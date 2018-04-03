@@ -100,7 +100,7 @@ export default class HostRegistration extends Component{
         { address_form }
         { out_of_bounds }
         <section className="after_tour_info">
-          Don’t worry if your property doesn’t qualify, <a href="#">click here</a> for AFTER TOUR information
+          Don’t worry if your property doesn’t qualify, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform" alt="form link">click here</a> for AFTER TOUR information
         </section>
         <section className="radius_map">
           <div className="map_element">

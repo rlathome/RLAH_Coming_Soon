@@ -815,16 +815,23 @@ tbody > tr:nth-child(1) {
   }
 }
 
-.out_of_bounds {
+.out_of_bounds, .within_bounds {
   margin-top: 2.5vh;
   font-size: 2vw;
-  color: red;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
-  .out_of_bounds {
+  .out_of_bounds, .within_bounds {
     font-size: 4vw;
   }
+}
+
+.out_of_bounds {
+  color: red;
+}
+
+.within_bounds {
+  color: green;
 }
 
 .flex-col {

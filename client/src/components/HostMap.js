@@ -58,6 +58,9 @@ export default class HostRegistration extends Component{
     const out_of_bounds = (this.state.address_entered && this.state.out_of_bounds) ? (
       <div className="out_of_bounds">Sorry, that address is not within our tour area.</div>
     ) : '';
+    const within_bounds = (this.state.address_entered && !this.state.out_of_bounds) ? (
+      <div className="within_bounds">Your property is within the tour area. Please press 'Next'</div>
+    ) : '';
     let submit = (this.state.address_entered && !this.state.out_of_bounds) ? (
       <span onClick={()=>this.next()} className="checker_submit">NEXT</span>
     ): (
@@ -99,6 +102,7 @@ export default class HostRegistration extends Component{
         </span></section>
         { address_form }
         { out_of_bounds }
+        { within_bounds }
         <section className="after_tour_info">
           Don’t worry if your property doesn’t qualify, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform" alt="form link">click here</a> for AFTER TOUR information
         </section>

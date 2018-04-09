@@ -14,7 +14,6 @@ class RadiusMap extends Component{
   render(){
     let pt_center = {lat:38.909543,lng:-77.037441};
     // console.log('the markerz: ',pt_center,pt_center.lat>0,pt_center.lat==0);
-
     let listing_marker = {title:"DuPont Circle",position:{lat:38.910136,lng: -77.042510}};
     let out_of_bounds = this.props.out_of_bounds;
     let not_out_of_bounds = this.props.not_out_of_bounds;
@@ -103,6 +102,7 @@ class RadiusMap extends Component{
               no_address_entered();
               out_of_bounds();
               clearMarkers();
+              initSubmitBtn();
               if (event.keyCode === 13) {
                   event.preventDefault();
               }

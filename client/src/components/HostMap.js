@@ -21,9 +21,11 @@ export default class HostRegistration extends Component{
       const d = admin.data[0];
       const avail = parseInt(d.slots_available);
       const slots_full = (avail===0) ? true : false;
+      const date = d.event_date;
       this.setState({
         slots_available:d.slots_available,
-        slots_full
+        slots_full,
+        date
       });
     }).catch((err)=>{
       console.log('err - ',err);
@@ -93,13 +95,15 @@ export default class HostRegistration extends Component{
           <ol className="qualifications_list">
             <li>Property is located within the 2 Miler Map below (no VA addresses)</li>
             <li>Property is NOT listed in Bright MLS (except "Coming Soon") at time of tour</li>
-            <li>Property must be submitted by 12pm the previous Monday or until 4 total qualifying properties have been submitted, whichever comes first</li>
-            <li>Occurs every 1st and 3rd Tuesday of each month beginning at 9:30AM and ending at approximately 11:30AM. Each property will have a stop of about 15-20 minutes.</li>
+            <li>Property must be submitted by 12pm the Monday before the tour or until 4 total qualifying properties have been submitted, whichever comes first</li>
           </ol>
         </section>
         <section className="slots_avail"><h3>Current Property Slots Available:</h3> <span className="slots_number">
           { this.state.slots_available }
         </span></section>
+        <div className="agenda_date">
+          { this.state.date }
+        </div>
         { address_form }
         { out_of_bounds }
         { within_bounds }

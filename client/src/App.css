@@ -79,6 +79,11 @@ body {
   margin-top: 3.5vh;
 }
 
+.main-subtitle div {
+  font-size: .65em;
+  margin-top: 2.5vh;
+}
+
 .join_coming_soon {
   width: 100%;
   position: absolute;
@@ -235,7 +240,7 @@ body {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .address_checker input {
-    width: 85vw;
+    width: 55vw;
     margin-bottom: 2.5vw;
     font-size: 1em;
     padding: 1vw;
@@ -294,6 +299,7 @@ body {
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .host_form form, .guest_form form {
     width: 75vw;
+    font-size: .85em;
   }
 }
 
@@ -304,6 +310,12 @@ body {
 .host_form form > div, .guest_form form > div {
   margin-top: 2.5vh;
   width: 100%;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .host_form form > div, .guest_form form > div {
+    margin-top: 1.25vh;
+  }
 }
 
 .host_form form .form_labels, .guest_form form .form_labels {
@@ -605,6 +617,10 @@ td:nth-child(8) textarea {
   height: 100%;
 }
 
+.after_tour_table td:nth-child(1) {
+  font-size: 1em;
+}
+
 th:nth-child(1) {
   width: 8vw;
 }
@@ -743,10 +759,17 @@ th:nth-child(8) textarea {
   tr > th:nth-child(1) {
     font-size: .55em !important;
   }
+  .after_tour_table tr > th:nth-child(1), .after_tour_table tr > td:nth-child(1) {
+    font-size: .75em !important;
+  }
+  tbody > tr:nth-child(1) th {
+    height: 1.5vh !important;
+  }
 }
 
 tbody > tr:nth-child(1) {
   font-size: 1em !important;
+  font-weight: bold;
 }
 
 .login_window_container {
@@ -918,4 +941,13 @@ tbody > tr:nth-child(1) {
   .main_logo {
     margin-left: -30%;
   }
+}
+
+.add_event {
+  float: left;
+  margin-left: 1.5vw;
+}
+
+.bottom_buffer {
+  margin-bottom: 8vw;
 }

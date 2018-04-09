@@ -13,6 +13,19 @@ export default class GuestRegistration extends Component{
       terms_conditions:false
     }
   }
+  componentWillMount(){
+    console.log('joey: ',this.props.joey)
+    axios.get(url+'/info/admin_info').then((admin)=>{
+      console.log('map admin info: ',admin.data);
+      const d = admin.data[0];
+      const date = d.event_date;
+      this.setState({
+        date
+      });
+    }).catch((err)=>{
+      console.log('err - ',err);
+    })
+  }
   isFormFilled(){
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
    const isEmail = re.test(String(this.refs.email.value).toLowerCase());
@@ -55,7 +68,7 @@ export default class GuestRegistration extends Component{
           });
           //route to agenda
           setTimeout(()=>{
-            this.props.history.push('/agenda');
+            this.props.history.push('/');
           },2000);
         }
       }).catch((err)=>{
@@ -76,7 +89,7 @@ export default class GuestRegistration extends Component{
     ) : '';
     const terms_conditions = (this.state.terms_conditions) ? (
       <div className = 'flex-col terms_conditions_modal'>
-        <span>THIS TOUR IS PROVIDED ON “AS IS” AND  “AS AVAILABLE” BASIS, AND BROKER EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. NEITHER PARTY SHALL BE LIABLE TO THE OTHER PARTY FOR ANY CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OR LOST PROFITS ARISING OUT OF ANY BREACH OF THIS AGREEMENT OR ITS TERMINATION, WHETHER FOR BREACH OF WARRANTY OR ANY OBLIGATION OR OTHERWISE, WHETHER LIABILITY IS ASSERTED IN CONTRACT OR TORT AND REGARDLESS OF WHETHER OR NOT THE PARTY HAS ADVISED OR HAS BEEN ADVISED OF THE POSSIBILITY OF ANY SUCH LOSS OR DAMAGE. This Agreement and all attached Schedules constitute the entire understanding and agreement of the parties with respect to the subject matter contained herein. This Agreement may not be altered, modified or waived, in whole or in part, except in a writing signed by the authorized representatives of the parties.</span>
+        <span>THIS TOUR IS PROVIDED ON “AS IS” AND  “AS AVAILABLE” BASIS, AND BROKER EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. NEITHER PARTY SHALL BE LIABLE TO THE OTHER PARTY FOR ANY CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OR LOST PROFITS ARISING OUT OF ANY BREACH OF THIS AGREEMENT OR ITS TERMINATION, WHETHER FOR BREACH OF WARRANTY OR ANY OBLIGATION OR OTHERWISE, WHETHER LIABILITY IS ASSERTED IN CONTRACT OR TORT AND REGARDLESS OF WHETHER OR NOT THE PARTY HAS ADVISED OR HAS BEEN ADVISED OF THE POSSIBILITY OF ANY SUCH LOSS OR DAMAGE. <br/>This Agreement and all attached Schedules constitute the entire understanding and agreement of the parties with respect to the subject matter contained herein. This Agreement may not be altered, modified or waived, in whole or in part, except in a writing signed by the authorized representatives of the parties.</span>
         <br/>
         <span className="checker_submit" onClick={()=>this.toggleTerms()}>Close</span>
       </div>
@@ -94,7 +107,12 @@ export default class GuestRegistration extends Component{
         <div className="host_title">
           GUEST
         </div>
-
+        <div className="agenda_date">
+          { this.state.date }
+        </div>
+        <div className="reminder">
+          Registering as a guest reserves a spot for you in the caravan paid for by the brokerage. If you do not need transportation, but still want to view the properties you do not need to register”
+        </div>
         <section className="guest_form top_padding">
           <form>
             <p>*denotes required field for submission</p>

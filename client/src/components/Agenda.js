@@ -7,14 +7,16 @@ export default class Agenda extends Component{
   constructor(props){
     super(props);
     this.state={
-      agenda:''
+      agenda:'',
+      after_tour:''
     }
   }
   componentDidMount(){
     axios.get(url+'/info/admin_info').then((agenda)=>{
-      console.log('the agenda: ',agenda.data[0].agenda);
+      console.log('the agenda: ',agenda.data[0].after_tour);
       this.setState({
-        agenda:agenda.data[0]
+        agenda:agenda.data[0],
+        after_tour:agenda.data[0].after_tour
       });
     }).catch((err)=>{
       console.log('err - ',err);
@@ -35,6 +37,42 @@ export default class Agenda extends Component{
         </tr>
       );
     }) : '';
+    let after_tour = (this.state.after_tour !=='' && this.state.after_tour !==undefined) ? this.state.after_tour.map((event)=>{
+      return(
+        <tr>
+          <td>{event.address}</td>
+          <td>{event.listing_agt}</td>
+          <td>{event.est_price}</td>
+          <td>{event.est_sq_ft}</td>
+          <td>{event.will_sell}</td>
+        </tr>
+      );
+    }) : '';
+    const after_tour_contents = (this.state.after_tour.length>0) ? (
+      <div>
+        <div className="bottom_buffer"></div>
+        <div id="after_tour" className="host_title">
+          AFTER TOUR
+        </div>
+        <section className="agenda_table_container after_tour_table">
+          <table className="agenda_table">
+            <tbody>
+              <tr>
+                <th>Address</th>
+                <th>Listing Agent</th>
+                <th>Est. Price</th>
+                <th>Est. Sq. Ft</th>
+                <th>Willing to sell off market?</th>
+              </tr>
+              { after_tour }
+            </tbody>
+
+
+          </table>
+        </section>
+        <div className="bottom_buffer"></div>
+    </div>
+    ) : '';
     return(
       <main>
         <h1 className="coming_soon_title">Coming Soon Tour</h1>
@@ -67,6 +105,28 @@ export default class Agenda extends Component{
           <span onClick={()=>window.print()} className="main_submit">PRINT</span>
         </section>
         <Footer />
+        {/* <div className="bottom_buffer"></div>
+        <div className="host_title">
+          AFTER TOUR
+        </div>
+        <section className="agenda_table_container after_tour_table">
+          <table className="agenda_table">
+            <tbody>
+              <tr>
+                <th>Address</th>
+                <th>Listing Agent</th>
+                <th>Est. Price</th>
+                <th>Est. Sq. Ft</th>
+                <th>Willing to sell off market?</th>
+              </tr>
+              { after_tour }
+            </tbody>
+
+
+          </table>
+        </section>
+        <div className="bottom_buffer"></div> */}
+        { after_tour_contents }
       </main>
     );
   }

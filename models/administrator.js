@@ -17,6 +17,10 @@ var schema = new mongoose.Schema({
     type:Array,
     required:false
   },
+  after_tour:{
+    type:Array,
+    required:false
+  },
   event_date:{
     type:String,
     required:false

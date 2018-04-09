@@ -68,6 +68,10 @@ body{
 .main-subtitle{
   width:40vw;
   margin-top:3.5vh;
+  div{
+    font-size:.65em;
+    margin-top:$section_padding;
+  }
 }
 .join_coming_soon{
   width:100%;
@@ -204,7 +208,7 @@ body{
     @media only screen
     and (min-width : 355px)
     and (max-width : 668px){
-      width:85vw;
+      width:55vw;
       // margin-right:3vw;
       margin-bottom:2.5vw;
       font-size: 1em;
@@ -255,6 +259,7 @@ body{
     and (min-width : 355px)
     and (max-width : 668px){
       width:75vw;
+      font-size:.85em;
     }
     display:inline-block;
     *{
@@ -263,6 +268,11 @@ body{
     &>div{
       margin-top:$section_padding;
       width:100%;
+      @media only screen
+      and (min-width : 355px)
+      and (max-width : 668px){
+        margin-top:$section_padding/2;
+      }
     }
     .form_labels{
       width:40%;
@@ -450,6 +460,9 @@ td{
   @include table_style(1,padding,.25em 0em);
   @include table_width_collection;
 }
+.after_tour_table td{
+  @include table_style(1,font-size,1em);
+}
 th{
   @include table_width_collection;
 }
@@ -466,9 +479,18 @@ and (max-width : 668px){
   tr>th:nth-child(1){
     font-size:.55em !important;
   }
+  .after_tour_table tr>th:nth-child(1), .after_tour_table tr>td:nth-child(1){
+    font-size:.75em !important;
+  }
+  tbody>tr:nth-child(1){
+    th{
+      height:1.5vh !important;
+    }
+  }
 }
 tbody>tr:nth-child(1){
   font-size:1em !important;
+  font-weight: bold;
 }
 
 .login_window_container{
@@ -623,4 +645,11 @@ and (max-width : 668px){
   .main_logo{
     margin-left:-30%;
   }
+}
+.add_event{
+  float:left;
+  margin-left:1.5vw;
+}
+.bottom_buffer{
+  margin-bottom:8vw;
 }

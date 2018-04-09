@@ -30,6 +30,26 @@ router.post('/submitagenda',function(req,res,next){
     res.send('success');
   });
 });
+router.post('/delete_event',function(req,res,next){
+  console.log('agenda: ',req.body);
+  const agenda = req.body.agenda;
+  Administrator.update({},{
+      'agenda':agenda
+    },function(err){
+    if(err) ()=>console.log('error: ',err);
+    res.send('success');
+  });
+});
+router.post('/update_after_tour_event',function(req,res,next){
+  console.log('after_tour: ',req.body);
+  const after_tour = req.body.after_tour;
+  Administrator.update({},{
+      'after_tour':after_tour
+    },function(err){
+    if(err) ()=>console.log('error: ',err);
+    res.send('success');
+  });
+});
 router.post('/change_password',function(req,res,next){
   console.log('password: ',req.body);
   const password = req.body.password;
@@ -87,7 +107,7 @@ router.post('/submithostform',function(req,res,next){
 
   // res.send("Queued. Thank you.");
 
-  let to = 'info@rlahre.com'
+  let to = 'comingsoontour@gmail.com'
   // let to = 'josh@allenb.com';
   let subject = "A new host has signed up on the Coming Soon Tour!";
 
@@ -171,7 +191,7 @@ router.post('/submitguestform',function(req,res,next){
   console.log('submitting: ',form_data);
   let agent_name = form_data.agent_name;
   let email = form_data.email;
-  let to = 'info@rlahre.com';
+  let to = 'comingsoontour@gmail.com';
   // let to = 'josh@allenb.com';
   let subject = "A new guest has signed up on the Coming Soon Tour!";
   let guest_subject = "Thank you for signing up!";

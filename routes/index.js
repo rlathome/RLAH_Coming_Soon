@@ -125,7 +125,7 @@ router.post('/submithostform',function(req,res,next){
     subject:host_subject,
     to:agent_email,
     from:'<'+to+'>',
-    html:'<div>Thank you for submitting your property to be a part of our next tour. We will review your submission and get back to you shortly!</div><br/><br/>'
+    html:'<div>Thank you for submitting your property to be a part of our next Coming Soon Tour. We will review your submission and get back to you shortly!”</div><br/><br/>'
     +'<div>'
     +'Name: '+form_data.agent_name+'<br/>'
     +'Address: '+form_data.address+'<br/>'
@@ -208,7 +208,7 @@ router.post('/submitguestform',function(req,res,next){
     subject:guest_subject,
     to:email,
     from:'<'+to+'>',
-    html:'<div>Thank you for submitting your property to be a part of our next Coming Soon Tour. We will review your submission and get back to you shortly!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email
+    html:'<div>Thank you for signing up to be a guest on our next Coming Soon Tour. We will review your submission and get back to you shortly!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email
   });
 
   guest_mail.build(function(mailBuildError, message){

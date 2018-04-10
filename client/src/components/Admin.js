@@ -282,41 +282,15 @@ export default class Admin extends Component{
       return(
         <tr>
           <button onClick={this.deleteAfterTourEvent.bind(this)} id={at_event_num}>Delete</button>
-          <td><textarea ref={address} className="table_input" type="text" defaultValue={event.address}/></td>
+          <td id="aftertour_address"><textarea ref={address} className="table_input" type="text" defaultValue={event.address}/></td>
           <td><textarea ref={listing_agt} className="table_input" type="text" defaultValue={event.listing_agt}/></td>
-          <td><textarea ref={est_price} className="table_input" type="text" defaultValue={event.est_price}/></td>
-          <td><textarea ref={est_sq_ft} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
-          <td><textarea ref={will_sell} className="table_input" type="text" defaultValue={event.will_sell}/></td>
+          <td className="aftertour_price"><textarea ref={est_price} className="table_input" type="text" defaultValue={event.est_price}/></td>
+          <td className="aftertour_sqft"><textarea ref={est_sq_ft} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
+          <td className="aftertour_willsell"><textarea ref={will_sell} className="table_input" type="text" defaultValue={event.will_sell}/></td>
         </tr>
       );
     }) : '';
-    // if(ts_agenda !=='' && ts_agenda.length<4){
-    //   let i = ts_agenda.length;
-    //   console.log('i: ',i)
-    //   while(i<4){
-    //     i++;
-    //     const property_no = 'property_no'+i;
-    //     const arrival = 'arrival'+i;
-    //     const departure = 'departure'+i;
-    //     const address = 'address'+i;
-    //     const listing_agt = 'listing_agt'+i;
-    //     const est_price = 'est_price'+i;
-    //     const est_sq_ft = 'est_sq_ft'+i;
-    //     const will_sell = 'will_sell'+i;
-    //     agenda.push(
-    //       <tr>
-    //         <td><input ref={property_no} className="table_input" type="text"  /></td>
-    //         <td><input ref={arrival} className="table_input" type="text" /></td>
-    //         <td><input ref={departure} className="table_input" type="text" /></td>
-    //         <td><input ref={address} className="table_input" type="text" /></td>
-    //         <td><input ref={listing_agt} className="table_input" type="text" /></td>
-    //         <td><input ref={est_price} className="table_input" type="text" /></td>
-    //         <td><input ref={est_sq_ft} className="table_input" type="text" /></td>
-    //         <td><input ref={will_sell} className="table_input" type="text" /></td>
-    //       </tr>
-    //     );
-    //   }
-    // }
+
     let agenda_date = (this.state.event_date !=='') ? (
       <div className="agenda_date">
         <span>Event date: </span>
@@ -387,9 +361,9 @@ export default class Admin extends Component{
                   <th></th>
                   <th>Address</th>
                   <th>Listing Agent</th>
-                  <th>Est. Price</th>
-                  <th>Est. Sq. Ft</th>
-                  <th>Willing to sell off market?</th>
+                  <th className="aftertour_price">Est. Price</th>
+                  <th className="aftertour_sqft">Est. Sq. Ft</th>
+                  <th className="aftertour_willsell">Willing to sell off market?</th>
                 </tr>
                 { after_tour }
             </tbody>

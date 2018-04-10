@@ -111,7 +111,7 @@ export default class GuestRegistration extends Component{
           { this.state.date }
         </div>
         <div className="reminder">
-          Registering as a guest reserves a spot for you in the caravan paid for by the brokerage. If you do not need transportation, but still want to view the properties you do not need to register”
+          Registering as a guest reserves a spot for you in the caravan paid for by the brokerage. If you do not need transportation, but still want to view the properties you do not need to register
         </div>
         <section className="guest_form top_padding">
           <form>

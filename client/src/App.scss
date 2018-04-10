@@ -476,12 +476,22 @@ th,td{
 @media only screen
 and (min-width : 355px)
 and (max-width : 668px){
+  // make property no header text much smaller
   tr>th:nth-child(1){
     font-size:.55em !important;
   }
+  // make first column of after tour table the same font as others (i.e., undo default property no styling)
   .after_tour_table tr>th:nth-child(1), .after_tour_table tr>td:nth-child(1){
     font-size:.75em !important;
   }
+  // make after tour address and listing agent cells wider
+  .after_tour_table tr>th:nth-child(1),.after_tour_table tr>th:nth-child(2){
+    width:70px;
+  }
+  .after_tour_table tr>th:nth-child(4),{
+    width:40px;
+  }
+  // make table header rows shorter than table cells
   tbody>tr:nth-child(1){
     th{
       height:1.5vh !important;
@@ -652,4 +662,38 @@ and (max-width : 668px){
 }
 .bottom_buffer{
   margin-bottom:8vw;
+}
+#aftertour_address{
+  width:20vw;
+}
+.aftertour_agent{
+  width:20vw !important;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:20vw !important;
+  }
+}
+.aftertour_price{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:20vw !important;
+  }
+}
+.aftertour_sqft{
+  width:10vw !important;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:12vw !important;
+  }
+}
+.aftertour_willsell{
+  width:10vw !important;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:2.5vw !important;
+  }
 }

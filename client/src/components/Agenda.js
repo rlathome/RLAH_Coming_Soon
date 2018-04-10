@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Footer from './Footer';
 const url = 'http://www.comingsoontour.com';
@@ -22,6 +23,15 @@ export default class Agenda extends Component{
       console.log('err - ',err);
     })
   }
+  componentDidUpdate() {
+    let hash = this.props.location.hash.replace('#', '');
+      if (hash) {
+          let node = ReactDOM.findDOMNode(this.refs[hash]);
+          if (node) {
+              node.scrollIntoView();
+          }
+      }
+  }
   render(){
     let agenda = (this.state.agenda !=='' && this.state.agenda.agenda !==undefined) ? this.state.agenda.agenda.map((event)=>{
       return(
@@ -40,18 +50,18 @@ export default class Agenda extends Component{
     let after_tour = (this.state.after_tour !=='' && this.state.after_tour !==undefined) ? this.state.after_tour.map((event)=>{
       return(
         <tr>
-          <td>{event.address}</td>
-          <td>{event.listing_agt}</td>
-          <td>{event.est_price}</td>
-          <td>{event.est_sq_ft}</td>
-          <td>{event.will_sell}</td>
+          <td id="aftertour_address">{event.address}</td>
+          <td className="aftertour_agent">{event.listing_agt}</td>
+          <td className="aftertour_price">{event.est_price}</td>
+          <td className="aftertour_sqft">{event.est_sq_ft}</td>
+          <td className="aftertour_willsell">{event.will_sell}</td>
         </tr>
       );
     }) : '';
     const after_tour_contents = (this.state.after_tour.length>0) ? (
       <div>
         <div className="bottom_buffer"></div>
-        <div id="after_tour" className="host_title">
+        <div ref="after_tour" className="host_title">
           AFTER TOUR
         </div>
         <section className="agenda_table_container after_tour_table">
@@ -59,10 +69,10 @@ export default class Agenda extends Component{
             <tbody>
               <tr>
                 <th>Address</th>
-                <th>Listing Agent</th>
-                <th>Est. Price</th>
-                <th>Est. Sq. Ft</th>
-                <th>Willing to sell off market?</th>
+                <th className="aftertour_agent">Listing Agent</th>
+                <th className="aftertour_price">Est. Price</th>
+                <th className="aftertour_sqft">Est. Sq. Ft</th>
+                <th className="aftertour_willsell">Willing to sell off market?</th>
               </tr>
               { after_tour }
             </tbody>

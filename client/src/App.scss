@@ -72,6 +72,11 @@ body{
     font-size:.65em;
     margin-top:$section_padding;
   }
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:70vw;
+  }
 }
 .join_coming_soon{
   width:100%;
@@ -211,7 +216,7 @@ body{
       width:55vw;
       // margin-right:3vw;
       margin-bottom:2.5vw;
-      font-size: 1em;
+      font-size: 12px;
       padding:1vw;
     }
   }

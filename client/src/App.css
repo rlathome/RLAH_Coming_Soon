@@ -84,6 +84,12 @@ body {
   margin-top: 2.5vh;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main-subtitle {
+    width: 70vw;
+  }
+}
+
 .join_coming_soon {
   width: 100%;
   position: absolute;
@@ -242,7 +248,7 @@ body {
   .address_checker input {
     width: 55vw;
     margin-bottom: 2.5vw;
-    font-size: 1em;
+    font-size: 12px;
     padding: 1vw;
   }
 }

@@ -3,7 +3,7 @@ import RadiusMap from './RadiusMap';
 import axios from 'axios';
 import Footer from './Footer';
 const google = window.google;
-const url = 'https://polar-waters-86989.herokuapp.com';
+const url = 'http://www.comingsoontour.com';
 
 export default class HostRegistration extends Component{
   constructor(props){
@@ -21,9 +21,11 @@ export default class HostRegistration extends Component{
       const d = admin.data[0];
       const avail = parseInt(d.slots_available);
       const slots_full = (avail===0) ? true : false;
+      const date = d.event_date;
       this.setState({
         slots_available:d.slots_available,
-        slots_full
+        slots_full,
+        date
       });
     }).catch((err)=>{
       console.log('err - ',err);
@@ -46,12 +48,20 @@ export default class HostRegistration extends Component{
       address
     })
   }
+  no_address_entered(){
+    this.setState({
+      address_entered:false
+    });
+  }
   next(){
     this.props.history.push('/host/registration/'+this.state.address);
   }
   render(){
-    const out_of_bounds = (this.state.out_of_bounds) ? (
-      <div className="out_of_bounds">Sorry, that address is outside of the 2 mile radius qualification</div>
+    const out_of_bounds = (this.state.address_entered && this.state.out_of_bounds) ? (
+      <div className="out_of_bounds">Sorry, that address is not within our tour area.</div>
+    ) : '';
+    const within_bounds = (this.state.address_entered && !this.state.out_of_bounds) ? (
+      <div className="within_bounds">Your property is within the tour area. Please press 'Next'</div>
     ) : '';
     let submit = (this.state.address_entered && !this.state.out_of_bounds) ? (
       <span onClick={()=>this.next()} className="checker_submit">NEXT</span>
@@ -60,7 +70,7 @@ export default class HostRegistration extends Component{
     );
     let address_form = (
       <form className="address_checker checker_margin">
-        <h3>Address:</h3><input ref="addr" id="pac-input" type="text" />
+        <h3>Address:</h3><input placeholder="Enter an address to see if it qualifies" ref="addr" id="pac-input" type="text" />
         { submit }
       </form>
     )
@@ -70,6 +80,7 @@ export default class HostRegistration extends Component{
     const map_props = {
       out_of_bounds:this.out_of_bounds.bind(this),
       not_out_of_bounds:this.not_out_of_bounds.bind(this),
+      no_address_entered :this.no_address_entered.bind(this),
       address_entered :this.address_entered.bind(this),
       center:{lat:38.910136,lng:-77.042510}
     }
@@ -82,16 +93,23 @@ export default class HostRegistration extends Component{
         <section className="qualifications_msg">
           <h3>Qualifications</h3>
           <ol className="qualifications_list">
-            <li>Property is located within the 2 mile map</li>
+            <li>Property is located within the 2 Miler Map below (no VA addresses)</li>
             <li>Property is NOT listed in Bright MLS (except "Coming Soon") at time of tour</li>
-            <li>Property must be submitted by 12pm the previous Monday or until 4 total qualifying properties have been submitted, whichever comes first</li>
+            <li>Property must be submitted by 12pm the Monday before the tour or until 4 total qualifying properties have been submitted, whichever comes first</li>
           </ol>
         </section>
         <section className="slots_avail"><h3>Current Property Slots Available:</h3> <span className="slots_number">
           { this.state.slots_available }
         </span></section>
+        <div className="agenda_date">
+          { this.state.date }
+        </div>
         { address_form }
         { out_of_bounds }
+        { within_bounds }
+        <section className="after_tour_info">
+          Don’t worry if your property doesn’t qualify, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform" alt="form link">click here</a> for AFTER TOUR information
+        </section>
         <section className="radius_map">
           <div className="map_element">
             <RadiusMap  {...map_props} />

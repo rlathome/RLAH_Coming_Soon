@@ -67,19 +67,24 @@ export default class Home extends Component{
     let first = (this.state.first) ? (
       <div>
         <h1 className="coming_soon_title">Coming Soon Tour</h1>
-        <div className="main-subtitle">Bi-weekly caravan tour to preview properties not listed in Bright MLS for agents</div>
+        <div className="main-subtitle">Bi-weekly caravan tour to preview properties not listed in Bright MLS for agents<br/>
+          <div>Occurs every 1st and 3rd Tuesday of each month beginning at 9:30AM and ending at approximately 11:30AM. Each property will have a stop of about 15-20 minutes.</div>
+        </div>
         <section className="visitor_buttons clearfix">
           <div onClick={()=>{this.open_host()}}>Host</div>
           <div onClick={()=>{this.open_guest()}}>Guest</div>
         </section>
         <Footer />
+        <section className="join_coming_soon">
+          If you or your brokerage is interested in joining Coming Soon Tour <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWeIYF79hZpKvguPsM93XLrq8_YM6nbRxNKw_f4REqjw3KMQ/viewform" alt="form link">click here</a>
+        </section>
       </div>
     ) : '';
     let guest_pass = (this.state.guest_pass) ? (
       <div className="login_window_container">
         <div className="login_window panel panel-default clearfix">
           <h2>Please Enter Password</h2>
-          <input type="text" ref="password" />
+          <input type="password" ref="password" />
           <span onClick={()=>this.login('guest')} className="checker_submit">
             Login
           </span>
@@ -90,7 +95,7 @@ export default class Home extends Component{
       <div className="login_window_container">
         <div className="login_window panel panel-default clearfix">
           <h2>Please Enter Password</h2>
-          <input type="text" ref="password" />
+          <input type="password" ref="password" />
           <span onClick={()=>this.login('host')} className="checker_submit">
             Login
           </span>

@@ -32,13 +32,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('./client/build'));
+  // app.use('*', express.static('client/build')); // Added this
+}
+
 app.use('/info', index);
 
 app.use('/',express.static('client/build'));
 
 
 app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+  response.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
 })
 
 // catch 404 and forward to error handler
@@ -55,7 +60,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status('hey - '+err.status || 500);
+  res.status(err.status || 500);
   res.render('error');
 });
 

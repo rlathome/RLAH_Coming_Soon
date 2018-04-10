@@ -10,7 +10,7 @@ html * {
 header {
   text-align: center;
   border-bottom: 1px solid grey;
-  padding: 1vw;
+  padding: 2vw 1vw 1vw 1vw;
   width: 100%;
   font-size: 1.25em;
 }
@@ -30,6 +30,7 @@ header ul li {
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   main {
     width: 95vw;
+    margin: auto;
   }
 }
 
@@ -61,17 +62,50 @@ body {
   }
 }
 
-.main-subtitle {
-  width: 40vw;
+.main-subtitle, .join_coming_soon {
   display: inline-block;
-  margin-top: 3.5vh;
   font-size: 1.35em;
   font-weight: bold;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
-  .main-subtitle {
+  .main-subtitle, .join_coming_soon {
     font-size: 1em;
+  }
+}
+
+.main-subtitle {
+  width: 40vw;
+  margin-top: 3.5vh;
+}
+
+.main-subtitle div {
+  font-size: .65em;
+  margin-top: 2.5vh;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main-subtitle {
+    width: 70vw;
+  }
+}
+
+.join_coming_soon {
+  width: 100%;
+  position: absolute;
+  bottom: 4vw;
+  left: 0vw;
+}
+
+.join_coming_soon a {
+  text-decoration: none;
+  color: gray;
+  font-weight: lighter;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .join_coming_soon {
+    padding: 0vw 5vw;
   }
 }
 
@@ -89,6 +123,10 @@ body {
   .visitor_buttons {
     margin-top: 5vh;
   }
+}
+
+.visitor_buttons div:hover {
+  background-color: #000;
 }
 
 .visitor_buttons * {
@@ -181,6 +219,13 @@ body {
   font-weight: lighter;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .address_checker .col-sm-9 {
+    margin-bottom: 5vw;
+    font-size: .75em;
+  }
+}
+
 .address_checker h3 {
   display: inline;
   margin-right: 2vw;
@@ -196,14 +241,15 @@ body {
 .address_checker input {
   margin-right: .75vw;
   width: 40vw;
+  padding-left: .75vw;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .address_checker input {
-    width: 37vw;
-    margin-right: 3vw;
-    font-size: 1em;
-    padding: 0vw .5vw;
+    width: 55vw;
+    margin-bottom: 2.5vw;
+    font-size: 12px;
+    padding: 1vw;
   }
 }
 
@@ -259,6 +305,7 @@ body {
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .host_form form, .guest_form form {
     width: 75vw;
+    font-size: .85em;
   }
 }
 
@@ -271,12 +318,22 @@ body {
   width: 100%;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .host_form form > div, .guest_form form > div {
+    margin-top: 1.25vh;
+  }
+}
+
 .host_form form .form_labels, .guest_form form .form_labels {
   width: 40%;
 }
 
 .host_form form .form_labels div, .guest_form form .form_labels div {
   float: right;
+}
+
+.host_form form .form_labels div #radio_invisible, .guest_form form .form_labels div #radio_invisible {
+  display: none;
 }
 
 .host_form form .form_labels div input, .host_form form .form_labels div label, .guest_form form .form_labels div input, .guest_form form .form_labels div label {
@@ -297,7 +354,7 @@ body {
 }
 
 .guest_form {
-  margin-bottom: 15vh;
+  margin-bottom: 5vh;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
@@ -363,6 +420,12 @@ body {
   background-color: #000;
 }
 
+.main_close_btn {
+  width: 60%;
+  margin: auto;
+  margin-bottom: 2vw;
+}
+
 .muted {
   cursor: default;
   background-color: grey;
@@ -380,6 +443,12 @@ body {
   font-size: 2.75em;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .agenda_date {
+    font-size: 1.75em;
+  }
+}
+
 .agenda_table_container {
   text-align: center;
   margin-top: 2.5vh;
@@ -387,8 +456,7 @@ body {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .agenda_table_container {
-    font-size: .75em;
-    width: 100vw;
+    font-size: .8em;
   }
 }
 
@@ -433,9 +501,14 @@ td:nth-child(1) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(1) {
-    width: 3vw;
-    font-size: .85em;
+    width: 2vw;
+    font-size: .75em;
   }
+}
+
+td:nth-child(1) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 td:nth-child(2) {
@@ -444,9 +517,14 @@ td:nth-child(2) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(2) {
-    width: 4vw;
-    font-size: .85em;
+    width: 10vw;
+    font-size: .75em;
   }
+}
+
+td:nth-child(2) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 td:nth-child(3) {
@@ -455,9 +533,14 @@ td:nth-child(3) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(3) {
-    width: 5vw;
-    font-size: .85em;
+    width: 10vw;
+    font-size: .75em;
   }
+}
+
+td:nth-child(3) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 td:nth-child(4) {
@@ -466,9 +549,14 @@ td:nth-child(4) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(4) {
-    width: 10vw;
-    font-size: .85em;
+    width: 17vw;
+    font-size: .75em;
   }
+}
+
+td:nth-child(4) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 td:nth-child(5) {
@@ -477,9 +565,14 @@ td:nth-child(5) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(5) {
-    width: 7.5vw;
-    font-size: .85em;
+    width: 17vw;
+    font-size: .75em;
   }
+}
+
+td:nth-child(5) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 td:nth-child(6) {
@@ -488,9 +581,14 @@ td:nth-child(6) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(6) {
-    width: 5vw;
-    font-size: .85em;
+    width: 15vw;
+    font-size: .75em;
   }
+}
+
+td:nth-child(6) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 td:nth-child(7) {
@@ -499,9 +597,14 @@ td:nth-child(7) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(7) {
-    width: 3vw;
-    font-size: .85em;
+    width: 10vw;
+    font-size: .75em;
   }
+}
+
+td:nth-child(7) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 td:nth-child(8) {
@@ -511,8 +614,17 @@ td:nth-child(8) {
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   td:nth-child(8) {
     width: 6vw;
-    font-size: .85em;
+    font-size: .75em;
   }
+}
+
+td:nth-child(8) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.after_tour_table td:nth-child(1) {
+  font-size: 1em;
 }
 
 th:nth-child(1) {
@@ -521,9 +633,14 @@ th:nth-child(1) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(1) {
-    width: 3vw;
-    font-size: .85em;
+    width: 2vw;
+    font-size: .75em;
   }
+}
+
+th:nth-child(1) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 th:nth-child(2) {
@@ -532,9 +649,14 @@ th:nth-child(2) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(2) {
-    width: 4vw;
-    font-size: .85em;
+    width: 10vw;
+    font-size: .75em;
   }
+}
+
+th:nth-child(2) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 th:nth-child(3) {
@@ -543,9 +665,14 @@ th:nth-child(3) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(3) {
-    width: 5vw;
-    font-size: .85em;
+    width: 10vw;
+    font-size: .75em;
   }
+}
+
+th:nth-child(3) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 th:nth-child(4) {
@@ -554,9 +681,14 @@ th:nth-child(4) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(4) {
-    width: 10vw;
-    font-size: .85em;
+    width: 17vw;
+    font-size: .75em;
   }
+}
+
+th:nth-child(4) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 th:nth-child(5) {
@@ -565,9 +697,14 @@ th:nth-child(5) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(5) {
-    width: 7.5vw;
-    font-size: .85em;
+    width: 17vw;
+    font-size: .75em;
   }
+}
+
+th:nth-child(5) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 th:nth-child(6) {
@@ -576,9 +713,14 @@ th:nth-child(6) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(6) {
-    width: 5vw;
-    font-size: .85em;
+    width: 15vw;
+    font-size: .75em;
   }
+}
+
+th:nth-child(6) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 th:nth-child(7) {
@@ -587,9 +729,14 @@ th:nth-child(7) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(7) {
-    width: 3vw;
-    font-size: .85em;
+    width: 10vw;
+    font-size: .75em;
   }
+}
+
+th:nth-child(7) textarea {
+  width: 100%;
+  height: 100%;
 }
 
 th:nth-child(8) {
@@ -599,8 +746,42 @@ th:nth-child(8) {
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   th:nth-child(8) {
     width: 6vw;
-    font-size: .85em;
+    font-size: .75em;
   }
+}
+
+th:nth-child(8) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  th, td {
+    height: 15vw;
+  }
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  tr > th:nth-child(1) {
+    font-size: .55em !important;
+  }
+  .after_tour_table tr > th:nth-child(1), .after_tour_table tr > td:nth-child(1) {
+    font-size: .75em !important;
+  }
+  .after_tour_table tr > th:nth-child(1), .after_tour_table tr > th:nth-child(2) {
+    width: 70px;
+  }
+  .after_tour_table tr > th:nth-child(4) {
+    width: 40px;
+  }
+  tbody > tr:nth-child(1) th {
+    height: 1.5vh !important;
+  }
+}
+
+tbody > tr:nth-child(1) {
+  font-size: 1em !important;
+  font-weight: bold;
 }
 
 .login_window_container {
@@ -655,10 +836,37 @@ th:nth-child(8) {
   display: inline-block;
 }
 
-.out_of_bounds {
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_logo {
+    width: 95vw;
+    margin: auto;
+  }
+  .main_logo div, .main_logo input, .main_logo img {
+    margin-bottom: 1vh;
+  }
+  .main_logo img {
+    width: 50vw;
+    display: inline;
+  }
+}
+
+.out_of_bounds, .within_bounds {
   margin-top: 2.5vh;
   font-size: 2vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .out_of_bounds, .within_bounds {
+    font-size: 4vw;
+  }
+}
+
+.out_of_bounds {
   color: red;
+}
+
+.within_bounds {
+  color: green;
 }
 
 .flex-col {
@@ -671,16 +879,127 @@ th:nth-child(8) {
   margin-right: 1vw;
 }
 
-.submit_modal {
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .input-logo {
+    width: 100%;
+  }
+}
+
+.submit_modal, .terms_conditions_modal {
   position: absolute;
-  width: 35vw;
-  height: 33vh;
   background-color: lightgray;
   text-align: center;
-  top: 33vh;
-  left: 33vw;
   font-size: 1.5em;
   padding: 1.5vw;
   justify-content: space-around;
   z-index: 9999999999;
+}
+
+.submit_modal {
+  width: 35vw;
+  height: 33vh;
+  top: 33vh;
+  left: 33vw;
+  position: fixed;
+}
+
+.terms_conditions_modal {
+  width: 50vw;
+  left: 25vw;
+  top: 25vh;
+  position: fixed;
+  font-size: .95em;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .terms_conditions_modal {
+    width: 100vw;
+    left: 0vw;
+    font-size: 1em;
+    top: 15vw;
+  }
+}
+
+.after_tour_info {
+  font-size: .85em;
+  margin-top: .85em;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  select:focus,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+@media print {
+  .logo-area {
+    margin-top: 1vh;
+  }
+  .main_logo {
+    margin-left: -30%;
+  }
+}
+
+.add_event {
+  float: left;
+  margin-left: 1.5vw;
+}
+
+.bottom_buffer {
+  margin-bottom: 8vw;
+}
+
+#aftertour_address {
+  width: 20vw;
+}
+
+.aftertour_agent {
+  width: 20vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .aftertour_agent {
+    width: 20vw !important;
+  }
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .aftertour_price {
+    width: 20vw !important;
+  }
+}
+
+.aftertour_sqft {
+  width: 10vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .aftertour_sqft {
+    width: 12vw !important;
+  }
+}
+
+.aftertour_willsell {
+  width: 10vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .aftertour_willsell {
+    width: 2.5vw !important;
+  }
 }

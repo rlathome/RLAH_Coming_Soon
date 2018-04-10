@@ -10,7 +10,7 @@ $section_padding:2.5vh;
 header{
   text-align: center;
   border-bottom:1px solid grey;
-  padding:1vw;
+  padding:2vw 1vw 1vw 1vw;
   width:100%;
   font-size: 1.25em;
   ul{
@@ -29,6 +29,7 @@ main{
   and (min-width : 355px)
   and (max-width : 668px){
     width:95vw;
+    margin: auto;
   }
 }
 .top_padding{
@@ -54,16 +55,43 @@ body{
 // .no_click{
 //   cursor: default !important;
 // }
-.main-subtitle{
-  width:40vw;
+.main-subtitle,.join_coming_soon{
   display: inline-block;
-  margin-top:3.5vh;
   font-size:1.35em;
   font-weight: bold;
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
     font-size:1em;
+  }
+}
+.main-subtitle{
+  width:40vw;
+  margin-top:3.5vh;
+  div{
+    font-size:.65em;
+    margin-top:$section_padding;
+  }
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:70vw;
+  }
+}
+.join_coming_soon{
+  width:100%;
+  position: absolute;
+  bottom:4vw;
+  left:0vw;
+  a{
+    text-decoration: none;
+    color:gray;
+    font-weight: lighter;
+  }
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    padding:0vw 5vw;
   }
 }
 #pac-input{
@@ -77,6 +105,11 @@ body{
   and (min-width : 355px)
   and (max-width : 668px){
     margin-top:5vh;
+  }
+  div{
+    &:hover{
+      background-color: #000;
+    }
   }
   *{
     text-transform:uppercase;
@@ -155,6 +188,14 @@ body{
 }
 .address_checker{
   font-weight: lighter;
+  .col-sm-9{
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      margin-bottom:5vw;
+      font-size: .75em;
+    }
+  }
   h3{
     display: inline;
     margin-right:2vw;
@@ -168,13 +209,15 @@ body{
   input{
     margin-right:.75vw;
     width:40vw;
+    padding-left:.75vw;
     @media only screen
     and (min-width : 355px)
     and (max-width : 668px){
-      width:37vw;
-      margin-right:3vw;
-      font-size: 1em;
-      padding:0vw .5vw;
+      width:55vw;
+      // margin-right:3vw;
+      margin-bottom:2.5vw;
+      font-size: 12px;
+      padding:1vw;
     }
   }
   .row{
@@ -221,6 +264,7 @@ body{
     and (min-width : 355px)
     and (max-width : 668px){
       width:75vw;
+      font-size:.85em;
     }
     display:inline-block;
     *{
@@ -229,10 +273,18 @@ body{
     &>div{
       margin-top:$section_padding;
       width:100%;
+      @media only screen
+      and (min-width : 355px)
+      and (max-width : 668px){
+        margin-top:$section_padding/2;
+      }
     }
     .form_labels{
       width:40%;
       div{
+        #radio_invisible{
+          display:none;
+        }
         float:right;
         input,label{
           margin-left:.75em;
@@ -252,7 +304,7 @@ body{
   font-size:1.75em;
 }
 .guest_form{
-  margin-bottom: 15vh;
+  margin-bottom: 5vh;
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
@@ -316,6 +368,11 @@ body{
     background-color: #000;
   }
 }
+.main_close_btn{
+  width: 60%;
+  margin: auto;
+  margin-bottom: 2vw;
+}
 .muted{
   cursor:default;
   background-color:grey;
@@ -331,6 +388,12 @@ body{
 
 .agenda_date{
   font-size:2.75em;
+  // iphone 6 portrait
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:1.75em;
+  }
 }
 .agenda_table_container{
   text-align: center;
@@ -338,8 +401,7 @@ body{
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
-    font-size: .75em;
-    width:100vw;
+    font-size: .8em;
   }
 }
 .checker_submit{
@@ -366,6 +428,8 @@ table,th,td{
   border:1px solid #000;
   text-align: center !important;
 }
+
+
 @mixin table_width($row,$val,$val2){
   &:nth-child(#{$row}){
     width:$val;
@@ -373,7 +437,11 @@ table,th,td{
     and (min-width : 355px)
     and (max-width : 668px){
       width:$val2;
-      font-size: .85em;
+      font-size: .75em;
+    }
+    textarea{
+      width:100%;
+      height:100%;
     }
   }
 }
@@ -382,28 +450,64 @@ table,th,td{
     #{$attr}:#{$val};
   }
 }
+@mixin table_width_collection{
+  @include table_width(1,8vw,2vw);
+  @include table_width(2,10vw,10vw);
+  @include table_width(3,12vw,10vw);
+  @include table_width(4,20vw,17vw);
+  @include table_width(5,15vw,17vw);
+  @include table_width(6,10vw,15vw);
+  @include table_width(7,6vw,10vw);
+  @include table_width(8,12vw,6vw);
+}
 td{
   @include table_style(1,font-size,1.75em);
   @include table_style(1,padding,.25em 0em);
-  @include table_width(1,8vw,3vw);
-  @include table_width(2,10vw,4vw);
-  @include table_width(3,12vw,5vw);
-  @include table_width(4,20vw,10vw);
-  @include table_width(5,15vw,7.5vw);
-  @include table_width(6,10vw,5vw);
-  @include table_width(7,6vw,3vw);
-  @include table_width(8,12vw,6vw);
+  @include table_width_collection;
+}
+.after_tour_table td{
+  @include table_style(1,font-size,1em);
 }
 th{
-  @include table_width(1,8vw,3vw);
-  @include table_width(2,10vw,4vw);
-  @include table_width(3,12vw,5vw);
-  @include table_width(4,20vw,10vw);
-  @include table_width(5,15vw,7.5vw);
-  @include table_width(6,10vw,5vw);
-  @include table_width(7,6vw,3vw);
-  @include table_width(8,12vw,6vw);
+  @include table_width_collection;
 }
+th,td{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    height:15vw;
+  }
+}
+@media only screen
+and (min-width : 355px)
+and (max-width : 668px){
+  // make property no header text much smaller
+  tr>th:nth-child(1){
+    font-size:.55em !important;
+  }
+  // make first column of after tour table the same font as others (i.e., undo default property no styling)
+  .after_tour_table tr>th:nth-child(1), .after_tour_table tr>td:nth-child(1){
+    font-size:.75em !important;
+  }
+  // make after tour address and listing agent cells wider
+  .after_tour_table tr>th:nth-child(1),.after_tour_table tr>th:nth-child(2){
+    width:70px;
+  }
+  .after_tour_table tr>th:nth-child(4),{
+    width:40px;
+  }
+  // make table header rows shorter than table cells
+  tbody>tr:nth-child(1){
+    th{
+      height:1.5vh !important;
+    }
+  }
+}
+tbody>tr:nth-child(1){
+  font-size:1em !important;
+  font-weight: bold;
+}
+
 .login_window_container{
   margin-top:25vh;
 }
@@ -446,12 +550,36 @@ th{
 .main_logo{
   width:20vw;
   display: inline-block;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:95vw;
+    margin: auto;
+    div,input,img{
+      margin-bottom:1vh;
+    }
+    img{
+      width:50vw;
+      display: inline;
+    }
+  }
 }
-.out_of_bounds{
+.out_of_bounds,.within_bounds{
   margin-top:$section_padding;
   font-size:2vw;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:4vw;
+  }
+}
+.out_of_bounds{
   color:red;
 }
+.within_bounds{
+  color:green;
+}
+
 .flex-col{
   display: flex;
   flex-direction: column;
@@ -459,18 +587,118 @@ th{
 .input-logo{
   width:60%;
   margin-right:1vw;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:100%;
+  }
 }
-.submit_modal{
+.submit_modal,.terms_conditions_modal{
   position: absolute;
-  width:35vw;
-  height:33vh;
   background-color:lightgray;
   // color:black;
   text-align:center;
-  top:33vh;
-  left:33vw;
   font-size: 1.5em;
   padding:1.5vw;
   justify-content: space-around;
   z-index: 9999999999;
+}
+.submit_modal{
+  width:35vw;
+  height:33vh;
+  top:33vh;
+  left:33vw;
+  position: fixed;
+}
+.terms_conditions_modal{
+  width:50vw;
+  left:25vw;
+  top:25vh;
+  position:fixed;
+  font-size:.95em;
+  // iphone 6 portrait
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:100vw;
+    left:0vw;
+    font-size:1em;
+    top:15vw;
+  }
+}
+.after_tour_info{
+  font-size: .85em;
+  margin-top:.85em;
+}
+// iphone 6 portrait - prevent iOS from zooming on input focus:
+@media only screen
+and (min-width : 355px)
+and (max-width : 668px){
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  select:focus,
+  textarea {
+    font-size: 16px;
+  }
+}
+@media print{
+  .logo-area{
+    margin-top:1vh;
+  }
+  .main_logo{
+    margin-left:-30%;
+  }
+}
+.add_event{
+  float:left;
+  margin-left:1.5vw;
+}
+.bottom_buffer{
+  margin-bottom:8vw;
+}
+#aftertour_address{
+  width:20vw;
+}
+.aftertour_agent{
+  width:20vw !important;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:20vw !important;
+  }
+}
+.aftertour_price{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:20vw !important;
+  }
+}
+.aftertour_sqft{
+  width:10vw !important;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:12vw !important;
+  }
+}
+.aftertour_willsell{
+  width:10vw !important;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:2.5vw !important;
+  }
 }

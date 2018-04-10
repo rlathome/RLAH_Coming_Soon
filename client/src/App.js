@@ -182,8 +182,8 @@ class App extends Component {
             <Route path='/guest' component = { Header } />
             <Route exact path='/' component = { Home } />
             <Route exact path='/host' component = { Header } />
-            <Route exact path='/host/:registration' component = { Header } />
-            <Route path='/agenda' component = { Header } />
+            <Route exact path='/host/registration/:addr' component = { Header } />
+            {/* <Route path='/agenda' component = { Header } /> */}
             <Route path='/login/guest' component = { GuestLogin } />
             <Route path='/login/host' component = { HostLogin } />
             <Route path='/admin_login' component = { AdminLogin } />
@@ -199,6 +199,7 @@ class App extends Component {
             {/* <HostRoute exact path='/host' component = { HostMap } />
             <HostRoute path='/host/registration/:addr' component = { HostRegistration } /> */}
 
+            <Route exact path='/agenda' component = { Header } />
             <Route path='/agenda' component = { Agenda }/>
             {/* <Route path='/' component = { Footer } /> */}
           </div>

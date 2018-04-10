@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import axios from 'axios';
-const url = 'https://polar-waters-86989.herokuapp.com';
+const url = 'http://www.comingsoontour.com';
 
 export default class HostRegistration extends Component{
   constructor(props){
     super(props);
     this.state={
       address:this.props.match.params.addr,
-      selected_option:'yes',
+      selected_option:'invisible',
       price:false,
       staging:false,
       timing:false,
@@ -18,18 +18,30 @@ export default class HostRegistration extends Component{
       other:false,
       agrees:false,
       next_ok:false,
-      submitted_form:false
+      submitted_form:false,
+      terms_conditions:false
     }
   }
   componentDidMount(){
-    let a
-    console.log('address: ',this.props.match.params.addr)
+    window.scrollTo(0,0);
+    var checkbox1 = document.getElementById("radio_yes");
+    // checkbox1.unchecked = true;
+    checkbox1.indeterminate = true;
+    var checkbox2 = document.getElementById("radio_no");
+    // checkbox2.unchecked = true;
+    checkbox2.indeterminate = true;
   }
   handleOptionChange(e){
     console.log(e.target.value)
-    this.setState({
-      selected_option:e.target.value
-    });
+    if(e.target.value===this.state.selected_option){
+      this.setState({
+        selected_option:'invisible'
+      });
+    }else{
+      this.setState({
+        selected_option:e.target.value
+      });
+    }
     setTimeout(()=>{
       this.isFormFilled();
     },20);
@@ -83,7 +95,7 @@ export default class HostRegistration extends Component{
     let will_show_before_listing = this.state.selected_option;
     let feedback_wanted = [];
     for(let i in this.state){
-      if(this.state[i]==true && i!=='agrees' && i !=='next_ok' && i !=='submitted_form'){
+      if(this.state[i]==true && i!=='agrees' && i !=='next_ok' && i !=='submitted_form' && i !=='terms_conditions'){
         feedback_wanted.push(i);
       }
     }
@@ -104,7 +116,7 @@ export default class HostRegistration extends Component{
             submitted_form:true
           });
           setTimeout(()=>{
-            this.props.history.push('/agenda');
+            this.props.history.push('/');
           },2000);
         }
       }).catch((err)=>{
@@ -112,20 +124,34 @@ export default class HostRegistration extends Component{
       });
 
   }
+  toggleTerms(){
+    this.setState({
+      terms_conditions:!this.state.terms_conditions
+    });
+  }
   render(){
     const submit_modal = (this.state.submitted_form) ? (
       <div className = 'submit_modal flex-col'>
         <span>Thank you for your submission! We'll be in touch shortly.</span>
       </div>
     ) : '';
+    const terms_conditions = (this.state.terms_conditions) ? (
+      <div className = 'flex-col terms_conditions_modal'>
+        <span>THIS TOUR IS PROVIDED ON “AS IS” AND  “AS AVAILABLE” BASIS, AND BROKER EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. NEITHER PARTY SHALL BE LIABLE TO THE OTHER PARTY FOR ANY CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OR LOST PROFITS ARISING OUT OF ANY BREACH OF THIS AGREEMENT OR ITS TERMINATION, WHETHER FOR BREACH OF WARRANTY OR ANY OBLIGATION OR OTHERWISE, WHETHER LIABILITY IS ASSERTED IN CONTRACT OR TORT AND REGARDLESS OF WHETHER OR NOT THE PARTY HAS ADVISED OR HAS BEEN ADVISED OF THE POSSIBILITY OF ANY SUCH LOSS OR DAMAGE. <br/>This Agreement and all attached Schedules constitute the entire understanding and agreement of the parties with respect to the subject matter contained herein. This Agreement may not be altered, modified or waived, in whole or in part, except in a writing signed by the authorized representatives of the parties.</span>
+        <br/>
+        <span className="main_submit main_close_btn" onClick={()=>this.toggleTerms()}>Close</span>
+      </div>
+    ) : '';
     const submit = (this.state.next_ok) ? (
       <span onClick={()=>this.submitRegistration()} className="main_submit">SUBMIT</span>
     ):(
       <span className="main_submit muted">SUBMIT</span>
-    )
+    );
+    console.log('radio selected: ',this.state.selected_option);
     return(
       <main>
         { submit_modal }
+        { terms_conditions }
         <h1 className="coming_soon_title">Coming Soon Tour</h1>
         <div className="host_title">
           HOST
@@ -155,6 +181,7 @@ export default class HostRegistration extends Component{
                 <div>
                   <input onChange={this.handleOptionChange.bind(this)} type="radio" value='yes' checked = {this.state.selected_option==='yes'} id="radio_no" name="yes_no" /><label for="radio_no">Yes</label>
                   <input onChange={this.handleOptionChange.bind(this)} type="radio" value='no' checked = {this.state.selected_option==='no'} id="radio_yes" name="yes_no" /><label for="radio_yes">No</label>
+                  <input onChange={this.handleOptionChange.bind(this)} type="radio" value='no' checked = {this.state.selected_option==='invisible'} id="radio_invisible" name="yes_no" />
                 </div>
               </div>
           </form>
@@ -189,7 +216,7 @@ export default class HostRegistration extends Component{
           <Link to="/agenda"> comingsoontour.com/agenda</Link> AND sent to all members via email in participating brokerage(s).
         </section>
         <section className="terms_conditions">
-          <input onChange={this.handleAgree.bind(this)} type="checkbox" id="terms_conditions_radio" value="terms_conditions_radio" name="terms_conditions_radio"  /><label className="terms_conditions_link">I agree to the terms and conditions</label>
+          <input onChange={this.handleAgree.bind(this)} type="checkbox" id="terms_conditions_radio" value="terms_conditions_radio" name="terms_conditions_radio"  /><label onClick={this.toggleTerms.bind(this)} className="terms_conditions_link">I agree to the terms and conditions</label>
         </section>
         <section className="submit_btn">
           { submit }

@@ -39,6 +39,11 @@ body{
   width:40vw;
   display: inline-block;
   margin-top:3.5vh;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    width:80vw !important;
+  }
 }
 .visitor_buttons{
   display: flex;
@@ -101,6 +106,12 @@ body{
   input{
     margin-right:.75vw;
     width:40vw;
+    // iphone 6 portrait
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      font-size:12px;
+    }
   }
   .row{
     width:45vw;

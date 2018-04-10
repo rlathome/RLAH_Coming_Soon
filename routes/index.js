@@ -4,6 +4,7 @@ var https = require('https');
 var Administrator = require('../models/administrator.js');
 
 
+
 router.get('/test',function(req,res,next){
   console.log('getting request');
   res.send('Connected in truth');
@@ -11,7 +12,7 @@ router.get('/test',function(req,res,next){
 
 router.get('/admin_info',function(req,res,next){
   Administrator.find({},'',function(err,admin){
-    if(err) console.log('err, ',err)
+    if(err) console.log('err! - , ',err)
     console.log('admin: ',admin);
     res.json(admin);
   })
@@ -24,6 +25,26 @@ router.post('/submitagenda',function(req,res,next){
       'agenda':agenda,
       'event_date':req.body.event_date,
       'slots_available':req.body.slots_avail
+    },function(err){
+    if(err) ()=>console.log('error: ',err);
+    res.send('success');
+  });
+});
+router.post('/delete_event',function(req,res,next){
+  console.log('agenda: ',req.body);
+  const agenda = req.body.agenda;
+  Administrator.update({},{
+      'agenda':agenda
+    },function(err){
+    if(err) ()=>console.log('error: ',err);
+    res.send('success');
+  });
+});
+router.post('/update_after_tour_event',function(req,res,next){
+  console.log('after_tour: ',req.body);
+  const after_tour = req.body.after_tour;
+  Administrator.update({},{
+      'after_tour':after_tour
     },function(err){
     if(err) ()=>console.log('error: ',err);
     res.send('success');
@@ -84,20 +105,18 @@ router.post('/submithostform',function(req,res,next){
   const agent_email = form_data.email;
   const agent_name = form_data.agent_name;
 
-
-
   // res.send("Queued. Thank you.");
 
-  let to = 'info@rlahre.com'
+  let to = 'comingsoontour@gmail.com'
   // let to = 'josh@allenb.com';
-  let subject = "A new host has signed up on RLAH Coming Soon!";
+  let subject = "A new host has signed up on the Coming Soon Tour!";
 
   let host_subject = "Thank you for signing up!";
 
   var mailcomposer = require('mailcomposer');
 
-  var domain = 'info.dcopenhouselist.com';
-  var apiKey = 'key-602b6fef248551d53fee98ac2dbdef70';
+  var domain = 'info.comingsoontour.com';
+  var apiKey = 'key-30c5713300a403cced1a5f5adaa0ffa8';
   var mailgun = require('mailgun-js')({apiKey:apiKey, domain:domain});
   //
   //************Send confirmation email to host:
@@ -105,8 +124,8 @@ router.post('/submithostform',function(req,res,next){
   var host_mail = mailcomposer({
     subject:host_subject,
     to:agent_email,
-    from:'The RLAH Team'+' <'+to+'>',
-    html:'<div>Thank you for submitting your property to be a part of our next tour. We will review your submission and get back to you shortly!</div><br/><br/>'
+    from:'<'+to+'>',
+    html:'<div>Thank you for submitting your property to be a part of our next Coming Soon Tour. We will review your submission and get back to you shortly!”</div><br/><br/>'
     +'<div>'
     +'Name: '+form_data.agent_name+'<br/>'
     +'Address: '+form_data.address+'<br/>'
@@ -172,15 +191,15 @@ router.post('/submitguestform',function(req,res,next){
   console.log('submitting: ',form_data);
   let agent_name = form_data.agent_name;
   let email = form_data.email;
-  let to = 'info@rlahre.com';
+  let to = 'comingsoontour@gmail.com';
   // let to = 'josh@allenb.com';
-  let subject = "A new guest has signed up on RLAH Coming Soon!";
+  let subject = "A new guest has signed up on the Coming Soon Tour!";
   let guest_subject = "Thank you for signing up!";
 
   var mailcomposer = require('mailcomposer');
 
-  var domain = 'info.dcopenhouselist.com';
-  var apiKey = 'key-602b6fef248551d53fee98ac2dbdef70';
+  var domain = 'info.comingsoontour.com';
+  var apiKey = 'key-30c5713300a403cced1a5f5adaa0ffa8';
   var mailgun = require('mailgun-js')({apiKey:apiKey, domain:domain});
 
   //*********** Send confirmation email to guest:
@@ -188,8 +207,8 @@ router.post('/submitguestform',function(req,res,next){
   var guest_mail = mailcomposer({
     subject:guest_subject,
     to:email,
-    from:'The RLAH Team'+' <'+to+'>',
-    html:'<div>Thank you for submitting your property to be a part of our next Coming Soon Tour. We will review your submission and get back to you shortly!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email
+    from:'<'+to+'>',
+    html:'<div>Thank you for signing up to be a guest on our next Coming Soon Tour. We will review your submission and get back to you shortly!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email
   });
 
   guest_mail.build(function(mailBuildError, message){

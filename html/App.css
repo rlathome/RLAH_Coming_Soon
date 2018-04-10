@@ -50,6 +50,12 @@ body {
   margin-top: 3.5vh;
 }
 
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main-subtitle {
+    width: 80vw !important;
+  }
+}
+
 .visitor_buttons {
   display: flex;
   justify-content: space-around;
@@ -122,6 +128,12 @@ body {
 .address_checker input {
   margin-right: .75vw;
   width: 40vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .address_checker input {
+    font-size: 12px;
+  }
 }
 
 .address_checker .row {

@@ -248,7 +248,7 @@ body {
   .address_checker input {
     width: 55vw;
     margin-bottom: 2.5vw;
-    font-size: 12px;
+    font-size: 12px !important;
     padding: 1vw;
   }
 }

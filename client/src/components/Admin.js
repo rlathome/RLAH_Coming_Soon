@@ -39,7 +39,9 @@ export default class Admin extends Component{
     let agenda = [];
     let event_date = this.refs.event_date.value;
     let slots_avail = this.refs.slots_avail.value.toString();
-    for(let i=1; i<5; i++){
+    const slots_to_fill = document.getElementsByClassName('admin_row');
+    let slots = slots_to_fill.length;
+    for(let i=1; i<=slots; i++){
       let property_no = 'property_no'+i;
       let arrival = 'arrival'+i;
       let departure = 'departure'+i;
@@ -69,12 +71,12 @@ export default class Admin extends Component{
       agenda.push(items);
     }
     console.log('our agenda: ',agenda);
-    axios.post(url+'/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
-      console.log('success: ',response);
-      alert('your agenda has been updated');
-    }).catch((err)=>{
-      console.log('err - ',err);
-    });
+    // axios.post(url+'/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
+    //   console.log('success: ',response);
+    //   alert('your agenda has been updated');
+    // }).catch((err)=>{
+    //   console.log('err - ',err);
+    // });
   }
   submitAfterTourEvent(){
     let event_num = 0;
@@ -259,7 +261,7 @@ export default class Admin extends Component{
       const est_sq_ft = 'est_sq_ft'+event_num;
       const will_sell = 'will_sell'+event_num;
       return(
-        <tr>
+        <tr className="admin_row">
           <button onClick={this.deleteEvent.bind(this)} id={event_num}>Delete</button>
           <td><textarea ref={property_no} className="table_input" type="text" defaultValue={event.property_no} /></td>
           <td><textarea ref={arrival} className="table_input" type="text" defaultValue={event.arrival}/></td>

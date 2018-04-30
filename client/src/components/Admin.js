@@ -71,12 +71,12 @@ export default class Admin extends Component{
       agenda.push(items);
     }
     console.log('our agenda: ',agenda);
-    // axios.post(url+'/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
-    //   console.log('success: ',response);
-    //   alert('your agenda has been updated');
-    // }).catch((err)=>{
-    //   console.log('err - ',err);
-    // });
+    axios.post(url+'/info/submitagenda',{agenda,event_date,slots_avail}).then((response)=>{
+      console.log('success: ',response);
+      alert('your agenda has been updated');
+    }).catch((err)=>{
+      console.log('err - ',err);
+    });
   }
   submitAfterTourEvent(){
     let event_num = 0;

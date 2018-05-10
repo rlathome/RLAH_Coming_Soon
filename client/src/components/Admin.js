@@ -308,11 +308,10 @@ export default class Admin extends Component{
 
     let logo = this.state.logo;
 
-    const logo_edit = (logo) ? (
-      <div>
+    const logo_edit = (<div>
         <input className="input-logo" type="text" ref="logo_url" defaultValue={logo} /><span onClick={()=>this.changeLogo()} className="btn btn-primary">Update</span>
       </div>
-    ) : '';
+    );
     return(
       <div>
         <h1>Welcome to Admin Page!</h1>

@@ -68,7 +68,7 @@ export default class Home extends Component{
       <div>
         <h1 className="coming_soon_title">Coming Soon Tour</h1>
         <div className="main-subtitle">Bi-weekly caravan tour to preview properties not listed in Bright MLS for agents<br/>
-          <div>Occurs every 1st and 3rd Tuesday of each month beginning at 10AM and ending before noon. Each property will have a stop of about 15-20 minutes.</div>
+          <div>Occurs every 1st and 3rd Tuesday of each month beginning at 10am and ending before noon. Each property will have a stop of about 15-20 minutes.</div>
         </div>
         <section className="visitor_buttons clearfix">
           <div onClick={()=>{this.open_host()}}>Host</div>

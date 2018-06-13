@@ -10,7 +10,8 @@ export default class GuestRegistration extends Component{
     this.state={
       next_ok:false,
       agrees:false,
-      terms_conditions:false
+      terms_conditions:false,
+      submitted_form:false
     }
   }
   componentWillMount(){

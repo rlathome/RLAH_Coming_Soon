@@ -62,7 +62,7 @@ export default class Agenda extends Component{
       <div>
         <div className="bottom_buffer"></div>
         <div ref="after_tour" className="host_title">
-          AFTER TOUR
+          HOT LIST
         </div>
         <section className="agenda_table_container after_tour_table">
           <table className="agenda_table">

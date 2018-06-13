@@ -76,6 +76,10 @@ body{
   and (min-width : 355px)
   and (max-width : 668px){
     width:70vw;
+    font-size:1.5em;
+    div{
+      font-size:.85em;
+    }
   }
 }
 .join_coming_soon{

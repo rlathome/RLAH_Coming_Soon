@@ -108,7 +108,7 @@ export default class HostRegistration extends Component{
         { out_of_bounds }
         { within_bounds }
         <section className="after_tour_info">
-          Don’t worry if your property doesn’t qualify, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform" alt="form link">click here</a> for AFTER TOUR information
+          Don’t worry if your property doesn’t qualify, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform" alt="form link">click here</a> for HOT LIST information
         </section>
         <section className="radius_map">
           <div className="map_element">

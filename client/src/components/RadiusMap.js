@@ -12,9 +12,9 @@ class RadiusMap extends Component{
     super(props)
   }
   render(){
-    let pt_center = {lat:38.909543,lng:-77.037441};
+    let pt_center = {lat:38.924295,lng:-77.033381};
     // console.log('the markerz: ',pt_center,pt_center.lat>0,pt_center.lat==0);
-    let listing_marker = {title:"DuPont Circle",position:{lat:38.910136,lng: -77.042510}};
+    const listing_marker = {title:"DuPont Circle",position:{lat:38.910136,lng: -77.042510}};
     let out_of_bounds = this.props.out_of_bounds;
     let not_out_of_bounds = this.props.not_out_of_bounds;
     let address_entered = this.props.address_entered;
@@ -27,7 +27,7 @@ class RadiusMap extends Component{
         <GoogleMap
           googleMaps={this.props.googleMaps}
           // You can add and remove coordinates on the fly.
-          // The map will rerender new markers and remove the old ones.
+          // The map will rerender new markers and remove the osld ones.
           // coordinates = {markers}
           coordinates={[
             {
@@ -75,6 +75,16 @@ class RadiusMap extends Component{
               fillOpacity: 0.1
             });
             rhodeIsland.setMap(map);
+            var smallBrokerage = new goo.Circle({
+              center:{lat:38.939687,lng:-77.024657},
+              radius:3218.69,
+              strokeColor:'rgba(100,100,100,1)',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: 'rgb(53,202,252)',
+              fillOpacity: 0.1
+            });
+            smallBrokerage.setMap(map);
             // // Bias the SearchBox results towards current map's viewport.
 
 
@@ -146,7 +156,7 @@ class RadiusMap extends Component{
                 }
                 const lat = place.geometry.location.lat();
                 const lng = place.geometry.location.lng();
-                if(duPont.getBounds().contains({lat,lng}) && rhodeIsland.getBounds().contains({lat,lng})){
+                if(duPont.getBounds().contains({lat,lng}) || rhodeIsland.getBounds().contains({lat,lng}) || smallBrokerage.getBounds().contains({lat,lng})){
                   console.log('this marker is in!!')
                   not_out_of_bounds();
                   return true;

@@ -1007,3 +1007,7 @@ tbody > tr:nth-child(1) {
     width: 2.5vw !important;
   }
 }
+
+td {
+  white-space: pre;
+}

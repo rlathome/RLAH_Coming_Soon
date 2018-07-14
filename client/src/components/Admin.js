@@ -137,6 +137,7 @@ export default class Admin extends Component{
     }
   }
   deleteAfterTourEvent(e){
+    console.log(e.target.id)
     let event = (e.target.id !=='0') ? parseInt(e.target.id)-1 : 0;
     let after_tour = this.state.after_tour.slice();
     console.log('after_tour - ',after_tour);
@@ -353,7 +354,7 @@ export default class Admin extends Component{
             </div>
           </section>
           <div className="host_title">
-            AFTER TOUR
+            HOT LIST
           </div>
           <section className="agenda_table_container">
             <table className="agenda_table admin_agenda_table">

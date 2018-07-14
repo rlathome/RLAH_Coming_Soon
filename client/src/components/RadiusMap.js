@@ -125,7 +125,7 @@ class RadiusMap extends Component{
                 console.log(place,' is one of ',places.length, ' in places')
                 out_of_bounds();
                 var icon = {
-                  url: place.icon,
+                  url:'',
                   size: new goo.Size(71, 71),
                   origin: new goo.Point(0, 0),
                   anchor: new goo.Point(17, 34),
@@ -159,10 +159,26 @@ class RadiusMap extends Component{
                 if(duPont.getBounds().contains({lat,lng}) || rhodeIsland.getBounds().contains({lat,lng}) || smallBrokerage.getBounds().contains({lat,lng})){
                   console.log('this marker is in!!')
                   not_out_of_bounds();
+                  // Create a marker for each place.
+                  icon.url = 'https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png'
+                  markers.push(new goo.Marker({
+                    map: map,
+                    icon: icon,
+                    title: place.name,
+                    position: place.geometry.location
+                  }));
                   return true;
                 }else{
                  console.log('this marker is out!!')
                  out_of_bounds();
+                 // Create a marker for each place.
+                 icon.url = place.icon;
+                 markers.push(new goo.Marker({
+                   map: map,
+                   icon: icon,
+                   title: place.name,
+                   position: place.geometry.location
+                 }));
                  return false;
                 }
               });

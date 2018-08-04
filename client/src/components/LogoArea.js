@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { url } from '../configURL.js';
 // const url = 'http://www.comingsoontour.com';
-export default class Footer extends Component{
+import { url } from '../globalConf.js';
+console.log('url in logo: ',url)
+
+export default class LogoArea extends Component{
   constructor(props){
     super(props);
     this.state={
-      footer_logo_url:''
+      logo:''
     }
   }
   componentDidMount(){
     axios.get(url+'/info/admin_info').then((admin)=>{
       console.log('logo_area admin:',admin.data[0].logo_url)
       this.setState({
-        footer_logo_url:admin.data[0].footer_logo_url
+        logo:admin.data[0].logo_url
       });
     })
   }
   render(){
-    let footer_logo_url = this.state.footer_logo_url;
-    let logo_img = (this.state.footer_logo_url !== '') ? (
+    let logourl = this.state.logo;
+    let logo_img = (this.state.logo !== '') ? (
       <section className="logo-area">
-          <img className="img-responsive" src={footer_logo_url} alt="" />
+        <h2>Sponsored by</h2>
+        <div className='main_logo' >
+          <img className="img-responsive" src={logourl} alt="" />
+        </div>
       </section>
     ) : '';
     return(

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import LogoArea from './LogoArea';
 import Footer from './Footer';
 import axios from 'axios';
-const url = 'http://www.comingsoontour.com';
+import { terms_text } from './inserts/terms_conditions.js';
+// const url = 'http://www.comingsoontour.com';
+import { url } from '../globalConf.js';
 
 export default class HostRegistration extends Component{
   constructor(props){
@@ -19,7 +22,8 @@ export default class HostRegistration extends Component{
       agrees:false,
       next_ok:false,
       submitted_form:false,
-      terms_conditions:false
+      terms_conditions:false,
+      showing_other_input:false
     }
   }
   componentDidMount(){
@@ -48,6 +52,12 @@ export default class HostRegistration extends Component{
   }
   handleRadioChange(e){
     const property = e.target.id;
+    let new_field = {};
+    if(property==='other'){
+      new_field = {
+        showing_other_input:!this.state.showing_other_input
+      }
+    }
     let yes_no = this.state[property]
     console.log(property,' was checked: ',yes_no)
     var stateObject = function() {
@@ -55,10 +65,14 @@ export default class HostRegistration extends Component{
       returnObj[property] = !yes_no;
       return returnObj;
     }();
-    this.setState(stateObject);
+    console.log('state object: ',{...stateObject,...new_field});
+    this.setState({
+      ...stateObject,
+      ...new_field
+    });
     setTimeout(()=>{
       this.isFormFilled();
-    },20);
+    },100);
   }
   handleAgree(){
     this.setState({
@@ -73,7 +87,12 @@ export default class HostRegistration extends Component{
    const isEmail = re.test(String(this.refs.agent_email.value).toLowerCase());
 
    const ready =
-   this.refs.agent_name !=='' && this.state.agrees && isEmail && this.refs.est_size.value !=='' && (this.state.selected_option =='yes' || this.state.selected_option =='no') && (this.state.price || this.state.staging || this.state.timing || this.state.improvements || this.state.other || this.state.buyers_interested);
+   this.refs.agent_name.value !==''
+   && this.state.agrees
+   && isEmail
+   && this.refs.est_size.value !==''
+   && (this.state.selected_option =='yes'|| this.state.selected_option =='no')
+   && (this.state.price || this.state.staging || this.state.timing || this.state.improvements || this.state.other || this.state.buyers_interested);
 
     if(ready){
       console.log('ready to go')
@@ -81,6 +100,7 @@ export default class HostRegistration extends Component{
         next_ok:true
       });
     }else{
+      console.log('not ready','name:' ,this.refs.agent_name.value,' agrees: ',this.state.agrees, 'isemail: ',isEmail ,'est value: ',this.refs.est_size.value, 'selected ys/no: ',(this.state.selected_option =='yes' || this.state.selected_option =='no'),'other picks: ','price',this.state.price ,'staging: ',this.state.staging,'timing', this.state.timing ,'improvemts ',this.state.improvements ,'other ',this.state.other ,'buyers interested: ',this.state.buyers_interested)
       this.setState({
         next_ok:false
       });
@@ -92,10 +112,13 @@ export default class HostRegistration extends Component{
     let expected_price = this.refs.expected_price.value;
     let agent_name = this.refs.agent_name.value;
     let email = this.refs.agent_email.value;
+    let extra_media = (this.refs.extra_media.value !=='') ? this.refs.extra_media.value : '';
+    let est_active = (this.refs.est_active.value !=='') ? this.refs.est_active.value : '';
     let will_show_before_listing = this.state.selected_option;
     let feedback_wanted = [];
+    const other_text = (this.refs.other_text) ? 'Other feedback wanted: '+ this.refs.other_text.value : 'none';
     for(let i in this.state){
-      if(this.state[i]==true && i!=='agrees' && i !=='next_ok' && i !=='submitted_form' && i !=='terms_conditions'){
+      if(this.state[i]==true && i!=='agrees' && i !=='next_ok' && i !=='submitted_form' && i !=='terms_conditions' && i !=='showing_other_input'){
         feedback_wanted.push(i);
       }
     }
@@ -106,7 +129,10 @@ export default class HostRegistration extends Component{
       agent_name,
       email,
       will_show_before_listing,
-      feedback_wanted
+      feedback_wanted,
+      extra_media,
+      est_active,
+      other_text
     }
     console.log('you submitted: ',data);
       axios.post(url + '/info/submithostform',data).then((response)=>{
@@ -130,6 +156,7 @@ export default class HostRegistration extends Component{
     });
   }
   render(){
+    const { showing_other_input } = this.state;
     const submit_modal = (this.state.submitted_form) ? (
       <div className = 'submit_modal flex-col'>
         <span>Thank you for your submission! We'll be in touch shortly.</span>
@@ -137,7 +164,7 @@ export default class HostRegistration extends Component{
     ) : '';
     const terms_conditions = (this.state.terms_conditions) ? (
       <div className = 'flex-col terms_conditions_modal'>
-        <span>THIS TOUR IS PROVIDED ON “AS IS” AND  “AS AVAILABLE” BASIS, AND BROKER EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. NEITHER PARTY SHALL BE LIABLE TO THE OTHER PARTY FOR ANY CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OR LOST PROFITS ARISING OUT OF ANY BREACH OF THIS AGREEMENT OR ITS TERMINATION, WHETHER FOR BREACH OF WARRANTY OR ANY OBLIGATION OR OTHERWISE, WHETHER LIABILITY IS ASSERTED IN CONTRACT OR TORT AND REGARDLESS OF WHETHER OR NOT THE PARTY HAS ADVISED OR HAS BEEN ADVISED OF THE POSSIBILITY OF ANY SUCH LOSS OR DAMAGE. <br/>This Agreement and all attached Schedules constitute the entire understanding and agreement of the parties with respect to the subject matter contained herein. This Agreement may not be altered, modified or waived, in whole or in part, except in a writing signed by the authorized representatives of the parties.</span>
+        { terms_text() }
         <br/>
         <span className="main_submit main_close_btn" onClick={()=>this.toggleTerms()}>Close</span>
       </div>
@@ -175,7 +202,7 @@ export default class HostRegistration extends Component{
             <div><div className="form_labels">Listing Agent Email*:</div>&nbsp;<div className="form_inputs"><input onKeyUp={this.isFormFilled.bind(this)} ref="agent_email" type="text" /></div></div>
             <div><div className="form_labels">Expected Price:</div>&nbsp;<div className="form_inputs"><input ref="expected_price" type="text" /></div></div>
             <div><div className="form_labels">Estimated Size (sqft)*:</div>&nbsp;<div className="form_inputs"><input onKeyUp={this.isFormFilled.bind(this)} ref="est_size" type="text" /></div></div>
-            <div className="form_inputs">Will seller show home/consider
+            <div><div className="form_labels">Will seller show home/consider
   offers prior to listing?*:</div>&nbsp;
               <div className="form_labels">
                 <div>
@@ -183,6 +210,19 @@ export default class HostRegistration extends Component{
                   <input onChange={this.handleOptionChange.bind(this)} type="radio" value='no' checked = {this.state.selected_option==='no'} id="radio_yes" name="yes_no" /><label for="radio_yes">No</label>
                   <input onChange={this.handleOptionChange.bind(this)} type="radio" value='no' checked = {this.state.selected_option==='invisible'} id="radio_invisible" name="yes_no" />
                 </div>
+              </div>
+            </div>
+              <div className="form_labels">
+                <div className="form_labels__buffer">What media do you have, if any, of property (SPW, Photos, Previous Listing, etc)</div>
+              </div>&nbsp;
+              <div className="form_inputs">
+                <textarea ref="extra_media"/>
+              </div>
+              <div className="form_labels">
+                <div className="form_labels__buffer">When will this listing be active (estimated)?</div>
+              </div>&nbsp;
+              <div className="form_inputs">
+                <textarea ref="est_active"/>
               </div>
           </form>
         </section>
@@ -207,6 +247,9 @@ export default class HostRegistration extends Component{
               <input onChange={this.handleRadioChange.bind(this)} ref='buyers_interested' type="checkbox" id="buyers_interested" value="radio_buyers_interested" name="radio_feedback"  /><label for="radio_buyers_interested">Buyers Interested</label><br/>
               <input onChange={this.handleRadioChange.bind(this)} ref='other' type="checkbox" id="other" value="radio_other" name="radio_feedback" /><label for="radio_other">Other</label><br/>
             </div>
+            {showing_other_input && (
+              <div><div className="form_inputs"><input ref="other_text" type="text" /></div></div>
+            )}
           </form>
           </div>
         </section>
@@ -221,6 +264,7 @@ export default class HostRegistration extends Component{
         <section className="submit_btn">
           { submit }
         </section>
+        <LogoArea />
         <Footer />
       </main>
     );

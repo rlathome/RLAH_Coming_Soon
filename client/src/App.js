@@ -9,7 +9,6 @@ import GuestRegistration from './components/GuestRegistration';
 import HostRegistration from './components/HostRegistration';
 import Agenda from './components/Agenda';
 import Admin from './components/Admin';
-import Footer from './components/Footer';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -188,8 +187,8 @@ class App extends Component {
             <Route path='/login/host' component = { HostLogin } />
             <Route path='/admin_login' component = { AdminLogin } />
 
-            {/* <Route path='/admin' component = { Admin } /> */}
-            <AdminRoute path='/admin' component = { Admin } />
+            <Route path='/admin' component = { Admin } />
+            {/* <AdminRoute path='/admin' component = { Admin } /> */}
 
             <Route exact path='/guest' component = { GuestRegistration } />
             {/* <GuestRoute exact path='/guest' component = { GuestRegistration } /> */}

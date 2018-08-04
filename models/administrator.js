@@ -32,6 +32,14 @@ var schema = new mongoose.Schema({
   logo_url:{
     type:String,
     required:false
+  },
+  footer_logo_url:{
+    type:String,
+    required:false
+  },
+  next_tour:{
+    type:String,
+    required:false
   }
 });
 

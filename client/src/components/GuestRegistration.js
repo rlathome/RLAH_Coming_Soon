@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
+import LogoArea from './LogoArea';
 import Footer from './Footer';
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = 'http://www.comingsoontour.com';
+import { terms_text } from './inserts/terms_conditions.js';
+import { url } from '../globalConf.js';
+// const url = 'http://www.comingsoontour.com';
 
 export default class GuestRegistration extends Component{
   constructor(props){
@@ -85,12 +88,12 @@ export default class GuestRegistration extends Component{
   render(){
     const submit_modal = (this.state.submitted_form) ? (
       <div className = 'submit_modal flex-col'>
-        <span>Thank you for your submission! We'll be in touch shortly.</span>
+        <span>Thank you for your submission! We'll have a seat for you on the tour!</span>
       </div>
     ) : '';
     const terms_conditions = (this.state.terms_conditions) ? (
       <div className = 'flex-col terms_conditions_modal'>
-        <span>THIS TOUR IS PROVIDED ON “AS IS” AND  “AS AVAILABLE” BASIS, AND BROKER EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. NEITHER PARTY SHALL BE LIABLE TO THE OTHER PARTY FOR ANY CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OR LOST PROFITS ARISING OUT OF ANY BREACH OF THIS AGREEMENT OR ITS TERMINATION, WHETHER FOR BREACH OF WARRANTY OR ANY OBLIGATION OR OTHERWISE, WHETHER LIABILITY IS ASSERTED IN CONTRACT OR TORT AND REGARDLESS OF WHETHER OR NOT THE PARTY HAS ADVISED OR HAS BEEN ADVISED OF THE POSSIBILITY OF ANY SUCH LOSS OR DAMAGE. <br/>This Agreement and all attached Schedules constitute the entire understanding and agreement of the parties with respect to the subject matter contained herein. This Agreement may not be altered, modified or waived, in whole or in part, except in a writing signed by the authorized representatives of the parties.</span>
+        { terms_text() }
         <br/>
         <span className="checker_submit" onClick={()=>this.toggleTerms()}>Close</span>
       </div>
@@ -134,6 +137,7 @@ export default class GuestRegistration extends Component{
         <section className="submit_btn">
           { rsvp }
         </section>
+        <LogoArea />
         <Footer />
       </main>
     );

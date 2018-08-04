@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+import LogoArea from './LogoArea';
 import Footer from './Footer';
-const url = 'http://www.comingsoontour.com';
+import { APIService } from '../APIs/apiService';
 
 export default class Agenda extends Component{
   constructor(props){
@@ -11,9 +11,10 @@ export default class Agenda extends Component{
       agenda:'',
       after_tour:''
     }
+    this.api = new APIService();
   }
   componentDidMount(){
-    axios.get(url+'/info/admin_info').then((agenda)=>{
+    this.api.get('info/admin_info').then((agenda)=>{
       console.log('the agenda: ',agenda.data[0].after_tour);
       this.setState({
         agenda:agenda.data[0],
@@ -33,28 +34,41 @@ export default class Agenda extends Component{
       }
   }
   render(){
+    console.log('OUR AGENDA ',this.state.agenda)
     let agenda = (this.state.agenda !=='' && this.state.agenda.agenda !==undefined) ? this.state.agenda.agenda.map((event)=>{
+      const address = (event.listing_url) ? (
+        <a href={event.listing_url} target="_blank" rel="listing website">
+          {event.address}
+        </a>
+      ) : event.address;
       return(
         <tr>
           <td>{event.property_no}</td>
           <td>{event.arrival}</td>
           <td>{event.departure}</td>
-          <td>{event.address}</td>
+          <td>{address}</td>
           <td>{event.listing_agt}</td>
           <td>{event.est_price}</td>
           <td>{event.est_sq_ft}</td>
           <td>{event.will_sell}</td>
+          <td>{event.est_live}</td>
         </tr>
       );
     }) : '';
     let after_tour = (this.state.after_tour !=='' && this.state.after_tour !==undefined) ? this.state.after_tour.map((event)=>{
+      const address = (event.listing_url) ? (
+        <a href={event.listing_url} target="_blank" rel="listing website">
+          {event.address}
+        </a>
+      ) : event.address;
       return(
         <tr>
-          <td id="aftertour_address">{event.address}</td>
+          <td id="aftertour_address">{address}</td>
           <td className="aftertour_agent">{event.listing_agt}</td>
           <td className="aftertour_price">{event.est_price}</td>
           <td className="aftertour_sqft">{event.est_sq_ft}</td>
           <td className="aftertour_willsell">{event.will_sell}</td>
+          <td className="aftertour_est_live">{event.est_live}</td>
         </tr>
       );
     }) : '';
@@ -65,14 +79,15 @@ export default class Agenda extends Component{
           HOT LIST
         </div>
         <section className="agenda_table_container after_tour_table">
-          <table className="agenda_table">
+          <table className="agenda_table second_table">
             <tbody>
               <tr>
                 <th>Address</th>
                 <th className="aftertour_agent">Listing Agent</th>
                 <th className="aftertour_price">Est. Price</th>
                 <th className="aftertour_sqft">Est. Sq. Ft</th>
-                <th className="aftertour_willsell">Willing to sell off market?</th>
+                <th className="aftertour_willsell">Sell off mkt?</th>
+                <th className="aftertour_est_live">Est. Live Date</th>
               </tr>
               { after_tour }
             </tbody>
@@ -92,18 +107,19 @@ export default class Agenda extends Component{
         <div className="agenda_date">
           { this.state.agenda.event_date }
         </div>
-        <section className="agenda_table_container">
+        <section className="agenda_table_container main_agenda_table">
           <table className="agenda_table">
             <tbody>
               <tr>
-                <th>Property No.</th>
+                <th>Prop no.</th>
                 <th>Arrival</th>
                 <th>Departure</th>
                 <th>Address</th>
                 <th>Listing Agent</th>
                 <th>Est. Price</th>
                 <th>Est. Sq. Ft</th>
-                <th>Willing to sell off market?</th>
+                <th>Sell off mkt?</th>
+                <th>Est. Live Date</th>
               </tr>
               { agenda }
             </tbody>
@@ -111,10 +127,10 @@ export default class Agenda extends Component{
 
           </table>
         </section>
-        <section className="submit_btn">
+        <section className="submit_btn hidden-xs">
           <span onClick={()=>window.print()} className="main_submit">PRINT</span>
         </section>
-        <Footer />
+        <LogoArea />
         {/* <div className="bottom_buffer"></div>
         <div className="host_title">
           AFTER TOUR
@@ -137,6 +153,7 @@ export default class Agenda extends Component{
         </section>
         <div className="bottom_buffer"></div> */}
         { after_tour_contents }
+      <Footer/>
       </main>
     );
   }

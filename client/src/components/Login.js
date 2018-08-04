@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = 'http://www.comingsoontour.com';
+import { url } from '../globalConf.js';
 
 export default class Login extends Component{
   login(){

@@ -96,7 +96,7 @@ body {
 
 .join_coming_soon {
   width: 100%;
-  position: absolute;
+  margin-top: 5vh;
   bottom: 4vw;
   left: 0vw;
 }
@@ -120,7 +120,7 @@ body {
 .visitor_buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 15vh;
+  margin-top: 5vh;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
@@ -131,6 +131,7 @@ body {
 
 .visitor_buttons div:hover {
   background-color: #000;
+  transition: background-color .45s ease-in-out;
 }
 
 .visitor_buttons * {
@@ -154,7 +155,7 @@ body {
 }
 
 .logo-area {
-  margin-top: 15vh;
+  margin-top: 3.75vh;
 }
 
 .logo-area h2 {
@@ -293,9 +294,16 @@ body {
   width: 40vw;
 }
 
+@media (max-width: 965px) {
+  .radius_map .map_element {
+    height: 50vw;
+    width: 55vw;
+  }
+}
+
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .radius_map .map_element {
-    width: 75vw;
+    width: 85vw;
     height: 110vw;
   }
 }
@@ -340,17 +348,41 @@ body {
   display: none;
 }
 
-.host_form form .form_labels div input, .host_form form .form_labels div label, .guest_form form .form_labels div input, .guest_form form .form_labels div label {
+.host_form form .form_labels div input, .host_form form .form_labels div label, .host_form form .form_labels div textarea, .guest_form form .form_labels div input, .guest_form form .form_labels div label, .guest_form form .form_labels div textarea {
   margin-left: .75em;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .host_form form .form_labels div, .guest_form form .form_labels div {
+    float: left;
+  }
+}
+
+.host_form form .form_labels__buffer, .guest_form form .form_labels__buffer {
+  padding-right: 5px;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .host_form form .form_labels, .guest_form form .form_labels {
+    width: 100%;
+    display: inline;
+    margin-bottom: 1.25vh;
+  }
 }
 
 .host_form form .form_inputs, .guest_form form .form_inputs {
   width: 55%;
 }
 
-.host_form form .form_inputs input, .guest_form form .form_inputs input {
+.host_form form .form_inputs input, .host_form form .form_inputs textarea, .guest_form form .form_inputs input, .guest_form form .form_inputs textarea {
   width: 100%;
   border: 1px solid #000;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .host_form form .form_inputs, .guest_form form .form_inputs {
+    width: 100%;
+  }
 }
 
 .prop_address {
@@ -389,6 +421,23 @@ body {
   .feedback .feedback_msg, .feedback .feedback_options {
     width: 75vw;
     margin-top: 2.5vh;
+  }
+}
+
+.feedback .form_inputs {
+  width: 55%;
+  float: right;
+}
+
+.feedback .form_inputs input, .feedback .form_inputs textarea {
+  width: 100%;
+  border: 1px solid #000;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .feedback .form_inputs {
+    display: block;
+    width: 100%;
   }
 }
 
@@ -499,264 +548,323 @@ td:nth-child(1) {
   padding: 0.25em 0em;
 }
 
-td:nth-child(1) {
-  width: 8vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  td:nth-child(1) {
-    width: 2vw;
-    font-size: .75em;
-  }
-}
-
-td:nth-child(1) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-td:nth-child(2) {
-  width: 10vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  td:nth-child(2) {
-    width: 10vw;
-    font-size: .75em;
-  }
-}
-
-td:nth-child(2) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-td:nth-child(3) {
-  width: 12vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  td:nth-child(3) {
-    width: 10vw;
-    font-size: .75em;
-  }
-}
-
-td:nth-child(3) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-td:nth-child(4) {
-  width: 20vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  td:nth-child(4) {
-    width: 17vw;
-    font-size: .75em;
-  }
-}
-
-td:nth-child(4) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-td:nth-child(5) {
-  width: 15vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  td:nth-child(5) {
-    width: 17vw;
-    font-size: .75em;
-  }
-}
-
-td:nth-child(5) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-td:nth-child(6) {
-  width: 10vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  td:nth-child(6) {
-    width: 15vw;
-    font-size: .75em;
-  }
-}
-
-td:nth-child(6) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-td:nth-child(7) {
-  width: 6vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  td:nth-child(7) {
-    width: 10vw;
-    font-size: .75em;
-  }
-}
-
-td:nth-child(7) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-td:nth-child(8) {
-  width: 12vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  td:nth-child(8) {
-    width: 6vw;
-    font-size: .75em;
-  }
-}
-
-td:nth-child(8) textarea {
-  width: 100%;
-  height: 100%;
-}
-
 .after_tour_table td:nth-child(1) {
   font-size: 1em;
 }
 
-th:nth-child(1) {
-  width: 8vw;
+.main_agenda_table th:nth-child(1) {
+  width: 8vw !important;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
-  th:nth-child(1) {
-    width: 2vw;
+  .main_agenda_table th:nth-child(1) {
+    max-width: 2vw !important;
+    min-width: 2vw !important;
     font-size: .75em;
   }
 }
 
-th:nth-child(1) textarea {
+.main_agenda_table th:nth-child(1) textarea {
   width: 100%;
   height: 100%;
 }
 
-th:nth-child(2) {
-  width: 10vw;
+.main_agenda_table th:nth-child(2) {
+  width: 10vw !important;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
-  th:nth-child(2) {
+  .main_agenda_table th:nth-child(2) {
+    max-width: 10vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table th:nth-child(2) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table th:nth-child(3) {
+  width: 12vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table th:nth-child(3) {
+    max-width: 16vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table th:nth-child(3) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table th:nth-child(4) {
+  width: 20vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table th:nth-child(4) {
+    max-width: 17vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table th:nth-child(4) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table th:nth-child(5) {
+  width: 13vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table th:nth-child(5) {
+    max-width: 17vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table th:nth-child(5) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table th:nth-child(6) {
+  width: 8vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table th:nth-child(6) {
+    max-width: 20vw !important;
+    min-width: 11vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table th:nth-child(6) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table th:nth-child(7) {
+  width: 6vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table th:nth-child(7) {
+    max-width: 10vw !important;
+    min-width: 10vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table th:nth-child(7) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table th:nth-child(8) {
+  width: 10vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table th:nth-child(8) {
+    max-width: 5vw !important;
+    min-width: 5vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table th:nth-child(8) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table th:nth-child(9) {
+  width: 6vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table th:nth-child(9) {
+    max-width: 10vw !important;
+    min-width: 12vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table th:nth-child(9) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(1) {
+  width: 8vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(1) {
+    max-width: 2vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(1) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(2) {
+  width: 10vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(2) {
+    max-width: 10vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(2) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(3) {
+  width: 12vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(3) {
+    max-width: 16vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(3) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(4) {
+  width: 20vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(4) {
+    max-width: 17vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(4) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(5) {
+  width: 13vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(5) {
+    max-width: 17vw !important;
+    min-width: 2vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(5) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(6) {
+  width: 8vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(6) {
+    max-width: 20vw !important;
+    min-width: 11vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(6) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(7) {
+  width: 6vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(7) {
+    max-width: 10vw !important;
+    min-width: 10vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(7) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(8) {
+  width: 10vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(8) {
+    max-width: 5vw !important;
+    min-width: 5vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(8) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.main_agenda_table tr:nth-child(9) {
+  width: 6vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .main_agenda_table tr:nth-child(9) {
+    max-width: 10vw !important;
+    min-width: 12vw !important;
+    font-size: .75em;
+  }
+}
+
+.main_agenda_table tr:nth-child(9) textarea {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .second_table tr {
+    width: 90vw;
+  }
+  .second_table tr th:nth-child(1) {
     width: 10vw;
-    font-size: .75em;
   }
-}
-
-th:nth-child(2) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-th:nth-child(3) {
-  width: 12vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  th:nth-child(3) {
-    width: 10vw;
-    font-size: .75em;
-  }
-}
-
-th:nth-child(3) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-th:nth-child(4) {
-  width: 20vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  th:nth-child(4) {
-    width: 17vw;
-    font-size: .75em;
-  }
-}
-
-th:nth-child(4) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-th:nth-child(5) {
-  width: 15vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  th:nth-child(5) {
-    width: 17vw;
-    font-size: .75em;
-  }
-}
-
-th:nth-child(5) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-th:nth-child(6) {
-  width: 10vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  th:nth-child(6) {
-    width: 15vw;
-    font-size: .75em;
-  }
-}
-
-th:nth-child(6) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-th:nth-child(7) {
-  width: 6vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  th:nth-child(7) {
-    width: 10vw;
-    font-size: .75em;
-  }
-}
-
-th:nth-child(7) textarea {
-  width: 100%;
-  height: 100%;
-}
-
-th:nth-child(8) {
-  width: 12vw;
-}
-
-@media only screen and (min-width: 355px) and (max-width: 668px) {
-  th:nth-child(8) {
-    width: 6vw;
-    font-size: .75em;
-  }
-}
-
-th:nth-child(8) textarea {
-  width: 100%;
-  height: 100%;
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
@@ -769,7 +877,7 @@ th:nth-child(8) textarea {
   tr > th:nth-child(1) {
     font-size: .55em !important;
   }
-  .after_tour_table tr > th:nth-child(1), .after_tour_table tr > td:nth-child(1) {
+  .second_table tr > th:nth-child(1), .second_table tr > td:nth-child(1) {
     font-size: .75em !important;
   }
   .after_tour_table tr > th:nth-child(1), .after_tour_table tr > th:nth-child(2) {
@@ -984,7 +1092,7 @@ tbody > tr:nth-child(1) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .aftertour_price {
-    width: 20vw !important;
+    width: 15vw !important;
   }
 }
 
@@ -1004,10 +1112,27 @@ tbody > tr:nth-child(1) {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .aftertour_willsell {
-    width: 2.5vw !important;
+    max-width: 2vw !important;
   }
 }
 
-td {
-  white-space: pre;
+.aftertour_est_live {
+  width: 10vw !important;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .aftertour_est_live {
+    min-width: 15vw !important;
+  }
+}
+
+.next_tour_date {
+  font-size: 2.5em;
+  margin-top: 2.5vh;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .next_tour_date {
+    font-size: 1.5em;
+  }
 }

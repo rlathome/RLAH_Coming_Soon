@@ -61,10 +61,28 @@ router.post('/change_password',function(req,res,next){
     res.send('success');
   });
 });
+router.post('/change_next_tour_date',function(req,res,next){
+  console.log('next_tour: ',req.body.next_tour);
+  const next_tour = req.body.next_tour.toString();
+  Administrator.update({},{
+    'next_tour':next_tour
+  },function(err){
+    if(err) ()=>console.log('error: ',err);
+    res.send('success');
+  });
+});
 router.post('/change_logo',function(req,res,next){
   console.log('logo: ',req.body);
   const logo_url = req.body;
   Administrator.update({},logo_url,function(err){
+    if(err) ()=>console.log('error: ',err);
+    res.send('success');
+  });
+});
+router.post('/change_footer_logo',function(req,res,next){
+  console.log('footer logo: ',req.body);
+  const footer_logo_url = req.body;
+  Administrator.update({},footer_logo_url,function(err){
     if(err) ()=>console.log('error: ',err);
     res.send('success');
   });
@@ -104,17 +122,15 @@ router.post('/submithostform',function(req,res,next){
   console.log('submitting: ',form_data);
   const agent_email = form_data.email;
   const agent_name = form_data.agent_name;
-
+  const extra_media = (form_data.extra_media) ? form_data.extra_media : 'none entered';
+  const est_live = (form_data.est_live) ? form_data.est_live : 'none entered';
+  const other_text = form_data.other_text;
   // res.send("Queued. Thank you.");
 
   let to = 'comingsoontour@gmail.com'
-  // let to = 'josh@allenb.com';
   let subject = "A new host has signed up on the Coming Soon Tour!";
-
   let host_subject = "Thank you for signing up!";
-
   var mailcomposer = require('mailcomposer');
-
   var domain = 'info.comingsoontour.com';
   var apiKey = 'key-30c5713300a403cced1a5f5adaa0ffa8';
   var mailgun = require('mailgun-js')({apiKey:apiKey, domain:domain});
@@ -125,7 +141,7 @@ router.post('/submithostform',function(req,res,next){
     subject:host_subject,
     to:agent_email,
     from:'<'+to+'>',
-    html:'<div>Thank you for submitting your property to be a part of our next Coming Soon Tour. We will review your submission and get back to you shortly!”</div><br/><br/>'
+    html:'<div>Thank you for submitting your property to be a part of our next Coming Soon Tour. We will review your submission and get back to you shortly!</div><br/><br/>'
     +'<div>'
     +'Name: '+form_data.agent_name+'<br/>'
     +'Address: '+form_data.address+'<br/>'
@@ -133,7 +149,10 @@ router.post('/submithostform',function(req,res,next){
     +'Expected price: '+form_data.expected_price+'<br/>'
     +'Estimated sq ft: '+form_data.est_size+'<br/>'
     +'Will show before listing: '+form_data.will_show_before_listing+'<br/>'
-    +'Feedback wanted: '+form_data.feedback_wanted.join(', ')
+    +'Feedback wanted: '+form_data.feedback_wanted.join(', ')+'<br/>'
+    + other_text+'<br/>'
+    +'Extra media provided: '+extra_media+'<br/>'
+    +'Estimated date property will be active: '+est_live+'<br/>'
     +'</div>'
   });
 

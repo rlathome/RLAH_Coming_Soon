@@ -52,7 +52,7 @@ body {
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .main-subtitle {
-    width: 80vw !important;
+    width: 80vw;
   }
 }
 
@@ -323,4 +323,8 @@ th:nth-child(8) {
 .listing-map-object {
   height: 100% !important;
   width: 100% !important;
+}
+
+.next_tour_date * {
+  font-size: 1.45em;
 }

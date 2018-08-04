@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const url = 'http://www.comingsoontour.com';
-// const url = 'http://localhost:8080';
+import { DataService } from '../APIs/dataService';
+
+import { url } from '../globalConf.js';
 
 export default class Admin extends Component{
   constructor(props){
@@ -13,26 +14,15 @@ export default class Admin extends Component{
       after_tour:'',
       event_date:'',
       slots_avail:'',
-      logo:''
+      logo:'',
+      next_tour:'',
+      footer_logo_url:'',
+      footer_logo_edit:''
     }
+    this.dataService = new DataService();
   }
-  componentDidMount(){
-    axios.get(url+'/info/admin_info').then((admin)=>{
-      console.log('admin info: ',admin.data);
-      const d = admin.data[0];
-      this.setState({
-        host_password:d.host_password,
-        guest_password:d.guest_password,
-        admin_password:d.admin_password,
-        agenda:d.agenda,
-        after_tour:d.after_tour,
-        event_date:d.event_date,
-        slots_avail:d.slots_available,
-        logo:d.logo_url
-      })
-    }).catch((err)=>{
-      console.log('err - ',err);
-    })
+  componentWillMount(){
+      this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
   }
   submitEvent(){
     let event_num = 0;
@@ -43,6 +33,7 @@ export default class Admin extends Component{
     let slots = slots_to_fill.length;
     for(let i=1; i<=slots; i++){
       let property_no = 'property_no'+i;
+      let listing_url = 'url'+i;
       let arrival = 'arrival'+i;
       let departure = 'departure'+i;
       let address = 'address'+i;
@@ -50,6 +41,7 @@ export default class Admin extends Component{
       let est_price = 'est_price'+i;
       let est_sq_ft = 'est_sq_ft'+i;
       let will_sell = 'will_sell'+i;
+      let est_live = 'est_live'+i;
       property_no = this.refs[property_no].value;
       arrival = this.refs[arrival].value;
       departure = this.refs[departure].value;
@@ -58,15 +50,18 @@ export default class Admin extends Component{
       est_price = this.refs[est_price].value;
       est_sq_ft = this.refs[est_sq_ft].value;
       will_sell = this.refs[will_sell].value;
+      est_live = this.refs[est_live].value;
       let items = {
         property_no,
+        listing_url,
         arrival,
         departure,
         address,
         listing_agt,
         est_price,
         est_sq_ft,
-        will_sell
+        will_sell,
+        est_live
       }
       agenda.push(items);
     }
@@ -84,17 +79,22 @@ export default class Admin extends Component{
     let amount = this.state.after_tour.length;
     for(let i=1; i<=amount; i++){
       let address = 'at_address'+i;
+      let listing_url = 'at_url'
       let listing_agt = 'at_listing_agt'+i;
       let est_price = 'at_est_price'+i;
       let est_sq_ft = 'at_est_sq_ft'+i;
       let will_sell = 'at_will_sell'+i;
+      let est_live = 'at_est_live'+i;
       address = this.refs[address].value;
       listing_agt = this.refs[listing_agt].value;
+      listing_url = this.refs[listing_url].value;
       est_price = this.refs[est_price].value;
       est_sq_ft = this.refs[est_sq_ft].value;
       will_sell = this.refs[will_sell].value;
+      est_live = this.refs[est_live].value;
       let items = {
         address,
+        listing_url,
         listing_agt,
         est_price,
         est_sq_ft,
@@ -163,9 +163,6 @@ export default class Admin extends Component{
       ]);
     }
   }
-  updateAfterTourEvent(){
-
-  }
   changePassword(type){
     let password;
     switch(type){
@@ -198,8 +195,35 @@ export default class Admin extends Component{
     const data = { logo_url };
     axios.post(url +'/info/change_logo',data).then((response)=>{
       console.log('success: ',response);
-      if(response.data.message === 'success'){
+      if(response.data === 'success'){
         alert('your logo has been updated');
+      }
+    }).catch((err)=>{
+      console.log('err - ',err);
+    });
+  }
+  changeFooterLogo(){
+    const footer_logo_url = this.refs.footer_logo_url.value;
+    const data = { footer_logo_url };
+    axios.post(url +'/info/change_footer_logo',data).then((response)=>{
+      console.log('success: ',response);
+      if(response.data === 'success'){
+        alert('your footer logo has been updated');
+      }
+    }).catch((err)=>{
+      console.log('err - ',err);
+    });
+  }
+  submitNextTourDate(){
+    const next_tour= this.refs.next_tour.value;
+    console.log('value: ',next_tour)
+    const data = {
+      next_tour
+    }
+    axios.post(url +'/info/change_next_tour_date',data).then((response)=>{
+      console.log('success: ',response);
+      if(response.data === 'success'){
+        alert('next tour date has been updated');
       }
     }).catch((err)=>{
       console.log('err - ',err);
@@ -210,13 +234,15 @@ export default class Admin extends Component{
     console.log(agenda)
     agenda.push({
       address:"",
+      listing_url:"",
       arrival:"",
       departure:"",
       est_price:"",
       est_sq_ft:"",
       listing_agt:"",
       property_no:"",
-      will_sell:""
+      will_sell:"",
+      est_live:""
     });
     this.setState({
       agenda
@@ -227,23 +253,47 @@ export default class Admin extends Component{
     console.log(after_tour)
     after_tour.push({
       address:"",
+      listing_url:"",
       arrival:"",
       departure:"",
       est_price:"",
       est_sq_ft:"",
       listing_agt:"",
       property_no:"",
-      will_sell:""
+      will_sell:"",
+      est_live:""
     });
     this.setState({
       after_tour
     })
   }
+  footerLogoEdit(footer_logo_url){
+    return (
+      <div className='main_logo flex_col' >
+        <div>
+            <input className="input-logo" type="text" ref="footer_logo_url" defaultValue={footer_logo_url} /><span onClick={()=>this.changeFooterLogo()} className="btn btn-primary">Update</span>
+          </div>
+        <img className="img-responsive" src={footer_logo_url} alt="affiliate logo" />
+      </div>
+    );
+  }
   render(){
+    let { logo, footer_logo_url } = this.state;
+    console.log('footer logo: ',footer_logo_url);
+    // const footer_logo_url = (this.state.footer_logo_url !== '')
+    // const logo = (this.state.logo !=='') ? this.state.logo : '';
+    // const footer_logo_url = (this.state.footer_logo_url !== '') ? this.state.footer_logo_url : '';
     let event_num = 0;
     let at_event_num = 0;
     let ts_agenda = this.state.agenda;
     let ts_after_tour = this.state.after_tour;
+    let next_tour_date = (this.state.next_tour !=='') ? (
+      <section className = "admin_passwords">
+        <h3>Next Tour</h3>
+        <input type="text" ref="next_tour" defaultValue={this.state.next_tour} />
+        <span onClick={this.submitNextTourDate.bind(this)} className="btn btn-primary">UPDATE</span>
+      </section>
+    ): '';
     let passwords = (this.state.guest_password !=='') ? (
       <div>
         <div className="admin_passwords">Host password: <input ref="host_pass" type="text" defaultValue={this.state.host_password} /><span onClick={()=>this.changePassword('host_password')} className="btn btn-primary">Update</span></div>
@@ -261,17 +311,22 @@ export default class Admin extends Component{
       const est_price = 'est_price'+event_num;
       const est_sq_ft = 'est_sq_ft'+event_num;
       const will_sell = 'will_sell'+event_num;
+      const est_live = 'est_live'+event_num;
+      const url = 'url'+event_num;
+      const listing_url = (event.listing_url) ? event.listing_url : '';
       return(
         <tr className="admin_row">
           <button onClick={this.deleteEvent.bind(this)} id={event_num}>Delete</button>
           <td><textarea ref={property_no} className="table_input" type="text" defaultValue={event.property_no} /></td>
           <td><textarea ref={arrival} className="table_input" type="text" defaultValue={event.arrival}/></td>
           <td><textarea ref={departure} className="table_input" type="text" defaultValue={event.departure}/></td>
+          <td><textarea ref={url} className="table_input" type="text" defaultValue={listing_url}/></td>
           <td><textarea ref={address} className="table_input" type="text" defaultValue={event.address}/></td>
           <td><textarea ref={listing_agt} className="table_input" type="text" defaultValue={event.listing_agt}/></td>
           <td><textarea ref={est_price} className="table_input" type="text" defaultValue={event.est_price}/></td>
           <td><textarea ref={est_sq_ft} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
           <td><textarea ref={will_sell} className="table_input" type="text" defaultValue={event.will_sell}/></td>
+          <td><textarea ref={est_live} className="table_input" type="text" defaultValue={event.est_live}/></td>
         </tr>
       );
     }) : '';
@@ -282,14 +337,19 @@ export default class Admin extends Component{
       const est_price = 'at_est_price'+at_event_num;
       const est_sq_ft = 'at_est_sq_ft'+at_event_num;
       const will_sell = 'at_will_sell'+at_event_num;
+      const est_live = 'at_est_live'+at_event_num;
+      const url = 'at_url'+at_event_num;
+      const listing_url = (event.listing_url) ? event.listing_url : '';
       return(
         <tr>
           <button onClick={this.deleteAfterTourEvent.bind(this)} id={at_event_num}>Delete</button>
           <td id="aftertour_address"><textarea ref={address} className="table_input" type="text" defaultValue={event.address}/></td>
+          <td id="aftertour_url"><textarea ref={url} className="table_input" type="text" defaultValue={listing_url}/></td>
           <td><textarea ref={listing_agt} className="table_input" type="text" defaultValue={event.listing_agt}/></td>
           <td className="aftertour_price"><textarea ref={est_price} className="table_input" type="text" defaultValue={event.est_price}/></td>
           <td className="aftertour_sqft"><textarea ref={est_sq_ft} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
           <td className="aftertour_willsell"><textarea ref={will_sell} className="table_input" type="text" defaultValue={event.will_sell}/></td>
+          <td className="aftertour_willsell"><textarea ref={est_live} className="table_input" type="text" defaultValue={event.est_live}/></td>
         </tr>
       );
     }) : '';
@@ -307,12 +367,30 @@ export default class Admin extends Component{
       </div>
     ) : '';
 
-    let logo = this.state.logo;
+    logo = (logo) ? logo : '';
+    // let logo = (this.state.logo !=='') ? this.state.logo : '';
 
-    const logo_edit = (<div>
-        <input className="input-logo" type="text" ref="logo_url" defaultValue={logo} /><span onClick={()=>this.changeLogo()} className="btn btn-primary">Update</span>
+    let logo_edit = (
+
+      <div className='main_logo flex_col' >
+        <div>
+            <input className="input-logo" type="text" ref="logo_url" defaultValue={logo} /><span onClick={()=>this.changeLogo()} className="btn btn-primary">Update</span>
+          </div>
+        <img className="img-responsive" src={logo} alt="affiliate logo" />
       </div>
     );
+
+    footer_logo_url = (this.state.footer_logo_url) ? footer_logo_url : '';
+
+    let footer_logo_edit = (
+      <div className='main_logo flex_col' >
+        <div>
+            <input className="input-logo" type="text" ref="footer_logo_url" defaultValue={footer_logo_url} /><span onClick={()=>this.changeFooterLogo()} className="btn btn-primary">Update</span>
+          </div>
+        <img className="img-responsive" src={footer_logo_url} alt="affiliate logo" />
+      </div>
+    );
+    // let footer_logo_edit = this.state.footer_logo_edit;
     return(
       <div>
         <h1>Welcome to Admin Page!</h1>
@@ -324,7 +402,7 @@ export default class Admin extends Component{
           { agenda_date }
           { slots_avail }
           <section className="agenda_table_container">
-            <table className="agenda_table admin_agenda_table">
+            <table className="agenda_table admin_agenda_table admin_container">
               <tbody>
                 <tr>
                   <th></th>
@@ -332,10 +410,12 @@ export default class Admin extends Component{
                   <th>Arrival</th>
                   <th>Departure</th>
                   <th>Address</th>
+                  <th>Listing URL</th>
                   <th>Listing Agent</th>
                   <th>Est. Price</th>
-                  <th>Est. Sq. Ft</th>
+                  <th>Estimated Sq. Ft</th>
                   <th>Willing to sell off market?</th>
+                  <th>Est. Live Date</th>
                 </tr>
                 { agenda }
             </tbody>
@@ -346,26 +426,30 @@ export default class Admin extends Component{
             <span onClick={()=>window.print()} className="main_submit">PRINT</span>
           <h1>Passwords</h1>
             { passwords }
+            { next_tour_date }
           <section className="logo-area">
             <h2>Sponsored by</h2>
-            <div className='main_logo flex_col' >
-              {logo_edit}
-              <img className="img-responsive" src={logo} alt="affiliate logo" />
-            </div>
+            {logo_edit}
+          </section>
+          <section className="logo-area">
+            <h2>Footer Logos</h2>
+            {footer_logo_edit}
           </section>
           <div className="host_title">
             HOT LIST
           </div>
           <section className="agenda_table_container">
-            <table className="agenda_table admin_agenda_table">
+            <table className="agenda_table admin_agenda_table admin_container">
               <tbody>
                 <tr>
                   <th></th>
                   <th>Address</th>
+                  <th>URL</th>
                   <th>Listing Agent</th>
                   <th className="aftertour_price">Est. Price</th>
                   <th className="aftertour_sqft">Est. Sq. Ft</th>
                   <th className="aftertour_willsell">Willing to sell off market?</th>
+                  <th className="aftertour_est_live">Est. Live Date</th>
                 </tr>
                 { after_tour }
             </tbody>

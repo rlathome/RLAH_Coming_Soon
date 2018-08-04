@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import RadiusMap from './RadiusMap';
-import axios from 'axios';
 import Footer from './Footer';
+import axios from 'axios';
+import LogoArea from './LogoArea';
+import { url } from '../globalConf.js';
 const google = window.google;
-const url = 'http://www.comingsoontour.com';
 
 export default class HostRegistration extends Component{
   constructor(props){
@@ -20,7 +21,7 @@ export default class HostRegistration extends Component{
       const d = admin.data[0];
       const avail = parseInt(d.slots_available);
       const slots_full = (avail===0) ? true : false;
-      const date = d.event_date;
+      const date = d.next_tour;
       this.setState({
         slots_available:d.slots_available,
         slots_full,
@@ -114,6 +115,7 @@ export default class HostRegistration extends Component{
             <RadiusMap  {...map_props} />
           </div>
         </section>
+        <LogoArea />
         <Footer />
       </main>
     );

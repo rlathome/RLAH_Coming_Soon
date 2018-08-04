@@ -84,7 +84,8 @@ body{
 }
 .join_coming_soon{
   width:100%;
-  position: absolute;
+  // position: absolute;
+  margin-top:$section_padding*2;
   bottom:4vw;
   left:0vw;
   a{
@@ -104,7 +105,7 @@ body{
 .visitor_buttons{
   display: flex;
   justify-content: space-around;
-  margin-top:15vh;
+  margin-top:5vh;
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
@@ -113,6 +114,7 @@ body{
   div{
     &:hover{
       background-color: #000;
+      transition:background-color .45s ease-in-out;
     }
   }
   *{
@@ -135,7 +137,7 @@ body{
   }
 }
 .logo-area{
-  margin-top:15vh;
+  margin-top:$section_padding*1.5;
   h2{
     font-family: 'Open Sans',sans-serif;
     font-weight: lighter;
@@ -252,10 +254,14 @@ body{
     border:1px solid #000;
     height:35vw;
     width:40vw;
+    @media(max-width:965px){
+      height:50vw;
+      width:55vw;
+    }
     @media only screen
     and (min-width : 355px)
     and (max-width : 668px){
-      width:75vw;
+      width:85vw;
       height:110vw;
     }
   }
@@ -290,16 +296,38 @@ body{
           display:none;
         }
         float:right;
-        input,label{
+        input,label,textarea{
           margin-left:.75em;
         }
+
+        @media only screen
+        and (min-width : 355px)
+        and (max-width : 668px){
+          float:left;
+          // display:flex;
+        }
+      }
+      &__buffer{
+        padding-right:5px;
+      }
+      @media only screen
+      and (min-width : 355px)
+      and (max-width : 668px){
+        width:100%;
+        display:inline;
+        margin-bottom:$section_padding/2;
       }
     }
     .form_inputs{
       width:55%;
-      input{
+      input,textarea{
         width:100%;
         border:1px solid #000;
+      }
+      @media only screen
+      and (min-width : 355px)
+      and (max-width : 668px){
+        width:100%;
       }
     }
   }
@@ -342,6 +370,20 @@ body{
     text-align:left;
   }
   input,label{
+  }
+  .form_inputs{
+    width:55%;
+    float:right;
+    input,textarea{
+      width:100%;
+      border:1px solid #000;
+    }
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      display:block;
+      width:100%;
+    }
   }
 }
 .feedback_wanted{
@@ -434,13 +476,14 @@ table,th,td{
 }
 
 
-@mixin table_width($row,$val,$val2){
+@mixin table_width($row,$val,$val2,$val3){
   &:nth-child(#{$row}){
-    width:$val;
+    width:$val !important;
     @media only screen
     and (min-width : 355px)
     and (max-width : 668px){
-      width:$val2;
+      max-width:$val2 !important;
+      min-width:$val3 !important;
       font-size: .75em;
     }
     textarea{
@@ -455,25 +498,58 @@ table,th,td{
   }
 }
 @mixin table_width_collection{
-  @include table_width(1,8vw,2vw);
-  @include table_width(2,10vw,10vw);
-  @include table_width(3,12vw,10vw);
-  @include table_width(4,20vw,17vw);
-  @include table_width(5,15vw,17vw);
-  @include table_width(6,10vw,15vw);
-  @include table_width(7,6vw,10vw);
-  @include table_width(8,12vw,6vw);
+  @include table_width(1,8vw,2vw,2vw);
+  @include table_width(2,10vw,10vw,2vw);
+  @include table_width(3,12vw,16vw,2vw);
+  @include table_width(4,20vw,17vw,2vw);
+  @include table_width(5,13vw,17vw,2vw);
+  @include table_width(6,8vw,20vw,11vw);
+  @include table_width(7,6vw,10vw,10vw);
+  @include table_width(8,10vw,5vw,5vw);
+  @include table_width(9,6vw,10vw,12vw);
 }
 td{
   @include table_style(1,font-size,1.75em);
   @include table_style(1,padding,.25em 0em);
-  @include table_width_collection;
 }
 .after_tour_table td{
   @include table_style(1,font-size,1em);
 }
-th{
-  @include table_width_collection;
+.main_agenda_table{
+  th{
+    @include table_width_collection;
+  }
+  tr{
+    @include table_width_collection;
+  }
+}
+@mixin afterTour_width_collection{
+  // @include table_width(1,12vw,15vw,25vw);
+  // @include table_width(2,6vw,6vw,2vw);
+  // @include table_width(3,6vw,6vw,2vw);
+  // @include table_width(4,6vw,6vw,2vw);
+  // @include table_width(5,6vw,3vw,3vw);
+  // @include table_width(6,6vw,6vw,6vw);
+}
+.second_table td{
+  @include afterTour_width_collection;
+}
+.second_table{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    tr{
+      width:90vw;
+      th:nth-child(1){
+        width:10vw;
+      }
+    }
+  }
+  // @include afterTour_width_collection;
+}
+
+.admin_agenda_table.admin_container{
+
 }
 th,td{
   @media only screen
@@ -490,7 +566,7 @@ and (max-width : 668px){
     font-size:.55em !important;
   }
   // make first column of after tour table the same font as others (i.e., undo default property no styling)
-  .after_tour_table tr>th:nth-child(1), .after_tour_table tr>td:nth-child(1){
+  .second_table tr>th:nth-child(1), .second_table tr>td:nth-child(1){
     font-size:.75em !important;
   }
   // make after tour address and listing agent cells wider
@@ -500,6 +576,9 @@ and (max-width : 668px){
   .after_tour_table tr>th:nth-child(4),{
     width:40px;
   }
+  // .second_table tr:nth-child(5){
+  //   width:20px !important;
+  // }
   // make table header rows shorter than table cells
   tbody>tr:nth-child(1){
     th{
@@ -687,7 +766,7 @@ and (max-width : 668px){
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
-    width:20vw !important;
+    width:15vw !important;
   }
 }
 .aftertour_sqft{
@@ -703,7 +782,25 @@ and (max-width : 668px){
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
-    width:2.5vw !important;
+    max-width:2vw !important;
   }
 }
-td { white-space:pre }
+.aftertour_est_live{
+  width:10vw !important;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    min-width:15vw !important;
+  }
+}
+// td { white-space:pre }
+
+.next_tour_date{
+  font-size:2.5em;
+  margin-top:$section_padding;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:1.5em;
+  }
+}

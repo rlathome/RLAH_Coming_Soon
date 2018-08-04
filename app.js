@@ -17,9 +17,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 console.log('port: ',process.env.PORT);
 
+// mongoose.connect(
+//   process.env.DB_CONN_URL,{
+//
+// });
+console.warn('DB_CONN_URL_TEST: ',process.env.DB_CONN_URL)
 mongoose.connect(
   process.env.DB_CONN_URL,{
-
 });
 app.use(cors());
 

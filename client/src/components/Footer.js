@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { url } from '../configURL.js';
+import { url } from '../globalConf.js';
 // const url = 'http://www.comingsoontour.com';
 export default class Footer extends Component{
   constructor(props){

@@ -50,6 +50,7 @@ export default class Admin extends Component{
       est_price = this.refs[est_price].value;
       est_sq_ft = this.refs[est_sq_ft].value;
       will_sell = this.refs[will_sell].value;
+      listing_url = this.refs[listing_url].value;
       est_live = this.refs[est_live].value;
       let items = {
         property_no,
@@ -57,6 +58,7 @@ export default class Admin extends Component{
         arrival,
         departure,
         address,
+        listing_url,
         listing_agt,
         est_price,
         est_sq_ft,
@@ -79,7 +81,7 @@ export default class Admin extends Component{
     let amount = this.state.after_tour.length;
     for(let i=1; i<=amount; i++){
       let address = 'at_address'+i;
-      let listing_url = 'at_url'
+      let listing_url = 'at_url'+i
       let listing_agt = 'at_listing_agt'+i;
       let est_price = 'at_est_price'+i;
       let est_sq_ft = 'at_est_sq_ft'+i;

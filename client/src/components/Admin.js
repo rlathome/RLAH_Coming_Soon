@@ -100,7 +100,8 @@ export default class Admin extends Component{
         listing_agt,
         est_price,
         est_sq_ft,
-        will_sell
+        will_sell,
+        est_live
       }
       agenda.push(items);
     }
@@ -411,8 +412,8 @@ export default class Admin extends Component{
                   <th>Property No.</th>
                   <th>Arrival</th>
                   <th>Departure</th>
-                  <th>Address</th>
                   <th>Listing URL</th>
+                  <th>Address</th>
                   <th>Listing Agent</th>
                   <th>Est. Price</th>
                   <th>Estimated Sq. Ft</th>

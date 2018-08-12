@@ -187,6 +187,10 @@ router.post('/submithostform',function(req,res,next){
     +'Will show before listing: '+form_data.will_show_before_listing+'<br/>'
     +'Feedback wanted: '+form_data.feedback_wanted.join(', ')
     +'</div>'
+    + other_text+'<br/>'
+    +'Extra media provided: '+extra_media+'<br/>'
+    +'Estimated date property will be active: '+est_live+'<br/>'
+    +'</div>'
   });
 
   mail.build(function(mailBuildError, message){
@@ -227,7 +231,7 @@ router.post('/submitguestform',function(req,res,next){
     subject:guest_subject,
     to:email,
     from:'<'+to+'>',
-    html:'<div>Thank you for signing up to be a guest on our next Coming Soon Tour. We will review your submission and get back to you shortly!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email
+    html:'<div>Thank you for your submission! We’ll have a seat for you on the tour!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email
   });
 
   guest_mail.build(function(mailBuildError, message){

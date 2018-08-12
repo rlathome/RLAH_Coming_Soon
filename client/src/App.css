@@ -156,6 +156,8 @@ body {
 
 .logo-area {
   margin-top: 3.75vh;
+  margin-left: 15vw;
+  margin-right: 15vw;
 }
 
 .logo-area h2 {
@@ -167,6 +169,8 @@ body {
 @media only screen and (min-width: 355px) and (max-width: 668px) {
   .logo-area {
     margin-top: 5vh;
+    margin-left: 0vw;
+    margin-right: 0vw;
   }
 }
 

@@ -138,6 +138,8 @@ body{
 }
 .logo-area{
   margin-top:$section_padding*1.5;
+  margin-left:15vw;
+  margin-right:15vw;
   h2{
     font-family: 'Open Sans',sans-serif;
     font-weight: lighter;
@@ -147,6 +149,8 @@ body{
   and (min-width : 355px)
   and (max-width : 668px){
     margin-top:5vh;
+    margin-left:0vw;
+    margin-right:0vw;
   }
 }
 .host_title{

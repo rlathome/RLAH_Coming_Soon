@@ -86,7 +86,7 @@ export default class Agenda extends Component{
                 <th className="aftertour_agent">Listing Agent</th>
                 <th className="aftertour_price">Est. Price</th>
                 <th className="aftertour_sqft">Est. Sq. Ft</th>
-                <th className="aftertour_willsell">Sell off mkt?</th>
+                <th className="aftertour_willsell">Sell Off Mkt?</th>
                 <th className="aftertour_est_live">Est. Live Date</th>
               </tr>
               { after_tour }
@@ -111,14 +111,14 @@ export default class Agenda extends Component{
           <table className="agenda_table">
             <tbody>
               <tr>
-                <th>Prop no.</th>
+                <th>Prop No.</th>
                 <th>Arrival</th>
                 <th>Departure</th>
                 <th>Address</th>
                 <th>Listing Agent</th>
                 <th>Est. Price</th>
                 <th>Est. Sq. Ft</th>
-                <th>Sell off mkt?</th>
+                <th>Sell Off Mkt?</th>
                 <th>Est. Live Date</th>
               </tr>
               { agenda }

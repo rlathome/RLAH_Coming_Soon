@@ -11,7 +11,7 @@ export default class Admin extends Component{
       host_password:'',
       guest_password:'',
       agenda:'',
-      after_tour:'',
+      after_tour:[],
       event_date:'',
       slots_avail:'',
       logo:'',
@@ -21,8 +21,8 @@ export default class Admin extends Component{
     }
     this.dataService = new DataService();
   }
-  componentWillMount(){
-      this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
+  componentDidMount(){
+    this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
   }
   submitEvent(){
     let event_num = 0;
@@ -117,6 +117,7 @@ export default class Admin extends Component{
   deleteEvent(e){
     let event = (e.target.id !=='0') ? parseInt(e.target.id)-1 : 0;
     let agenda = this.state.agenda.slice();
+    console.log('deleting -',e.target.id)
     if(agenda.length===1){
       agenda=[];
     }else{
@@ -140,10 +141,11 @@ export default class Admin extends Component{
     }
   }
   deleteAfterTourEvent(e){
-    console.log(e.target.id)
     let event = (e.target.id !=='0') ? parseInt(e.target.id)-1 : 0;
+
+    console.log('deleting - ',event)
     let after_tour = this.state.after_tour.slice();
-    console.log('after_tour - ',after_tour);
+    // console.log('after_tour - ',after_tour);
     if(after_tour.length===1){
       after_tour=[];
     }else{
@@ -153,14 +155,15 @@ export default class Admin extends Component{
     const data = {
       after_tour
     }
+    console.log('saving - ',data)
     if(window.confirm('Are you sure?')){
         axios.post(url+'/info/update_after_tour_event',data).then((response)=>{
         console.log('success -',response)
-        if(response.data ==='success'){
-          this.setState({
-            after_tour
-          });
-        }
+        window.alert('Your row has been deleted')
+        this.setState({
+          after_tour:[]
+        });
+        this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
       }).catch((err)=>[
         console.log('err - ',err)
       ]);
@@ -281,7 +284,7 @@ export default class Admin extends Component{
     );
   }
   render(){
-    let { logo, footer_logo_url } = this.state;
+    let { logo, footer_logo_url, after_tour } = this.state;
     console.log('footer logo: ',footer_logo_url);
     // const footer_logo_url = (this.state.footer_logo_url !== '')
     // const logo = (this.state.logo !=='') ? this.state.logo : '';
@@ -289,7 +292,6 @@ export default class Admin extends Component{
     let event_num = 0;
     let at_event_num = 0;
     let ts_agenda = this.state.agenda;
-    let ts_after_tour = this.state.after_tour;
     let next_tour_date = (this.state.next_tour !=='') ? (
       <section className = "admin_passwords">
         <h3>Next Tour</h3>
@@ -333,7 +335,7 @@ export default class Admin extends Component{
         </tr>
       );
     }) : '';
-    let after_tour = (ts_after_tour !=='' && ts_after_tour !== undefined) ? ts_after_tour.map((event)=>{
+    const after_tour_data = after_tour.map((event)=>{
       at_event_num++;
       const address = 'at_address'+at_event_num;
       const listing_agt = 'at_listing_agt'+at_event_num;
@@ -355,7 +357,7 @@ export default class Admin extends Component{
           <td className="aftertour_willsell"><textarea ref={est_live} className="table_input" type="text" defaultValue={event.est_live}/></td>
         </tr>
       );
-    }) : '';
+    });
 
     let agenda_date = (this.state.event_date !=='') ? (
       <div className="agenda_date">
@@ -454,7 +456,7 @@ export default class Admin extends Component{
                   <th className="aftertour_willsell">Willing to sell off market?</th>
                   <th className="aftertour_est_live">Est. Live Date</th>
                 </tr>
-                { after_tour }
+                { after_tour_data }
             </tbody>
             <button className="add_event" onClick={this.addAfterTourEvent.bind(this)}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
           </table><br/>

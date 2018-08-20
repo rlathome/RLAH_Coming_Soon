@@ -47,7 +47,7 @@ router.post('/update_after_tour_event',function(req,res,next){
       'after_tour':after_tour
     },function(err){
     if(err) ()=>console.log('error: ',err);
-    res.send('success');
+    res.send(after_tour);
   });
 });
 router.post('/change_password',function(req,res,next){

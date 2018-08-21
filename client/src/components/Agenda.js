@@ -46,7 +46,7 @@ export default class Agenda extends Component{
           <td>{event.property_no}</td>
           <td>{event.arrival}</td>
           <td>{event.departure}</td>
-          <td>{address}</td>
+          <td><span className="cs_address">{address}</span></td>
           <td>{event.listing_agt}</td>
           <td>{event.est_price}</td>
           <td>{event.est_sq_ft}</td>
@@ -63,7 +63,7 @@ export default class Agenda extends Component{
       ) : event.address;
       return(
         <tr>
-          <td id="aftertour_address">{address}</td>
+          <td id="aftertour_address"><span className="cs_address">{address}</span></td>
           <td className="aftertour_agent">{event.listing_agt}</td>
           <td className="aftertour_price">{event.est_price}</td>
           <td className="aftertour_sqft">{event.est_sq_ft}</td>

@@ -1130,10 +1130,6 @@ tbody > tr:nth-child(1) {
   }
 }
 
-td {
-  white-space: pre;
-}
-
 .next_tour_date {
   font-size: 2.5em;
   margin-top: 2.5vh;

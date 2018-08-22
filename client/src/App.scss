@@ -474,126 +474,6 @@ table{
   display:inline-block;
   margin-bottom:$section_padding;
 }
-table,th,td{
-  border:1px solid #000;
-  text-align: center !important;
-}
-
-
-@mixin table_width($row,$val,$val2,$val3){
-  &:nth-child(#{$row}){
-    width:$val !important;
-    @media only screen
-    and (min-width : 355px)
-    and (max-width : 668px){
-      max-width:$val2 !important;
-      min-width:$val3 !important;
-      font-size: .75em;
-    }
-    textarea{
-      width:100%;
-      height:100%;
-    }
-  }
-}
-@mixin table_style($row,$attr,$val){
-  &:nth-child(#{$row}){
-    #{$attr}:#{$val};
-  }
-}
-@mixin table_width_collection{
-  @include table_width(1,8vw,2vw,2vw);
-  @include table_width(2,10vw,10vw,2vw);
-  @include table_width(3,12vw,16vw,2vw);
-  @include table_width(4,20vw,17vw,2vw);
-  @include table_width(5,13vw,17vw,2vw);
-  @include table_width(6,8vw,20vw,11vw);
-  @include table_width(7,6vw,10vw,10vw);
-  @include table_width(8,10vw,5vw,5vw);
-  @include table_width(9,6vw,10vw,12vw);
-}
-td{
-  @include table_style(1,font-size,1.75em);
-  @include table_style(1,padding,.25em 0em);
-}
-.after_tour_table td{
-  @include table_style(1,font-size,1em);
-}
-.main_agenda_table{
-  th{
-    @include table_width_collection;
-  }
-  tr{
-    @include table_width_collection;
-  }
-}
-@mixin afterTour_width_collection{
-  // @include table_width(1,12vw,15vw,25vw);
-  // @include table_width(2,6vw,6vw,2vw);
-  // @include table_width(3,6vw,6vw,2vw);
-  // @include table_width(4,6vw,6vw,2vw);
-  // @include table_width(5,6vw,3vw,3vw);
-  // @include table_width(6,6vw,6vw,6vw);
-}
-.second_table td{
-  @include afterTour_width_collection;
-}
-.second_table{
-  @media only screen
-  and (min-width : 355px)
-  and (max-width : 668px){
-    tr{
-      width:90vw;
-      th:nth-child(1){
-        width:10vw;
-      }
-    }
-  }
-  // @include afterTour_width_collection;
-}
-
-.admin_agenda_table.admin_container{
-
-}
-th,td{
-  @media only screen
-  and (min-width : 355px)
-  and (max-width : 668px){
-    height:15vw;
-  }
-}
-@media only screen
-and (min-width : 355px)
-and (max-width : 668px){
-  // make property no header text much smaller
-  tr>th:nth-child(1){
-    font-size:.55em !important;
-  }
-  // make first column of after tour table the same font as others (i.e., undo default property no styling)
-  .second_table tr>th:nth-child(1), .second_table tr>td:nth-child(1){
-    font-size:.75em !important;
-  }
-  // make after tour address and listing agent cells wider
-  .after_tour_table tr>th:nth-child(1),.after_tour_table tr>th:nth-child(2){
-    width:70px;
-  }
-  .after_tour_table tr>th:nth-child(4),{
-    width:40px;
-  }
-  // .second_table tr:nth-child(5){
-  //   width:20px !important;
-  // }
-  // make table header rows shorter than table cells
-  tbody>tr:nth-child(1){
-    th{
-      height:1.5vh !important;
-    }
-  }
-}
-tbody>tr:nth-child(1){
-  font-size:1em !important;
-  font-weight: bold;
-}
 
 .login_window_container{
   margin-top:25vh;
@@ -794,7 +674,7 @@ and (max-width : 668px){
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
-    min-width:15vw !important;
+    min-width:13vw !important;
   }
 }
 .cs_address{
@@ -809,4 +689,136 @@ and (max-width : 668px){
   and (max-width : 668px){
     font-size:1.5em;
   }
+}
+
+//table styles
+
+table,th,td{
+  border:1px solid #000;
+  text-align: center !important;
+}
+
+
+@mixin table_width($row,$val,$val2,$val3){
+  &:nth-child(#{$row}){
+    width:$val !important;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      max-width:$val2 !important;
+      min-width:$val3 !important;
+      font-size: .75em;
+    }
+    textarea{
+      width:100%;
+      height:100%;
+    }
+  }
+}
+@mixin table_style($row,$attr,$val){
+  &:nth-child(#{$row}){
+    #{$attr}:#{$val};
+  }
+}
+@mixin table_width_collection{
+  @include table_width(1,8vw,5vw,6vw);
+  @include table_width(2,10vw,10vw,2vw);
+  @include table_width(3,12vw,16vw,2vw);
+  @include table_width(4,20vw,17vw,2vw);
+  @include table_width(5,13vw,17vw,2vw);
+  @include table_width(6,8vw,20vw,11vw);
+  @include table_width(7,6vw,10vw,10vw);
+  @include table_width(8,10vw,5vw,5vw);
+  @include table_width(9,6vw,10vw,8vw);
+}
+td{
+  @include table_style(1,font-size,1.75em);
+  @include table_style(1,padding,.25em 0em);
+}
+.after_tour_table td{
+  @include table_style(1,font-size,1em);
+}
+.main_agenda_table{
+  th{
+    @include table_width_collection;
+  }
+  tr{
+    @include table_width_collection;
+  }
+}
+@mixin afterTour_width_collection{
+  // @include table_width(1,12vw,15vw,25vw);
+  // @include table_width(2,6vw,6vw,2vw);
+  // @include table_width(3,6vw,6vw,2vw);
+  // @include table_width(4,6vw,6vw,2vw);
+  // @include table_width(5,6vw,3vw,3vw);
+  // @include table_width(6,6vw,6vw,6vw);
+}
+.second_table td{
+  @include afterTour_width_collection;
+}
+.second_table{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    tr{
+      width:90vw;
+      th:nth-child(1){
+        width:10vw;
+      }
+    }
+  }
+  // @include afterTour_width_collection;
+}
+
+.admin_agenda_table.admin_container{
+
+}
+th,td{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    height:15vw;
+  }
+}
+@media only screen
+and (min-width : 355px)
+and (max-width : 668px){
+  // make property no header text much smaller
+  tr>th:nth-child(1){
+    font-size:.55em !important;
+  }
+  // make first column of after tour table the same font as others (i.e., undo default property no styling)
+  .second_table tr>th:nth-child(1), .second_table tr>td:nth-child(1){
+    font-size:.75em !important;
+  }
+  // make after tour address and listing agent cells wider
+  .after_tour_table tr>th:nth-child(1),.after_tour_table tr>th:nth-child(2){
+    width:70px;
+  }
+  .after_tour_table{
+    font-size: 2.5vw;
+  }
+  .after_tour_table tr>th:nth-child(4),{
+    width:40px;
+  }
+  tr>th:nth-child(5){
+    min-width:8vw;
+  }
+  tr>th:nth-child(6){
+    width:8vw;
+  }
+  // .second_table tr:nth-child(5){
+  //   width:20px !important;
+  // }
+  // make table header rows shorter than table cells
+  tbody>tr:nth-child(1){
+    th{
+      height:1.5vh !important;
+    }
+  }
+}
+tbody>tr:nth-child(1){
+  font-size:1em !important;
+  font-weight: bold;
 }

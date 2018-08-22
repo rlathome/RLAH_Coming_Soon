@@ -131,7 +131,7 @@ export default class HostRegistration extends Component{
       will_show_before_listing,
       feedback_wanted,
       extra_media,
-      est_active,
+      est_live:est_active,
       other_text
     }
     console.log('you submitted: ',data);

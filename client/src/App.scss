@@ -785,6 +785,9 @@ th,td{
 and (min-width : 355px)
 and (max-width : 668px){
   // make property no header text much smaller
+  tr>th{
+    @include table_style(8,font-size,.55em !important);
+  }
   tr>th:nth-child(1){
     font-size:.55em !important;
   }

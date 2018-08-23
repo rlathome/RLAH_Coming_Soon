@@ -1123,6 +1123,9 @@ td:nth-child(1) {
 }
 
 @media only screen and (min-width: 355px) and (max-width: 668px) {
+  tr > th:nth-child(8) {
+    font-size: 0.55em !important;
+  }
   tr > th:nth-child(1) {
     font-size: .55em !important;
   }

@@ -127,7 +127,7 @@ export default class GuestRegistration extends Component{
         </section>
 
         <section className="reminder">
-          REMINDER: Finalized tour logisitics will be determined and distributed after final property
+          REMINDER: Finalized tour logistics will be determined and distributed after final property
           is submitted, but no later than 6pm on the previous Monday. Tour details will be posted at&nbsp;
           <Link to="/agenda">comingsoontour.com/agenda</Link> AND sent to all members via email in participating brokerage(s).
         </section>

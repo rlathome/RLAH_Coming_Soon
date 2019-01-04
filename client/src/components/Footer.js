@@ -11,10 +11,12 @@ export default class Footer extends Component{
   }
   componentDidMount(){
     axios.get(url+'/info/admin_info').then((admin)=>{
-      console.log('logo_area admin:',admin.data[0].logo_url)
-      this.setState({
-        footer_logo_url:admin.data[0].footer_logo_url
-      });
+      if(admin.data.length){
+        console.log('logo_area admin:',admin.data[0].logo_url)
+        this.setState({
+          footer_logo_url:admin.data[0].footer_logo_url
+        });
+      }
     })
   }
   render(){

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
 import Home from './components/Home';
-import HostMap from './components/HostMap'
+import HostMap from './components/HostMap';
+import Hotlist from './components/Hotlist';
 import GuestLoginReact from './components/GuestLoginReact';
 import Login from './components/Login';
 import GuestRegistration from './components/GuestRegistration';
@@ -200,6 +201,9 @@ class App extends Component {
 
             <Route exact path='/agenda' component = { Header } />
             <Route path='/agenda' component = { Agenda }/>
+
+            <Route exact path='/hotlist' component = { Header } />
+            <Route path='/hotlist' component = { Hotlist }/>
             {/* <Route path='/' component = { Footer } /> */}
           </div>
         </Router>

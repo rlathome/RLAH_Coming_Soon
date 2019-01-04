@@ -179,7 +179,14 @@ export default class HostRegistration extends Component{
       <main>
         { submit_modal }
         { terms_conditions }
-        <h1 className="coming_soon_title">Coming Soon Tour</h1>
+
+
+        <div className="cst_header_background">
+          <div className="cst_header_text">
+            <h1>Coming Soon Tour</h1>
+          </div>
+        </div>
+
         <div className="host_title">
           HOST
         </div>

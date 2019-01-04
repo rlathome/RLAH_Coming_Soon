@@ -1,3 +1,36 @@
-.bluegreen_bkgd{
-  background-color:linear-gradient(45deg,rgba(2,255,134,.8),rgba(32,168,255,.8))
+@mixin bluegreen_bkgd{
+  background:linear-gradient(45deg, rgb(2,255,134) 0%,rgb(32,168,255) 100%);
+  color:#fff;
+}
+@mixin header_bkgd{
+  background-color:#4c4b4b;
+  color:white;
+}
+
+@mixin text_clip{
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-text-fill-color: transparent;
+  -moz-background-clip: text;
+}
+
+.cst_header_background{
+  @include bluegreen_bkgd;
+  display:inline-block;
+}
+input, textarea{
+  padding:2px 5px;
+}
+
+$button_color:#4c4b4b;
+$section_padding:2.5vh;
+
+
+.cst_header_text{
+  background-color:#fff;
+  height:100%;
+  display:inherit;
+  h1{
+    @include text_clip
+  }
 }

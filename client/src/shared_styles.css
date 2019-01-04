@@ -1,3 +1,22 @@
-.bluegreen_bkgd {
-  background-color: linear-gradient(45deg, rgba(2, 255, 134, 0.8), rgba(32, 168, 255, 0.8));
+.cst_header_background {
+  background: linear-gradient(45deg, #02ff86 0%, #20a8ff 100%);
+  color: #fff;
+  display: inline-block;
+}
+
+input, textarea {
+  padding: 2px 5px;
+}
+
+.cst_header_text {
+  background-color: #fff;
+  height: 100%;
+  display: inherit;
+}
+
+.cst_header_text h1 {
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-text-fill-color: transparent;
+  -moz-background-clip: text;
 }

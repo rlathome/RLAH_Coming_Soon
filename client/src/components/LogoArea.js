@@ -13,10 +13,14 @@ export default class LogoArea extends Component{
   }
   componentDidMount(){
     axios.get(url+'/info/admin_info').then((admin)=>{
-      console.log('logo_area admin:',admin.data[0].logo_url)
-      this.setState({
-        logo:admin.data[0].logo_url
-      });
+      if(admin.data[0]){
+        console.log('logo_area admin:',admin.data[0].logo_url)
+        this.setState({
+          logo:admin.data[0].logo_url
+        });
+      }
+    }).catch((err)=>{
+      console.log('err - ',err);
     })
   }
   render(){

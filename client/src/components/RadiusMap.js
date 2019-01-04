@@ -2,7 +2,9 @@ import React, {Component} from "react"
 
 import GoogleMap from "react-google-map";
 import GoogleMapLoader from "react-google-maps-loader";
+import newDc from './DC';
 // let markers = this.props.markers;
+let DC = new newDc;
 const google = window.google;
 
 const MY_API_KEY = "AIzaSyDG_S6mYfRJsrvTX_aRuz3pwiLMouOny6g" // fake
@@ -12,7 +14,8 @@ class RadiusMap extends Component{
     super(props)
   }
   render(){
-    let pt_center = {lat:38.924295,lng:-77.033381};
+    let pt_center = {lat:38.893534,lng:-77.0215994};
+    console.log('newDc: ',DC.coordinates);
     // console.log('the markerz: ',pt_center,pt_center.lat>0,pt_center.lat==0);
     const listing_marker = {title:"DuPont Circle",position:{lat:38.910136,lng: -77.042510}};
     let out_of_bounds = this.props.out_of_bounds;
@@ -45,7 +48,7 @@ class RadiusMap extends Component{
             }
           ]}
           center={pt_center}
-          zoom={12}
+          zoom={11}
           onLoaded={(googleMaps, map) => {
 
             var goo = google.maps,
@@ -55,36 +58,48 @@ class RadiusMap extends Component{
 
             // Create two circles and test if marker is within them:
 
-            var duPont = new goo.Circle({
-              center:{lat:38.9101361,lng:-77.04250990000003},
-              radius:3218.69,
-              strokeColor:'rgba(100,100,100,1)',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: 'rgb(53,202,252)',
-              fillOpacity: 0.2
+            var dcPolygon = new google.maps.Polygon({
+                paths: DC.coordinates,
+                strokeColor: 'rgba(100,100,100,1)',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: 'rgb(53,202,252)',
+                fillOpacity: 0.2
             });
-            duPont.setMap(map);
-            var rhodeIsland = new goo.Circle({
-              center:{lat:38.9089377,lng:-77.03237089999999},
-              radius:3218.69,
-              strokeColor:'rgba(100,100,100,1)',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: 'rgb(53,202,252)',
-              fillOpacity: 0.1
-            });
-            rhodeIsland.setMap(map);
-            var smallBrokerage = new goo.Circle({
-              center:{lat:38.939687,lng:-77.024657},
-              radius:3218.69,
-              strokeColor:'rgba(100,100,100,1)',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: 'rgb(53,202,252)',
-              fillOpacity: 0.1
-            });
-            smallBrokerage.setMap(map);
+            console.log('dc polygon: ',dcPolygon);
+
+            dcPolygon.setMap(map);
+            //
+            // var duPont = new goo.Circle({
+            //   center:{lat:38.9101361,lng:-77.04250990000003},
+            //   radius:3218.69,
+            //   strokeColor:'rgba(100,100,100,1)',
+            //   strokeOpacity: 0.8,
+            //   strokeWeight: 2,
+            //   fillColor: 'rgb(53,202,252)',
+            //   fillOpacity: 0.2
+            // });
+            // // duPont.setMap(map);
+            // var rhodeIsland = new goo.Circle({
+            //   center:{lat:38.9089377,lng:-77.03237089999999},
+            //   radius:3218.69,
+            //   strokeColor:'rgba(100,100,100,1)',
+            //   strokeOpacity: 0.8,
+            //   strokeWeight: 2,
+            //   fillColor: 'rgb(53,202,252)',
+            //   fillOpacity: 0.1
+            // });
+            // // rhodeIsland.setMap(map);
+            // var smallBrokerage = new goo.Circle({
+            //   center:{lat:38.939687,lng:-77.024657},
+            //   radius:3218.69,
+            //   strokeColor:'rgba(100,100,100,1)',
+            //   strokeOpacity: 0.8,
+            //   strokeWeight: 2,
+            //   fillColor: 'rgb(53,202,252)',
+            //   fillOpacity: 0.1
+            // });
+            // smallBrokerage.setMap(map);
             // // Bias the SearchBox results towards current map's viewport.
 
 
@@ -156,7 +171,9 @@ class RadiusMap extends Component{
                 }
                 const lat = place.geometry.location.lat();
                 const lng = place.geometry.location.lng();
-                if(duPont.getBounds().contains({lat,lng}) || rhodeIsland.getBounds().contains({lat,lng}) || smallBrokerage.getBounds().contains({lat,lng})){
+                // if(duPont.getBounds().contains({lat,lng}) || rhodeIsland.getBounds().contains({lat,lng}) || smallBrokerage.getBounds().contains({lat,lng})){
+                let position = new google.maps.LatLng(lat,lng);
+                if(google.maps.geometry.poly.containsLocation(position,dcPolygon)){
                   console.log('this marker is in!!')
                   not_out_of_bounds();
                   // Create a marker for each place.

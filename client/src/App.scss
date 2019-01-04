@@ -7,8 +7,6 @@
 html *{
   font-family:'Open Sans', sans-serif;
 }
-$button_color:#4c4b4b;
-$section_padding:2.5vh;
 header{
   text-align: center;
   border-bottom:1px solid grey;
@@ -27,12 +25,19 @@ header{
   }
 }
 main{
-  @media only screen
-  and (min-width : 355px)
-  and (max-width : 668px){
-    width:95vw;
-    margin: auto;
-  }
+  // margin:0vw 5vw;
+  // @media only screen
+  // and (min-width : 355px)
+  // and (max-width : 668px){
+  //   width:100vw;
+  //   margin: auto;
+  // }
+  // @media(min-width:1450px){
+  //   margin:0vw 15vw;
+  // }
+  // @media(max-width: 865px){
+  //   margin:0vw;
+  // }
 }
 .top_padding{
   margin-top:$section_padding;
@@ -47,7 +52,7 @@ body{
 }
 .coming_soon_title{
   font-size: 3.5em;
-  margin-bottom:0px;
+  margin-bottom:15px;
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
@@ -156,7 +161,14 @@ body{
   }
 }
 .host_title{
+  @include bluegreen_bkgd;
   font-size:4.5em;
+  font-weight:bold;
+  padding:1.8vw 0vw;
+  display:flex;
+  flex-direction:column;
+  justify-content: space-around;
+  margin-bottom:$section_padding;
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
@@ -177,6 +189,17 @@ body{
   and (max-width : 668px){
     font-size:.75em;
     width: 90vw;
+  }
+}
+.hotlist_title_list{
+  text-align:left;
+  width:45vw;
+  display:inline-block;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:.75em;
+    width: 60vw;
   }
 }
 .slots_avail{
@@ -695,11 +718,19 @@ and (max-width : 668px){
 
 //table styles
 
-table,th,td{
+th,td{
   border:1px solid #000;
   text-align: center !important;
 }
 
+.row_header{
+  padding:.5vw;
+  font-size: 2vw;
+  font-weight: bold;
+  width:inherit;
+  margin:inherit;
+  @include bluegreen_bkgd;
+}
 
 @mixin table_width($row,$val,$val2,$val3){
   &:nth-child(#{$row}){
@@ -743,6 +774,8 @@ td{
 .main_agenda_table{
   th{
     @include table_width_collection;
+    @include header_bkgd;
+    padding:.25vw;
   }
   tr{
     @include table_width_collection;
@@ -760,6 +793,10 @@ td{
   @include afterTour_width_collection;
 }
 .second_table{
+  th{
+    @include header_bkgd;
+    padding:1vw
+  }
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){

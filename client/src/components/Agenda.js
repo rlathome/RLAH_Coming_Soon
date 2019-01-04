@@ -152,7 +152,6 @@ export default class Agenda extends Component{
           </table>
         </section>
         <div className="bottom_buffer"></div> */}
-        { after_tour_contents }
       <Footer/>
       </main>
     );

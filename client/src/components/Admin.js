@@ -317,7 +317,7 @@ export default class Admin extends Component{
       const est_sq_ft = 'est_sq_ft'+event_num;
       const will_sell = 'will_sell'+event_num;
       const est_live = 'est_live'+event_num;
-      const url = 'url'+event_num;
+      const url = 'url'+event_num; 
       const listing_url = (event.listing_url) ? event.listing_url : '';
       return(
         <tr className="admin_row">

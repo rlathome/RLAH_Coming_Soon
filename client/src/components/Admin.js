@@ -11,6 +11,9 @@ export default class Admin extends Component{
       host_password:'',
       guest_password:'',
       agenda:'',
+      after_tour_dc:[],
+      after_tour_md:[],
+      after_tour_va:[],
       after_tour:[],
       event_date:'',
       slots_avail:'',
@@ -75,10 +78,10 @@ export default class Admin extends Component{
       console.log('err - ',err);
     });
   }
-  submitAfterTourEvent(){
+  submitAfterTourEvent(tour){
     let event_num = 0;
     let agenda = [];
-    let amount = this.state.after_tour.length;
+    let amount = this.state[tour].length;
     for(let i=1; i<=amount; i++){
       let address = 'at_address'+i;
       let listing_url = 'at_url'+i
@@ -106,10 +109,14 @@ export default class Admin extends Component{
       agenda.push(items);
     }
     console.log('our agenda: ',agenda);
-    const after_tour = agenda;
-    axios.post(url+'/info/update_after_tour_event',{after_tour}).then((response)=>{
+    const hotlist = agenda;
+    const data = {
+      hotlist,
+      type:tour
+    };
+    axios.post(url+'/info/update_after_tour_event',{data}).then((response)=>{
       console.log('success: ',response);
-      alert('your after tour agenda has been updated');
+      alert('your hotlist agenda has been updated');
     }).catch((err)=>{
       console.log('err - ',err);
     });
@@ -317,7 +324,7 @@ export default class Admin extends Component{
       const est_sq_ft = 'est_sq_ft'+event_num;
       const will_sell = 'will_sell'+event_num;
       const est_live = 'est_live'+event_num;
-      const url = 'url'+event_num; 
+      const url = 'url'+event_num;
       const listing_url = (event.listing_url) ? event.listing_url : '';
       return(
         <tr className="admin_row">
@@ -460,7 +467,7 @@ export default class Admin extends Component{
             </tbody>
             <button className="add_event" onClick={this.addAfterTourEvent.bind(this)}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
           </table><br/>
-            <span onClick={this.submitAfterTourEvent.bind(this)} className="main_submit adm_submit">UPDATE</span>
+            <span onClick={()=>this.submitAfterTourEvent('after_tour')} className="main_submit adm_submit">UPDATE</span>
           </section>
           <div className="bottom_buffer"></div>
         </div>

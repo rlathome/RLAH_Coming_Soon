@@ -17,7 +17,15 @@ var schema = new mongoose.Schema({
     type:Array,
     required:false
   },
-  after_tour:{
+  after_tour_dc:{
+    type:Array,
+    required:false
+  },
+  after_tour_md:{
+    type:Array,
+    required:false
+  },
+  after_tour_va:{
     type:Array,
     required:false
   },

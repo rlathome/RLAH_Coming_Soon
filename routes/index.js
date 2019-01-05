@@ -41,14 +41,16 @@ router.post('/delete_event',function(req,res,next){
   });
 });
 router.post('/update_after_tour_event',function(req,res,next){
-  console.log('after_tour: ',req.body);
-  const after_tour = req.body.after_tour;
-  Administrator.update({},{
-      'after_tour':after_tour
-    },function(err){
-    if(err) ()=>console.log('error: ',err);
-    res.send(after_tour);
-  });
+  console.log('tour type: ',req.body.data.type);
+  const tour_type = req.body.data.type;
+  const hotlist = req.body.data.hotlist;
+  console.log('hotlist: ',hotlist);
+  // Administrator.update({},{
+  //     'after_tour':hotlist
+  //   },function(err){
+  //   if(err) ()=>console.log('error: ',err);
+  //   res.send(after_tour);
+  // });
 });
 router.post('/change_password',function(req,res,next){
   console.log('password: ',req.body);

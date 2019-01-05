@@ -11,10 +11,10 @@ export default class Admin extends Component{
       host_password:'',
       guest_password:'',
       agenda:'',
+      after_tour:[],
       after_tour_dc:[],
       after_tour_md:[],
       after_tour_va:[],
-      after_tour:[],
       event_date:'',
       slots_avail:'',
       logo:'',
@@ -291,7 +291,8 @@ export default class Admin extends Component{
     );
   }
   render(){
-    let { logo, footer_logo_url, after_tour } = this.state;
+    let { logo, footer_logo_url, after_tour, after_tour_dc, after_tour_md, after_tour_va } = this.state;
+    console.log('VIRGINIA - ',after_tour_va);
     console.log('footer logo: ',footer_logo_url);
     // const footer_logo_url = (this.state.footer_logo_url !== '')
     // const logo = (this.state.logo !=='') ? this.state.logo : '';
@@ -342,7 +343,8 @@ export default class Admin extends Component{
         </tr>
       );
     }) : '';
-    const after_tour_data = after_tour.map((event)=>{
+    const after_tour_data = (tour_type) => tour_type.map((event)=>{
+      console.log('mapping ',tour_type,'events now');
       at_event_num++;
       const address = 'at_address'+at_event_num;
       const listing_agt = 'at_listing_agt'+at_event_num;
@@ -402,6 +404,19 @@ export default class Admin extends Component{
         <img className="img-responsive" src={footer_logo_url} alt="affiliate logo" />
       </div>
     );
+
+    const hotlist_header = (
+      <tr>
+        <th></th>
+        <th>Address</th>
+        <th>URL</th>
+        <th>Listing Agent</th>
+        <th className="aftertour_price">Est. Price</th>
+        <th className="aftertour_sqft">Est. Sq. Ft</th>
+        <th className="aftertour_willsell">Willing to sell off market?</th>
+        <th className="aftertour_est_live">Est. Live Date</th>
+      </tr>
+    )
     // let footer_logo_edit = this.state.footer_logo_edit;
     return(
       <div>
@@ -453,21 +468,35 @@ export default class Admin extends Component{
           <section className="agenda_table_container">
             <table className="agenda_table admin_agenda_table admin_container">
               <tbody>
-                <tr>
-                  <th></th>
-                  <th>Address</th>
-                  <th>URL</th>
-                  <th>Listing Agent</th>
-                  <th className="aftertour_price">Est. Price</th>
-                  <th className="aftertour_sqft">Est. Sq. Ft</th>
-                  <th className="aftertour_willsell">Willing to sell off market?</th>
-                  <th className="aftertour_est_live">Est. Live Date</th>
-                </tr>
-                { after_tour_data }
-            </tbody>
-            <button className="add_event" onClick={this.addAfterTourEvent.bind(this)}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
-          </table><br/>
+              <div className="row_header">DC</div>
+                { hotlist_header }
+                { after_tour_data(after_tour) }
+              </tbody>
+              <button className="add_event" onClick={this.addAfterTourEvent.bind(this)}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
+            </table><br/>
             <span onClick={()=>this.submitAfterTourEvent('after_tour')} className="main_submit adm_submit">UPDATE</span>
+          </section>
+          <section className="agenda_table_container">
+            <table className="agenda_table admin_agenda_table admin_container">
+              <tbody>
+              <div className="row_header">MD</div>
+                { hotlist_header }
+                { after_tour_data(after_tour_md) }
+              </tbody>
+              <button className="add_event" onClick={this.addAfterTourEvent.bind(this)}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
+            </table><br/>
+            <span onClick={()=>this.submitAfterTourEvent('after_tour_md')} className="main_submit adm_submit">UPDATE</span>
+          </section>
+          <section className="agenda_table_container">
+            <table className="agenda_table admin_agenda_table admin_container">
+              <tbody>
+              <div className="row_header">VA</div>
+                { hotlist_header }
+                { after_tour_data(after_tour_va) }
+              </tbody>
+              <button className="add_event" onClick={this.addAfterTourEvent.bind(this)}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
+            </table><br/>
+            <span onClick={()=>this.submitAfterTourEvent('after_tour_va')} className="main_submit adm_submit">UPDATE</span>
           </section>
           <div className="bottom_buffer"></div>
         </div>

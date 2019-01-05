@@ -188,6 +188,7 @@ class App extends Component {
             <Route path='/login/host' component = { HostLogin } />
             <Route path='/admin_login' component = { AdminLogin } />
 
+            <Route exact path='/admin' component = { Header } />
             <Route path='/admin' component = { Admin } />
             {/*<AdminRoute path='/admin' component = { Admin } />*/}
 

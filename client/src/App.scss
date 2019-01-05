@@ -864,3 +864,6 @@ tbody>tr:nth-child(1){
   font-size:1em !important;
   font-weight: bold;
 }
+.hotlist_header{
+  @include header_bkgd;
+}

@@ -15,7 +15,7 @@ export class DataService{
           admin_password:d.admin_password,
           agenda:d.agenda,
           after_tour:d.after_tour,
-          event_date:d.event_date,
+          event_date:d.event_date, 
           slots_avail:d.slots_available,
           logo:d.logo_url,
           footer_logo_url:d.footer_logo_url,

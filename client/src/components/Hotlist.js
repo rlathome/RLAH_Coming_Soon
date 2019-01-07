@@ -9,7 +9,9 @@ export default class Hotlist extends Component{
     super(props);
     this.state={
       agenda:'',
-      after_tour:''
+      after_tour:'',
+      after_tour_md:'',
+      after_tour_va:''
     }
     this.api = new APIService();
   }
@@ -18,7 +20,9 @@ export default class Hotlist extends Component{
       console.log('the agenda: ',agenda.data[0].after_tour);
       this.setState({
         agenda:agenda.data[0],
-        after_tour:agenda.data[0].after_tour
+        after_tour:agenda.data[0].after_tour,
+        after_tour_va:agenda.data[0].after_tour_va,
+        after_tour_md:agenda.data[0].after_tour_md
       });
     }).catch((err)=>{
       console.log('err - ',err);
@@ -34,7 +38,26 @@ export default class Hotlist extends Component{
       }
   }
   render(){
-    const post_tour = this.state.after_tour;
+    const {after_tour, after_tour_md, after_tour_va} = this.state;
+    const table_contents = (type) => {
+      return this.state[type].map((event)=>{
+        const address = (event.listing_url) ? (
+          <a href={event.listing_url} target="_blank" rel="listing website">
+            {event.address}
+          </a>
+        ) : event.address;
+        return(
+          <tr>
+            <td id="aftertour_address"><span className="cs_address">{address}</span></td>
+            <td className="aftertour_agent">{event.listing_agt}</td>
+            <td className="aftertour_price">{event.est_price}</td>
+            <td className="aftertour_sqft">{event.est_sq_ft}</td>
+            <td className="aftertour_willsell">{event.will_sell}</td>
+            <td className="aftertour_est_live">{event.est_live}</td>
+          </tr>
+        );
+      });
+    }
     return(
       <main>
       <h1 className="coming_soon_title">Coming Soon Tour</h1>
@@ -50,7 +73,7 @@ export default class Hotlist extends Component{
       </section>
 
         {
-          post_tour && (
+          after_tour && (
           <div>
             <section className="agenda_table_container after_tour_table">
 
@@ -71,26 +94,9 @@ export default class Hotlist extends Component{
                     <th className="aftertour_est_live">Est. Live Date</th>
                   </tr>
 
-              {
-                post_tour &&
-                  this.state.after_tour.map((event)=>{
-                    const address = (event.listing_url) ? (
-                      <a href={event.listing_url} target="_blank" rel="listing website">
-                        {event.address}
-                      </a>
-                    ) : event.address;
-                    return(
-                      <tr>
-                        <td id="aftertour_address"><span className="cs_address">{address}</span></td>
-                        <td className="aftertour_agent">{event.listing_agt}</td>
-                        <td className="aftertour_price">{event.est_price}</td>
-                        <td className="aftertour_sqft">{event.est_sq_ft}</td>
-                        <td className="aftertour_willsell">{event.will_sell}</td>
-                        <td className="aftertour_est_live">{event.est_live}</td>
-                      </tr>
-                    );
-                  })
-                 }
+                  {
+                    after_tour && table_contents('after_tour')
+                  }
                  <div className="row_header">MD</div>
                   <tr>
                     <th>Address</th>
@@ -100,6 +106,9 @@ export default class Hotlist extends Component{
                     <th className="aftertour_willsell">Sell Off Mkt?</th>
                     <th className="aftertour_est_live">Est. Live Date</th>
                   </tr>
+                  {
+                    after_tour_md && table_contents('after_tour_md')
+                  }
                   <div className="row_header">VA</div>
                   <tr>
                     <th>Address</th>
@@ -109,6 +118,9 @@ export default class Hotlist extends Component{
                     <th className="aftertour_willsell">Sell Off Mkt?</th>
                     <th className="aftertour_est_live">Est. Live Date</th>
                   </tr>
+                  {
+                    after_tour_va && table_contents('after_tour_va')
+                  }
                 </tbody>
               </table>
             </section>

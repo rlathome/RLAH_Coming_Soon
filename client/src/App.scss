@@ -867,3 +867,8 @@ tbody>tr:nth-child(1){
 .hotlist_header{
   @include header_bkgd;
 }
+.dropdown_contain{
+  display:flex;
+  padding: 0vw 0vw 1vw 2vw;
+  justify-content: space-around;
+}

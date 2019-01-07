@@ -13,7 +13,15 @@ var schema = new mongoose.Schema({
     type:String,
     required:false
   },
+  hotlist_password:{
+    type:String,
+    required:false
+  },
   agenda:{
+    type:Array,
+    required:false
+  },
+  after_tour:{
     type:Array,
     required:false
   },

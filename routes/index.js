@@ -13,7 +13,7 @@ router.get('/test',function(req,res,next){
 router.get('/admin_info',function(req,res,next){
   Administrator.find({},'',function(err,admin){
     if(err) console.log('err! - , ',err)
-    console.log('admin: ',admin);
+    //console.log('admin: ',admin);
     res.json(admin);
   })
 });
@@ -45,12 +45,14 @@ router.post('/update_after_tour_event',function(req,res,next){
   const tour_type = req.body.data.type;
   const hotlist = req.body.data.hotlist;
   console.log('hotlist: ',hotlist);
-  Administrator.update({},{
-      tour_type:hotlist
-    },function(err){
-    if(err) ()=>console.log('error: ',err);
-    res.send(after_tour);
-  });
+  if(hotlist){
+    Administrator.update({},{
+        [tour_type]:hotlist
+      },function(err){
+      if(err) ()=>console.log('error: ',err);
+      res.send(hotlist);
+    });
+  }
 });
 router.post('/change_password',function(req,res,next){
   console.log('password: ',req.body);
@@ -98,7 +100,7 @@ router.post('/login',function(req,res,next){
   Administrator.find({},'',function(err,resp){
     if(err) console.log('err, ',err)
     admin = resp[0];
-    console.log('admin: ',admin)
+    //console.log('admin: ',admin)
     switch(type){
       case 'admin':
       real_password = admin.admin_password;
@@ -109,6 +111,8 @@ router.post('/login',function(req,res,next){
       case 'host':
       real_password = admin.host_password;
       break;
+      case 'hotlist':
+      real_password = admin.hotlist_password;
     }
     if(real_password===submitted_password){
       res.send('success');

@@ -13,6 +13,7 @@ export class DataService{
           host_password:d.host_password,
           guest_password:d.guest_password,
           admin_password:d.admin_password,
+          hotlist_password:d.hotlist_password,
           agenda:d.agenda,
           after_tour:d.after_tour,
           after_tour_va:d.after_tour_va,

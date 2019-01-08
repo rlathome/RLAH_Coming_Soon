@@ -239,8 +239,8 @@ class App extends Component {
             <Route path='/admin_login' component = { AdminLogin } />
 
             <Route exact path='/admin' component = { Header } />
-            <Route path='/admin' component = { Admin } />
-            {/*<AdminRoute path='/admin' component = { Admin } />*/}
+            {/*<Route path='/admin' component = { Admin } />*/}
+            <AdminRoute path='/admin' component = { Admin } />
 
             <Route exact path='/guest' component = { GuestRegistration } />
             {/* <GuestRoute exact path='/guest' component = { GuestRegistration } /> */}

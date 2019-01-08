@@ -10,6 +10,7 @@ export default class Admin extends Component{
     this.state={
       host_password:'',
       guest_password:'',
+      hotlist_password:'',
       agenda:'',
       after_tour:[],
       after_tour_dc:[],
@@ -116,6 +117,9 @@ export default class Admin extends Component{
       break;
       case 'host_password':
       password = this.refs.host_pass.value;
+      break;
+      case 'hotlist_password':
+      password = this.refs.hotlist_pass.value;
       break;
       default:
       password = this.refs.host_pass.value;
@@ -328,6 +332,7 @@ export default class Admin extends Component{
         <div className="admin_passwords">Host password: <input ref="host_pass" type="text" defaultValue={this.state.host_password} /><span onClick={()=>this.changePassword('host_password')} className="btn btn-primary">Update</span></div>
         <div className="admin_passwords">Guest password: <input ref="guest_pass" type="text" defaultValue={this.state.guest_password} /><span onClick={()=>this.changePassword('guest_password')} className="btn btn-primary">Update</span></div>
         <div className="admin_passwords">Admin password: <input ref="admin_pass" type="text" defaultValue={this.state.admin_password} /><span onClick={()=>this.changePassword('admin_password')} className="btn btn-primary">Update</span></div>
+        <div className="admin_passwords">Hotlist password: <input ref="hotlist_pass" type="text" defaultValue={this.state.hotlist_password} /><span onClick={()=>this.changePassword('hotlist_password')} className="btn btn-primary">Update</span></div>
       </div>
     ) : '';
     let agenda = (ts_agenda !=='' && ts_agenda !== undefined) ? ts_agenda.map((event)=>{
@@ -441,7 +446,6 @@ export default class Admin extends Component{
         <th className="aftertour_est_live">Est. Live Date</th>
       </tr>
     )
-    // let footer_logo_edit = this.state.footer_logo_edit;
     return(
       <div>
         <h1>Welcome to Admin Page!</h1>
@@ -449,6 +453,9 @@ export default class Admin extends Component{
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Currently Editing &nbsp;
           <span class="caret"></span></button>
+
+          {/* Dropdown to navigate to different areas of admin page: */}
+
           <ul class="dropdown-menu">
             <li className="dropdown-header">Tour Info:</li>
             <li><a onClick={()=>this.changeView('agenda')} href="#">Agenda</a></li>

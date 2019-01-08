@@ -86,7 +86,9 @@ export default class HostRegistration extends Component{
     }
     return(
       <main>
-        <h1 className="coming_soon_title">Coming Soon Tour</h1>
+      <div className="comingsoon_logo">
+        <img className="image-responsive" src="../images/RLAH_logo_green.png"/>
+      </div>
         <div className="host_title">
           HOST
         </div>

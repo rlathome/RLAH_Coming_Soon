@@ -168,6 +168,7 @@ body{
   display:flex;
   flex-direction:column;
   justify-content: space-around;
+  margin-top:$section_padding;
   margin-bottom:$section_padding;
   @media only screen
   and (min-width : 355px)
@@ -201,6 +202,7 @@ body{
     font-size:.75em;
     width: 60vw;
   }
+
 }
 .slots_avail{
   margin-top:$section_padding;
@@ -871,4 +873,22 @@ tbody>tr:nth-child(1){
   display:flex;
   padding: 0vw 0vw 1vw 2vw;
   justify-content: space-around;
+}
+.comingsoon_logo{
+  img{
+    width:45vw;
+    margin-top:$section_padding;
+    @media only screen
+    and (min-width : 355px)
+    and (max-width : 668px){
+      width:90vw;
+    }
+    // ipad portrait
+    @media only screen
+    and (min-width : 768px)
+    and (max-width : 1024px)
+    and (orientation : portrait) {
+      width:65vw !important;
+      /* STYLES GO HERE */ }
+  }
 }

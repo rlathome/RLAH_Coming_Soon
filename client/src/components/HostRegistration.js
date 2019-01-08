@@ -181,10 +181,8 @@ export default class HostRegistration extends Component{
         { terms_conditions }
 
 
-        <div className="cst_header_background">
-          <div className="cst_header_text">
-            <h1>Coming Soon Tour</h1>
-          </div>
+        <div className="comingsoon_logo">
+          <img className="image-responsive" src="../../images/RLAH_logo_green.png"/>
         </div>
 
         <div className="host_title">

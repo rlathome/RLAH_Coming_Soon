@@ -199,6 +199,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-top: 2.5vh;
   margin-bottom: 2.5vh;
 }
 
@@ -1225,4 +1226,22 @@ tbody > tr:nth-child(1) {
   display: flex;
   padding: 0vw 0vw 1vw 2vw;
   justify-content: space-around;
+}
+
+.comingsoon_logo img {
+  width: 45vw;
+  margin-top: 2.5vh;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .comingsoon_logo img {
+    width: 90vw;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .comingsoon_logo img {
+    width: 65vw !important;
+    /* STYLES GO HERE */
+  }
 }

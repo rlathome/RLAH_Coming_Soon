@@ -77,7 +77,10 @@ export default class Home extends Component{
     const {admin} = this.state;
     let first = (this.state.first) ? (
       <div>
-        <h1 className="coming_soon_title">Coming Soon Tour</h1>
+        {/*<h1 className="coming_soon_title">Coming Soon Tour</h1>*/}
+        <div className="comingsoon_logo">
+          <img className="image-responsive" src="../images/RLAH_logo_green.png"/>
+        </div>
         <div className="main-subtitle">Bi-weekly caravan tour to preview properties not listed in Bright MLS for agents<br/>
           <div>Occurs every 1st and 3rd Tuesday of each month beginning at 10AM and ending before noon. Each property will have a stop of about 15-20 minutes.</div>
         </div>

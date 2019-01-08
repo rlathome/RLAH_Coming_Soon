@@ -131,7 +131,7 @@ export default class Agenda extends Component{
           <span onClick={()=>window.print()} className="main_submit">PRINT</span>
         </section>
         <LogoArea />
-        {/* <div className="bottom_buffer"></div>
+        <div className="bottom_buffer"></div>
         <div className="host_title">
           AFTER TOUR
         </div>
@@ -151,7 +151,7 @@ export default class Agenda extends Component{
 
           </table>
         </section>
-        <div className="bottom_buffer"></div> */}
+        <div className="bottom_buffer"></div>
       <Footer/>
       </main>
     );

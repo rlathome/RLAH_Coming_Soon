@@ -62,6 +62,20 @@ const fakeAdminAuth = {
   }
 }
 
+const fakeHotlistAuth = {
+  isAuthenticated: false,
+  authenticate(cb) {
+    this.isAuthenticated = true
+    fakeAdminAuth.isAuthenticated = false;
+    fakeGuestAuth.isAuthenticated = false;
+    setTimeout(cb, 100)
+  },
+  signout(cb) {
+    this.isAuthenticated = false
+    setTimeout(cb, 100)
+  }
+}
+
 class GuestLogin extends Component{
   state = {
     redirectToReferrer: false
@@ -106,6 +120,30 @@ class HostLogin extends Component{
     }
     return(
         <Login type='host' login = {this.login} />
+    );
+  }
+}
+
+class HotlistLogin extends Component{
+  state = {
+    redirectToReferrer: false
+  }
+  login = () => {
+    fakeHotlistAuth.authenticate(() => {
+      this.setState(() => ({
+        redirectToReferrer: true
+      }))
+    })
+  }
+  render(){
+    const {from} = this.props.location.state || { from:{pathname:'/'}}
+    const {redirectToReferrer} = this.state;
+    if(redirectToReferrer===true){
+      console.log('it is true: ',from.pathname);
+      return <Redirect to={from.pathname} />
+    }
+    return(
+        <Login type='hotlist' login = {this.login} />
     );
   }
 }
@@ -168,6 +206,17 @@ const AdminRoute = ({ component: Component, ...rest }) => (
         }} />
   )}} />
 )
+const HotlistRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => {
+    return(
+    fakeHotlistAuth.isAuthenticated === true
+      ? <Component {...props} />
+      : <Redirect to={{
+          pathname: '/login/hotlist',
+          state: { from: props.location }
+        }} />
+  )}} />
+)
 
 class App extends Component {
   state = {
@@ -186,10 +235,12 @@ class App extends Component {
             {/* <Route path='/agenda' component = { Header } /> */}
             <Route path='/login/guest' component = { GuestLogin } />
             <Route path='/login/host' component = { HostLogin } />
+            <Route path='/login/hotlist' component = { HotlistLogin } />
             <Route path='/admin_login' component = { AdminLogin } />
 
-            <Route path='/admin' component = { Admin } />
-            {/*<AdminRoute path='/admin' component = { Admin } />*/}
+            <Route exact path='/admin' component = { Header } />
+            {/*<Route path='/admin' component = { Admin } />*/}
+            <AdminRoute path='/admin' component = { Admin } />
 
             <Route exact path='/guest' component = { GuestRegistration } />
             {/* <GuestRoute exact path='/guest' component = { GuestRegistration } /> */}
@@ -203,6 +254,7 @@ class App extends Component {
             <Route path='/agenda' component = { Agenda }/>
 
             <Route exact path='/hotlist' component = { Header } />
+            {/*<HotlistRoute path='/hotlist' component = { Hotlist } />*/}
             <Route path='/hotlist' component = { Hotlist }/>
             {/* <Route path='/' component = { Footer } /> */}
           </div>

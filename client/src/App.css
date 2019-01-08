@@ -1215,3 +1215,14 @@ tbody > tr:nth-child(1) {
   font-size: 1em !important;
   font-weight: bold;
 }
+
+.hotlist_header {
+  background-color: #4c4b4b;
+  color: white;
+}
+
+.dropdown_contain {
+  display: flex;
+  padding: 0vw 0vw 1vw 2vw;
+  justify-content: space-around;
+}

@@ -13,11 +13,27 @@ var schema = new mongoose.Schema({
     type:String,
     required:false
   },
+  hotlist_password:{
+    type:String,
+    required:false
+  },
   agenda:{
     type:Array,
     required:false
   },
   after_tour:{
+    type:Array,
+    required:false
+  },
+  after_tour_dc:{
+    type:Array,
+    required:false
+  },
+  after_tour_md:{
+    type:Array,
+    required:false
+  },
+  after_tour_va:{
     type:Array,
     required:false
   },

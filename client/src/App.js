@@ -254,8 +254,8 @@ class App extends Component {
             <Route path='/agenda' component = { Agenda }/>
 
             <Route exact path='/hotlist' component = { Header } />
-            <HotlistRoute path='/hotlist' component = { Hotlist } />
-            {/*<Route path='/hotlist' component = { Hotlist }/>*/}
+            {/*<HotlistRoute path='/hotlist' component = { Hotlist } />*/}
+            <Route path='/hotlist' component = { Hotlist }/>
             {/* <Route path='/' component = { Footer } /> */}
           </div>
         </Router>

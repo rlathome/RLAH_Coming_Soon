@@ -732,6 +732,11 @@ th,td{
   width:inherit;
   margin:inherit;
   @include bluegreen_bkgd;
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:5vw;
+  }
 }
 
 @mixin table_width($row,$val,$val2,$val3){
@@ -791,6 +796,7 @@ td{
   // @include table_width(5,6vw,3vw,3vw);
   // @include table_width(6,6vw,6vw,6vw);
 }
+
 .second_table td{
   @include afterTour_width_collection;
 }
@@ -799,9 +805,15 @@ td{
     @include header_bkgd;
     padding:1vw
   }
+  .row_header:nth-child(n+2){
+    margin-top:1.5vw;
+  }
   @media only screen
   and (min-width : 355px)
   and (max-width : 668px){
+    .row_header:nth-child(n+2){
+      margin-top:2.5vw;
+    }
     tr{
       width:90vw;
       th:nth-child(1){
@@ -890,5 +902,12 @@ tbody>tr:nth-child(1){
     and (orientation : portrait) {
       width:65vw !important;
       /* STYLES GO HERE */ }
+  }
+}
+.menu{
+  @media only screen
+  and (min-width : 355px)
+  and (max-width : 668px){
+    font-size:3.7vw;
   }
 }

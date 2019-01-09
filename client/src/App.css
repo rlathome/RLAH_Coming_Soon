@@ -1,5 +1,5 @@
 .cst_header_background {
-  background: linear-gradient(45deg, #02ff86 0%, #20a8ff 100%);
+  background: linear-gradient(45deg, #31d386 0%, #2798df 100%);
   color: #fff;
   display: inline-block;
 }
@@ -191,7 +191,7 @@ body {
 }
 
 .host_title {
-  background: linear-gradient(45deg, #02ff86 0%, #20a8ff 100%);
+  background: linear-gradient(45deg, #31d386 0%, #2798df 100%);
   color: #fff;
   font-size: 4.5em;
   font-weight: bold;
@@ -833,8 +833,14 @@ th, td {
   font-weight: bold;
   width: inherit;
   margin: inherit;
-  background: linear-gradient(45deg, #02ff86 0%, #20a8ff 100%);
+  background: linear-gradient(45deg, #31d386 0%, #2798df 100%);
   color: #fff;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .row_header {
+    font-size: 5vw;
+  }
 }
 
 td:nth-child(1) {
@@ -1167,7 +1173,14 @@ td:nth-child(1) {
   padding: 1vw;
 }
 
+.second_table .row_header:nth-child(n+2) {
+  margin-top: 1.5vw;
+}
+
 @media only screen and (min-width: 355px) and (max-width: 668px) {
+  .second_table .row_header:nth-child(n+2) {
+    margin-top: 2.5vw;
+  }
   .second_table tr {
     width: 90vw;
   }
@@ -1243,5 +1256,11 @@ tbody > tr:nth-child(1) {
   .comingsoon_logo img {
     width: 65vw !important;
     /* STYLES GO HERE */
+  }
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .menu {
+    font-size: 3.7vw;
   }
 }

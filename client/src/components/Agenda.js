@@ -133,27 +133,7 @@ export default class Agenda extends Component{
           <span onClick={()=>window.print()} className="main_submit">PRINT</span>
         </section>
         <LogoArea />
-        <div className="bottom_buffer"></div>
-        <div className="host_title">
-          AFTER TOUR
-        </div>
-        <section className="agenda_table_container after_tour_table">
-          <table className="agenda_table">
-            <tbody>
-              <tr>
-                <th>Address</th>
-                <th>Listing Agent</th>
-                <th>Est. Price</th>
-                <th>Est. Sq. Ft</th>
-                <th>Willing to sell off market?</th>
-              </tr>
-              { after_tour }
-            </tbody>
 
-
-          </table>
-        </section>
-        <div className="bottom_buffer"></div>
       <Footer/>
       </main>
     );

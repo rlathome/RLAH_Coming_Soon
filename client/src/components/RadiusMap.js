@@ -155,13 +155,13 @@ class RadiusMap extends Component{
                   position: place.geometry.location
                 }));
 
-                const va = new RegExp('VA');
-                if(va.test(place.formatted_address)){
-                  console.log('its in VA')
-                  return false;
-                }else{
-                  console.log('its in DC')
-                }
+                // const va = new RegExp('VA');
+                // if(va.test(place.formatted_address)){
+                //   console.log('its in VA')
+                //   return false;
+                // }else{
+                //   console.log('its in DC')
+                // }
 
                 if (place.geometry.viewport) {
                   // Only geocodes have viewport.

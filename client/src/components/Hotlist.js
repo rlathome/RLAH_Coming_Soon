@@ -91,7 +91,7 @@ export default class Hotlist extends Component{
                     <th>Address</th>
                     <th className="aftertour_agent">Listing Agent</th>
                     <th className="aftertour_price">Est. Price</th>
-                    <th className="aftertour_sqft">Est. Sq. Ft</th>
+                    <th className="aftertour_sqft">BR/BA</th>
                     <th className="aftertour_willsell">Sell Off Mkt?</th>
                     <th className="aftertour_est_live">Est. Live Date</th>
                   </tr>
@@ -104,7 +104,7 @@ export default class Hotlist extends Component{
                     <th>Address</th>
                     <th className="aftertour_agent">Listing Agent</th>
                     <th className="aftertour_price">Est. Price</th>
-                    <th className="aftertour_sqft">Est. Sq. Ft</th>
+                    <th className="aftertour_sqft">BR/BA</th>
                     <th className="aftertour_willsell">Sell Off Mkt?</th>
                     <th className="aftertour_est_live">Est. Live Date</th>
                   </tr>
@@ -116,7 +116,7 @@ export default class Hotlist extends Component{
                     <th>Address</th>
                     <th className="aftertour_agent">Listing Agent</th>
                     <th className="aftertour_price">Est. Price</th>
-                    <th className="aftertour_sqft">Est. Sq. Ft</th>
+                    <th className="aftertour_sqft">BR/BA</th>
                     <th className="aftertour_willsell">Sell Off Mkt?</th>
                     <th className="aftertour_est_live">Est. Live Date</th>
                   </tr>

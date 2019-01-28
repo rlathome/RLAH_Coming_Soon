@@ -206,7 +206,7 @@ export default class HostRegistration extends Component{
             <div><div className="form_labels">Listing Agent Name*:</div>&nbsp;<div className="form_inputs"><input onKeyUp={this.isFormFilled.bind(this)} ref="agent_name" type="text" /></div></div>
             <div><div className="form_labels">Listing Agent Email*:</div>&nbsp;<div className="form_inputs"><input onKeyUp={this.isFormFilled.bind(this)} ref="agent_email" type="text" /></div></div>
             <div><div className="form_labels">Expected Price:</div>&nbsp;<div className="form_inputs"><input ref="expected_price" type="text" /></div></div>
-            <div><div className="form_labels">Estimated Size (sqft)*:</div>&nbsp;<div className="form_inputs"><input onKeyUp={this.isFormFilled.bind(this)} ref="est_size" type="text" /></div></div>
+            <div><div className="form_labels">BR/BA:</div>&nbsp;<div className="form_inputs"><input onKeyUp={this.isFormFilled.bind(this)} ref="est_size" type="text" /></div></div>
             <div><div className="form_labels">Will seller show home/consider
   offers prior to listing?*:</div>&nbsp;
               <div className="form_labels">

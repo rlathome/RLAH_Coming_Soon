@@ -441,7 +441,7 @@ export default class Admin extends Component{
         <th>URL</th>
         <th>Listing Agent</th>
         <th className="aftertour_price">Est. Price</th>
-        <th className="aftertour_sqft">Est. Sq. Ft</th>
+        <th className="aftertour_sqft">BR/BA</th>
         <th className="aftertour_willsell">Willing to sell off market?</th>
         <th className="aftertour_est_live">Est. Live Date</th>
       </tr>
@@ -492,7 +492,7 @@ export default class Admin extends Component{
                       <th>Address</th>
                       <th>Listing Agent</th>
                       <th>Est. Price</th>
-                      <th>Estimated Sq. Ft</th>
+                      <th>BR/BA</th>
                       <th>Willing to sell off market?</th>
                       <th>Est. Live Date</th>
                     </tr>

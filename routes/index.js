@@ -153,7 +153,7 @@ router.post('/submithostform',function(req,res,next){
     +'Address: '+form_data.address+'<br/>'
     +'Email: '+form_data.email+'<br/>'
     +'Expected price: '+form_data.expected_price+'<br/>'
-    +'Estimated sq ft: '+form_data.est_size+'<br/>'
+    +'BR/BA: '+form_data.est_size+'<br/>'
     +'Will show before listing: '+form_data.will_show_before_listing+'<br/>'
     +'Feedback wanted: '+form_data.feedback_wanted.join(', ')+'<br/>'
     + other_text+'<br/>'
@@ -189,7 +189,7 @@ router.post('/submithostform',function(req,res,next){
     +'Address: '+form_data.address+'<br/>'
     +'Email: '+form_data.email+'<br/>'
     +'Expected price: '+form_data.expected_price+'<br/>'
-    +'Estimated sq ft: '+form_data.est_size+'<br/>'
+    +'BR/BA: '+form_data.est_size+'<br/>'
     +'Will show before listing: '+form_data.will_show_before_listing+'<br/>'
     +'Feedback wanted: '+form_data.feedback_wanted.join(', ')
     +'</div>'

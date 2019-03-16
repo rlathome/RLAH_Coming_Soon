@@ -202,14 +202,14 @@ export default class Admin extends Component{
     let agenda = [];
     let amount = this.state[tour].length;
     for(let i=1; i<=amount; i++){
-      let address_ref = `${tour}_address`+i;
+      let address_ref = `${tour}_address${i}`;
       console.log('submitAfterTour address_ref: ',address_ref)
-      let listing_url_ref = `${tour}_url`+i
-      let listing_agt_ref = `${tour}_listing_agt`+i;
-      let est_price_ref = `${tour}_est_price`+i;
-      let est_sq_ft_ref = `${tour}_est_sq_ft`+i;
-      let will_sell_ref = `${tour}_will_sell`+i;
-      let est_live_ref = `${tour}_est_live`+i;
+      let listing_url_ref = `${tour}_url${i}`;
+      let listing_agt_ref = `${tour}_listing_agt${i}`;
+      let est_price_ref = `${tour}_est_price${i}`;
+      let est_sq_ft_ref = `${tour}_est_sq_ft${i}`;
+      let will_sell_ref = `${tour}_will_sell${i}`;
+      let est_live_ref = `${tour}_est_live${i}`;
       const address = this.refs[address_ref].value;
       const listing_agt = this.refs[listing_agt_ref].value;
       const listing_url = this.refs[listing_url_ref].value;

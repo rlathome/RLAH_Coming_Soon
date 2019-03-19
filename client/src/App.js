@@ -239,6 +239,8 @@ class App extends Component {
             <Route path='/admin_login' component = { AdminLogin } />
 
             <Route exact path='/admin' component = { Header } />
+
+            {/*// Switch out these links during development:*/}
             {/*<Route path='/admin' component = { Admin } />*/}
             <AdminRoute path='/admin' component = { Admin } />
 

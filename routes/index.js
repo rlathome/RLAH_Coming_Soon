@@ -123,6 +123,30 @@ router.post('/login',function(req,res,next){
 
 });
 
+router.post('/hideguestslots',function(req,res,next){
+  let data = req.body;
+  console.log('HIDE GUESTS? ',data.cmd);
+  switch(data.cmd){
+    case 'on':
+    Administrator.update({},{hide_guest_slots:true},function(err){
+      if(err) ()=> console.log('error: ',err);
+      res.send(data.cmd);
+    });
+    break;
+    case 'off':
+    Administrator.update({},{hide_guest_slots:false},function(err){
+      if(err) ()=> console.log('error: ',err);
+      res.send(data.cmd);
+    });
+    break;
+    default:
+    Administrator.update({},{hide_guest_slots:false},function(err){
+      if(err) ()=> console.log('error: ',err);
+      res.send(data.cmd);
+    });
+  }
+});
+
 router.post('/submithostform',function(req,res,next){
   let form_data = req.body;
   console.log('submitting: ',form_data);
@@ -220,8 +244,10 @@ router.post('/submitguestform',function(req,res,next){
   console.log('submitting: ',form_data);
   let agent_name = form_data.agent_name;
   let email = form_data.email;
+  let needs_reserve = form_data.needs_reserve;
+
   let to = 'comingsoontour@gmail.com';
-  // let to = 'josh@allenb.com';
+  //let to = 'josh@allenb.com';
   let subject = "A new guest has signed up on the Coming Soon Tour!";
   let guest_subject = "Thank you for signing up!";
 
@@ -237,7 +263,7 @@ router.post('/submitguestform',function(req,res,next){
     subject:guest_subject,
     to:email,
     from:'<'+to+'>',
-    html:'<div>Thank you for your submission! We’ll have a seat for you on the tour!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email
+    html:'<div>Thank you for your submission! We’ll have a seat for you on the tour!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email+'<br/>I need to reserve a spot in the caravan: '+form_data.needs_reserve+'<br/>'
   });
 
   guest_mail.build(function(mailBuildError, message){
@@ -261,7 +287,8 @@ router.post('/submitguestform',function(req,res,next){
     to,
     from:agent_name+' <'+email+'>',
     email,
-    html:'<div>Re: Coming Soon Tour Guest: '+agent_name+'<br/>'+email+'</div><br/>'+JSON.stringify(form_data)
+    //html:'<div>Re: Coming Soon Tour Guest: '+agent_name+'<br/>'+email+'</div><br/>'+JSON.stringify(form_data)
+    html:'<div>Re: Coming Soon Tour Guest: </div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email+'<br/>Needs to reserve a spot in the caravan: '+form_data.needs_reserve+'<br/>'
   });
 
   mail.build(function(mailBuildError, message){

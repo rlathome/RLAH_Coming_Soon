@@ -29,6 +29,15 @@ export default class Admin extends Component{
   componentDidMount(){
     this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
   }
+
+  hideGuestSlots(cmd){
+    console.log('hide: ',cmd);
+    const data = {cmd};
+    axios.post(url+'/info/hideguestslots',data).then((res)=>{
+      console.log('HIDDEN: ',res.data);
+      alert('Guest Form Hide: '+res.data.toUpperCase());
+    }).catch(err=>console.log('error hiding guests: ',err));
+  }
   submitEvent(){
     let event_num = 0;
     let agenda = [];
@@ -468,6 +477,7 @@ export default class Admin extends Component{
             <li><a onClick={()=>this.changeView('next_tour')} href="#">Next Tour</a></li>
             <li><a onClick={()=>this.changeView('footer_logo')} href="#">Footer Logo</a></li>
             <li><a onClick={()=>this.changeView('sponsored_by')} href="#">Sponsored By</a></li>
+            <li><a onClick={()=>this.changeView('guest_slots_full')} href="#">Guest Slots Full</a></li>
           </ul>
         </div>
         </div>
@@ -505,6 +515,21 @@ export default class Admin extends Component{
                 <span onClick={()=>window.print()} className="main_submit">PRINT</span>
             </div>
         )}
+        {
+          currently_editing=='guest_slots_full' && (
+            <div className="dropdown_contain">
+              <div className="dropdown">
+              <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Guest Slots Full &nbsp;
+              <span className="caret"></span></button>
+              <ul className="dropdown-menu">
+                <li className="dropdown-header">Pick One:</li>
+                <li><a onClick={()=>this.hideGuestSlots('on')} href="#">On</a></li>
+                <li><a onClick={()=>this.hideGuestSlots('off')} href="#">Off</a></li>
+              </ul>
+              </div>
+            </div>
+          )
+        }
         {
           currently_editing=='passwords' && (
             <div>

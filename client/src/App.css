@@ -1167,6 +1167,10 @@ td:nth-child(1) {
   height: 100%;
 }
 
+.red {
+  color: red;
+}
+
 .second_table th {
   background-color: #4c4b4b;
   color: white;

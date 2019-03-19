@@ -797,6 +797,10 @@ td{
   // @include table_width(6,6vw,6vw,6vw);
 }
 
+.red{
+  color:red;
+}
+
 .second_table td{
   @include afterTour_width_collection;
 }

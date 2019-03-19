@@ -53,6 +53,10 @@ var schema = new mongoose.Schema({
     type:String,
     required:false
   },
+  hide_guest_slots:{
+    type:Boolean,
+    required:false
+  },
   next_tour:{
     type:String,
     required:false

@@ -257,13 +257,14 @@ router.post('/submitguestform',function(req,res,next){
   var apiKey = 'key-30c5713300a403cced1a5f5adaa0ffa8';
   var mailgun = require('mailgun-js')({apiKey:apiKey, domain:domain});
 
+console.log(`RECEIVING THIS INFO: AGENT NAME: ${agent_name} EMAIL: ${email} NEEDS RESERVE: ${needs_reserve}`)
   //*********** Send confirmation email to guest:
 
   var guest_mail = mailcomposer({
     subject:guest_subject,
     to:email,
     from:'<'+to+'>',
-    html:'<div>Thank you for your submission! We’ll have a seat for you on the tour!</div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email+'<br/>I need to reserve a spot in the caravan: '+form_data.needs_reserve+'<br/>'
+    html:`<div>Thank you for your submission! We’ll have a seat for you on the tour!</div><br/><br/>Name: ${agent_name}<br/>Email: ${email}<br/>I need to reserve a spot in the caravan: ${needs_reserve}<br/>`
   });
 
   guest_mail.build(function(mailBuildError, message){
@@ -288,7 +289,7 @@ router.post('/submitguestform',function(req,res,next){
     from:agent_name+' <'+email+'>',
     email,
     //html:'<div>Re: Coming Soon Tour Guest: '+agent_name+'<br/>'+email+'</div><br/>'+JSON.stringify(form_data)
-    html:'<div>Re: Coming Soon Tour Guest: </div><br/><br/>Name: '+form_data.agent_name+'<br/>Email: '+form_data.email+'<br/>Needs to reserve a spot in the caravan: '+form_data.needs_reserve+'<br/>'
+    html:`<div>Re: Coming Soon Tour Guest: </div><br/><br/>Name: ${agent_name}<br/>Email: ${email}<br/>Needs to reserve a spot in the caravan: ${needs_reserve}<br/>`
   });
 
   mail.build(function(mailBuildError, message){

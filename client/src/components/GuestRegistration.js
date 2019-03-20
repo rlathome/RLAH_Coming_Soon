@@ -65,7 +65,6 @@ export default class GuestRegistration extends Component{
     let agent_name = this.refs.agent_name.value;
     let email = this.refs.email.value;
     let needs_reserve = this.refs.needs_reserve.value;
-
     let data = {
       agent_name,
       email,

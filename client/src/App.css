@@ -577,8 +577,13 @@ table {
   margin-bottom: 2.5vh;
 }
 
+.privacy_policy_container {
+  text-align: left;
+}
+
 .login_window_container {
   margin-top: 25vh;
+  height: 70vh;
 }
 
 .login_window {
@@ -1267,4 +1272,15 @@ tbody > tr:nth-child(1) {
   .menu {
     font-size: 3.7vw;
   }
+}
+
+.privacy_policy {
+  text-align: left;
+  margin: 0px 50px 15px 50px;
+  color: #888888;
+  cursor: pointer;
+}
+
+.privacy_policy:hover {
+  color: #000;
 }

@@ -15,6 +15,7 @@ export default class Agenda extends Component{
   }
   componentDidMount(){
     this.api.get('info/admin_info').then((agenda)=>{
+      console.log('getting back: ',agenda)
       console.log('the agenda: ',agenda.data[0].after_tour);
       this.setState({
         agenda:agenda.data[0],

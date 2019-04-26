@@ -9,6 +9,7 @@ import Login from './components/Login';
 import GuestRegistration from './components/GuestRegistration';
 import HostRegistration from './components/HostRegistration';
 import Agenda from './components/Agenda';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import Admin from './components/Admin';
 import './App.css';
 import {
@@ -217,6 +218,15 @@ const HotlistRoute = ({ component: Component, ...rest }) => (
         }} />
   )}} />
 )
+class PrivacyPolicyLink extends Component{
+  render(){
+    return(
+      <div className="privacy_policy">
+        <Link to='/privacy_policy'>Privacy Policy</Link>
+      </div>
+    );
+  }
+}
 
 class App extends Component {
   state = {
@@ -228,17 +238,16 @@ class App extends Component {
       <div>
         <Router>
           <div>
-            <Route path='/guest' component = { Header } />
+          {["/home", "/guest", "/host", "/host/registration/:addr","/admin","/agenda","/hotlist","/privacy_policy"].map((path) =>
+              <Route exact path={path} component={Header} />
+          )}
             <Route exact path='/' component = { Home } />
-            <Route exact path='/host' component = { Header } />
-            <Route exact path='/host/registration/:addr' component = { Header } />
             {/* <Route path='/agenda' component = { Header } /> */}
             <Route path='/login/guest' component = { GuestLogin } />
             <Route path='/login/host' component = { HostLogin } />
             <Route path='/login/hotlist' component = { HotlistLogin } />
             <Route path='/admin_login' component = { AdminLogin } />
 
-            <Route exact path='/admin' component = { Header } />
 
             {/*// Switch out these links during development:*/}
             {/*<Route path='/admin' component = { Admin } />*/}
@@ -252,13 +261,15 @@ class App extends Component {
             {/* <HostRoute exact path='/host' component = { HostMap } />
             <HostRoute path='/host/registration/:addr' component = { HostRegistration } /> */}
 
-            <Route exact path='/agenda' component = { Header } />
             <Route path='/agenda' component = { Agenda }/>
 
-            <Route exact path='/hotlist' component = { Header } />
             {/*<HotlistRoute path='/hotlist' component = { Hotlist } />*/}
             <Route path='/hotlist' component = { Hotlist }/>
-            {/* <Route path='/' component = { Footer } /> */}
+
+            {/*<HotlistRoute path='/hotlist' component = { Hotlist } />*/}
+            <Route path='/privacy_policy' component = { PrivacyPolicy }/>
+
+            <Route exact path='/*' component = { PrivacyPolicyLink }/>
           </div>
         </Router>
       </div>

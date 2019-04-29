@@ -9,7 +9,11 @@ export default class Header extends Component {
           <li onClick={()=>this.props.history.push('/host')}>Host</li>
           <li onClick={()=>this.props.history.push('/guest')}>Guest</li>
           <li onClick={()=>this.props.history.push('/agenda')}>Agenda</li>
-          <li onClick={()=>this.props.history.push('/hotlist')}>Hot List</li>
+          <li onClick={()=>{
+            var win = window.open('/hotlist', '_blank');
+            win.focus();
+            }//this.props.history.push('/hotlist')}
+          }>Hot List</li>
         </ul>
       </header>
     );

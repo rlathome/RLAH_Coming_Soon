@@ -68,7 +68,7 @@ export default class Hotlist extends Component{
       </div>
       <section className="qualifications_msg">
         <ul className="hotlist_title_list">
-          <li>To submit a property to the Hot List<a href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform"> click here</a></li>
+          <li>To submit a property to the Hot List<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform"> click here</a></li>
           <li>Additional off-market properties that may not be on the sponsored tour</li>
           <li>Scroll down to view the complete list sorted by DC, MD, & VA</li>
           <li>If a property address is blue, click for additional media</li>

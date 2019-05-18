@@ -141,7 +141,7 @@ export default class GuestRegistration extends Component{
               </div>
               <form>
                 <p>*denotes required field for submission</p>
-                <div><div className="form_labels">Agent Name*:</div>&nbsp;<div className="form_inputs"><input  onKeyUp={()=>this.isFormFilled()} ref="agent_name" type="text" /></div></div>
+                <div><div className="form_labels">Agent Name*:</div>&nbsp;<div className="form_inputs"><input  name="fullname" onKeyUp={()=>this.isFormFilled()} ref="agent_name" type="text" /></div></div>
                 <div><div className="form_labels">Agent Email*:</div>&nbsp;<div className="form_inputs"><input  onKeyUp={()=>this.isFormFilled()} ref="email" type="text" /></div></div>
                 <div><div className="form_labels">I need to reserve a spot in the caravan (type yes or no)*:</div>&nbsp;<div className="form_inputs"><input onKeyUp={()=>this.isFormFilled()} ref="needs_reserve" type="text" /></div></div>
               </form>

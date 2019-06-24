@@ -21,6 +21,7 @@ router.get('/admin_info',function(req,res,next){
 router.post('/submitagenda',function(req,res,next){
   console.log('agenda: ',req.body);
   const agenda = req.body.agenda;
+  //Agenda.update
   Administrator.update({},{
       'agenda':agenda,
       'event_date':req.body.event_date,
@@ -33,6 +34,7 @@ router.post('/submitagenda',function(req,res,next){
 router.post('/delete_event',function(req,res,next){
   console.log('agenda: ',req.body);
   const agenda = req.body.agenda;
+  //Agenda.update
   Administrator.update({},{
       'agenda':agenda
     },function(err){
@@ -280,7 +282,7 @@ console.log(`RECEIVING THIS INFO: AGENT NAME: ${agent_name} EMAIL: ${email} NEED
         // res.json(body);
     });
   });
-
+ 
   //**********Send new guest alert email to RLAH:
 
   var mail = mailcomposer({

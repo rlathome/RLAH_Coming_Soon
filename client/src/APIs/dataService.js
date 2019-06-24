@@ -4,7 +4,7 @@ export class DataService{
   constructor(){
     this.api = new APIService();
   }
-  getAdminInfo(footerLogoEdit){
+  getAdminInfo(footerLogoEdit = null){
     return new Promise((res,rej)=>{
       this.api.get('info/admin_info').then((admin)=>{
         console.log('our admin info: ',admin.data);
@@ -23,11 +23,24 @@ export class DataService{
           logo:d.logo_url,
           footer_logo_url:d.footer_logo_url,
           next_tour:d.next_tour,
-          footer_logo_edit:footerLogoEdit(d.footer_logo_url)
+          footer_logo_edit:(footerLogoEdit != null) ? footerLogoEdit(d.footer_logo_url) : null
         })
       }).catch((err)=>{
         console.log('err - ',err);
       });
     })
   }
+  getAfterTour(type){
+    return new Promise((res,rej)=>{
+      this.api.get(`info/${type}`).then((after_tour)=>{
+        console.log('our after tour info: ',after_tour);
+        after_tour = after_tour.data;
+        res({
+            after_tour
+          })
+      }).catch((err)=>{
+      console.log('err - ',err);
+    });
+  })
+}
 }

@@ -28,8 +28,8 @@ export default class Admin extends Component{
   }
   componentDidMount(){
     this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
-  }
-
+    this.dataService.getAfterTour('after_tour').then(res=>console.log(`GETTING IN UI: ${res['after_tour']}`));
+}
   hideGuestSlots(cmd){
     console.log('hide: ',cmd);
     const data = {cmd};

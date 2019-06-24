@@ -4,6 +4,7 @@ import LogoArea from './LogoArea';
 import Footer from './Footer';
 import axios from 'axios';
 import { terms_text } from './inserts/terms_conditions.js';
+import { DataService } from '../APIs/dataService.js';
 // const url = 'http://www.comingsoontour.com';
 import { url } from '../globalConf.js';
 
@@ -25,6 +26,7 @@ export default class HostRegistration extends Component{
       terms_conditions:false,
       showing_other_input:false
     }
+    this.dataService = new DataService();
   }
   componentDidMount(){
     window.scrollTo(0,0);

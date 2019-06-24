@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var https = require('https');
 var Administrator = require('../models/administrator.js');
-
+var AfterTour = require('../models/after_tours.js');
 
 
 router.get('/test',function(req,res,next){
@@ -13,9 +13,19 @@ router.get('/test',function(req,res,next){
 router.get('/admin_info',function(req,res,next){
   Administrator.find({},'',function(err,admin){
     if(err) console.log('err! - , ',err)
-    //console.log('admin: ',admin);
+    console.log('admin: ',admin);
+    admin[0].after_tour.forEach((item)=>{
+      console.log(JSON.stringify(item));
+    })
     res.json(admin);
   })
+});
+
+router.get('/after_tour',function(req,res,next){
+  AfterTour.find({},'',function(err,after_tour){
+    if(err) console.log('error! - ',err);
+    res.json(after_tour);
+  });
 });
 
 router.post('/submitagenda',function(req,res,next){
@@ -282,7 +292,7 @@ console.log(`RECEIVING THIS INFO: AGENT NAME: ${agent_name} EMAIL: ${email} NEED
         // res.json(body);
     });
   });
- 
+
   //**********Send new guest alert email to RLAH:
 
   var mail = mailcomposer({

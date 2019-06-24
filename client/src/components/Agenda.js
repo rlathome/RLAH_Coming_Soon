@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import LogoArea from './LogoArea';
 import Footer from './Footer';
 import { APIService } from '../APIs/apiService';
+import { DataService } from '../APIs/dataService';
 
 export default class Agenda extends Component{
   constructor(props){
@@ -12,14 +13,17 @@ export default class Agenda extends Component{
       after_tour:''
     }
     this.api = new APIService();
+    this.dataService = new DataService();
   }
   componentDidMount(){
-    this.api.get('info/admin_info').then((agenda)=>{
-      console.log('getting back: ',agenda)
-      console.log('the agenda: ',agenda.data[0].after_tour);
+    // this.api.get('info/admin_info').then((agenda)=>{
+    this.dataService.getAdminInfo().then((admin_info)=>{
+
+      console.log('Admin getting back: ',admin_info.agenda)
+      const agenda = admin_info.agenda;
       this.setState({
-        agenda:agenda.data[0],
-        after_tour:agenda.data[0].after_tour
+        agenda,
+        after_tour:agenda.after_tour
       });
     }).catch((err)=>{
       console.log('err - ',err);
@@ -36,7 +40,7 @@ export default class Agenda extends Component{
   }
   render(){
     console.log('OUR AGENDA ',this.state.agenda)
-    let agenda = (this.state.agenda !=='' && this.state.agenda.agenda !==undefined) ? this.state.agenda.agenda.map((event)=>{
+    let agenda = (this.state.agenda !=='') ? this.state.agenda.map((event)=>{
       const address = (event.listing_url) ? (
         <a href={event.listing_url} target="_blank" rel="listing website">
           {event.address}
@@ -73,32 +77,33 @@ export default class Agenda extends Component{
         </tr>
       );
     }) : '';
-    const after_tour_contents = (this.state.after_tour.length>0) ? (
-      <div>
-        <div className="bottom_buffer"></div>
-        <div ref="after_tour" className="host_title">
-          HOT LIST
-        </div>
-        <section className="agenda_table_container after_tour_table">
-          <table className="agenda_table second_table">
-            <tbody>
-              <tr>
-                <th>Address</th>
-                <th className="aftertour_agent">Listing Agent</th>
-                <th className="aftertour_price">Est. Price</th>
-                <th className="aftertour_sqft">BR/BA</th>
-                <th className="aftertour_willsell">Sell Off Mkt?</th>
-                <th className="aftertour_est_live">Est. Live Date</th>
-              </tr>
-              { after_tour }
-            </tbody>
-
-
-          </table>
-        </section>
-        <div className="bottom_buffer"></div>
-    </div>
-    ) : '';
+    const after_tour_contents = '';
+    // const after_tour_contents = (this.state.after_tour.length>0) ? (
+    //   <div>
+    //     <div className="bottom_buffer"></div>
+    //     <div ref="after_tour" className="host_title">
+    //       HOT LIST
+    //     </div>
+    //     <section className="agenda_table_container after_tour_table">
+    //       <table className="agenda_table second_table">
+    //         <tbody>
+    //           <tr>
+    //             <th>Address</th>
+    //             <th className="aftertour_agent">Listing Agent</th>
+    //             <th className="aftertour_price">Est. Price</th>
+    //             <th className="aftertour_sqft">BR/BA</th>
+    //             <th className="aftertour_willsell">Sell Off Mkt?</th>
+    //             <th className="aftertour_est_live">Est. Live Date</th>
+    //           </tr>
+    //           { after_tour }
+    //         </tbody>
+    //
+    //
+    //       </table>
+    //     </section>
+    //     <div className="bottom_buffer"></div>
+    // </div>
+    // ) : '';
     return(
       <main>
       <div className="comingsoon_logo">

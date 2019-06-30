@@ -3,7 +3,8 @@ var router = express.Router();
 var https = require('https');
 var Administrator = require('../models/administrator.js');
 var AfterTour = require('../models/after_tours.js');
-
+var AfterTourVa = require('../models/after_tour_vas.js');
+var AfterTourMd = require('../models/after_tour_mds.js');
 
 router.get('/test',function(req,res,next){
   console.log('getting request');
@@ -21,10 +22,58 @@ router.get('/admin_info',function(req,res,next){
   })
 });
 
+// this function is the best way I could come up with to automatically migrate data from my Administrator collection into the new separate collections in a few milliseconds
+
+router.get('/after_tour_mapping',function(req,res,next){
+  Administrator.find({},'',function(err,admin){
+    if(err) console.log('mapping err  - ',err);
+    console.log('ADMIN - ',admin);
+
+    //Change this definiton
+    const after_tour = admin[0].after_tour_va;
+
+    console.log('AFTER TOUR: ',after_tour);
+    after_tour.forEach((item)=>{
+      console.log('TO CREATE: ',item);
+
+      //Change this definition
+      var post = new AfterTourVa({
+
+        address: item.address,
+        est_live: item.est_live,
+        est_price: item.est_price,
+        est_sq_ft: item.est_sq_ft,
+        listing_agt: item.listing_agt,
+        listing_url: item.listing_url,
+        will_sell: item.will_sell
+      });
+      console.log('post: ',post);
+      post.save(function(err,save){
+        if(err) console.log('SAVING ERROR ',err);
+      });
+    });
+    res.status(200).json(after_tour);
+  });
+});
+
 router.get('/after_tour',function(req,res,next){
   AfterTour.find({},'',function(err,after_tour){
     if(err) console.log('error! - ',err);
     res.json(after_tour);
+  });
+});
+
+router.get('/after_tour_va',function(req,res,next){
+  AfterTourVa.find({},'',function(err,after_tour_va){
+    if(err) console.log('error! - ',err);
+    res.json(after_tour_va);
+  });
+});
+
+router.get('/after_tour_md',function(req,res,next){
+  AfterTourMd.find({},'',function(err,after_tour_md){
+    if(err) console.log('error! - ',err);
+    res.json(after_tour_md);
   });
 });
 

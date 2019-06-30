@@ -28,7 +28,24 @@ export default class Admin extends Component{
   }
   componentDidMount(){
     this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
-    this.dataService.getAfterTour('after_tour').then(res=>console.log(`GETTING IN UI: ${res['after_tour']}`));
+    this.dataService.getAfterTour('after_tour').then(res=>{
+        this.setState({
+        after_tour:res['after_tour']
+      });
+    });
+    this.dataService.getAfterTour('after_tour_va').then(res=>{
+      console.log('setting va listings: ',res['after_tour_va'])
+        this.setState({
+        after_tour_va:res['after_tour_va']
+      });
+    });
+
+    this.dataService.getAfterTour('after_tour_md').then(res=>{
+      console.log('setting md listings: ',res['after_tour_md'])
+        this.setState({
+        after_tour_md:res['after_tour_md']
+      });
+    });
 }
   hideGuestSlots(cmd){
     console.log('hide: ',cmd);
@@ -208,7 +225,7 @@ export default class Admin extends Component{
 
   submitAfterTourEvent(tour){
     let event_num = 0;
-    let agenda = [];
+    let hotlist = [];
     let amount = this.state[tour].length;
     for(let i=1; i<=amount; i++){
       let address_ref = `${tour}_address${i}`;
@@ -226,6 +243,9 @@ export default class Admin extends Component{
       const est_sq_ft = this.refs[est_sq_ft_ref].value;
       const will_sell = this.refs[will_sell_ref].value;
       const est_live = this.refs[est_live_ref].value;
+
+      const id = this.refs[est_price_ref].id;
+      console.log('address ref id: ', id);
       let items = {
         address,
         listing_url,
@@ -235,20 +255,19 @@ export default class Admin extends Component{
         will_sell,
         est_live
       }
-      agenda.push(items);
+      hotlist.push(items);
     }
-    console.log('our agenda: ',agenda);
-    const hotlist = agenda;
+    console.log('our hotlist: ',hotlist);
     const data = {
       hotlist,
       type:tour
     };
-    axios.post(url+'/info/update_after_tour_event',{data}).then((response)=>{
-      console.log('success: ',response);
-      alert('your hotlist agenda has been updated');
-    }).catch((err)=>{
-      console.log('err - ',err);
-    });
+    // axios.post(url+'/info/update_after_tour_event',{data}).then((response)=>{
+    //   console.log('success: ',response);
+    //   alert('your hotlist agenda has been updated');
+    // }).catch((err)=>{
+    //   console.log('err - ',err);
+    // });
   }
 
   // This function will generate a new (editable) row on whichever hotlist table its argument specifies:
@@ -381,7 +400,7 @@ export default class Admin extends Component{
       let evt_num = 0;
       return tour.map((event)=>{
       evt_num++;
-      console.log('mapping ',tour_type,'events now');
+      console.log('mapping ',tour_type, event,' events now');
       const address_ref = `${tour_type}_address`+evt_num;
       console.log('after_tour_data address_ref: ',address_ref);
       const listing_agt_ref = `${tour_type}_listing_agt`+evt_num;
@@ -398,7 +417,7 @@ export default class Admin extends Component{
           <td id="aftertour_address"><textarea ref={address_ref} className="table_input" type="text" defaultValue={event.address}/></td>
           <td id="aftertour_url"><textarea ref={url_ref} className="table_input" type="text" defaultValue={listing_url}/></td>
           <td><textarea ref={listing_agt_ref} className="table_input" type="text" defaultValue={event.listing_agt}/></td>
-          <td className="aftertour_price"><textarea ref={est_price_ref} className="table_input" type="text" defaultValue={event.est_price}/></td>
+          <td className="aftertour_price"><textarea ref={est_price_ref} className="table_input" type="text" defaultValue={event.est_price} id={event._id}/></td>
           <td className="aftertour_sqft"><textarea ref={est_sq_ft_ref} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
           <td className="aftertour_willsell"><textarea ref={will_sell_ref} className="table_input" type="text" defaultValue={event.will_sell}/></td>
           <td className="aftertour_willsell"><textarea ref={est_live_ref} className="table_input" type="text" defaultValue={event.est_live}/></td>

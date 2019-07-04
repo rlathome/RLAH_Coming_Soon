@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var https = require('https');
 var Administrator = require('../models/administrator.js');
+var AgendaItem = require('../models/agenda_items.js');
 var AfterTour = require('../models/after_tours.js');
 var AfterTourVa = require('../models/after_tour_vas.js');
 var AfterTourMd = require('../models/after_tour_mds.js');
@@ -14,7 +15,7 @@ router.get('/test',function(req,res,next){
 router.get('/admin_info',function(req,res,next){
   Administrator.find({},'',function(err,admin){
     if(err) console.log('err! - , ',err)
-    console.log('admin: ',admin);
+    //console.log('admin: ',admin);
     admin[0].after_tour.forEach((item)=>{
       console.log(JSON.stringify(item));
     })
@@ -22,6 +23,49 @@ router.get('/admin_info',function(req,res,next){
   })
 });
 
+router.get('/agenda_items',(req,res,next)=>{
+  AgendaItem.find({},'',(err,agenda)=>{
+    if(err) console.log('err! - ',err);
+    console.log('THE AGENDA - ',agenda)
+    res.json(agenda);
+  })
+});
+
+router.post('/update_agenda_item/:id',(req,res,next)=>{
+  AgendaItem.findByIdAndUpdate(req.params.id,req.body,(err)=>{
+    if(err) console.log('err - ',err);
+    AgendaItem.find({},'',(err,agenda)=>{
+      if(err) console.log('err - ',err);
+      res.json(agenda);
+    })
+  });
+});
+
+router.post('/add_agenda_item',(req,res,next)=>{
+  const post = new AgendaItem(req.body);
+    console.log('post - ',post);
+  post.save((err)=>{
+    if(err) console.log('err ! - ',err);
+    AgendaItem.find({},'',(err,agenda)=>{
+      if(err) console.log('err - ',err);
+      res.json(agenda);
+    })
+  });
+});
+
+router.post('/delete_event/:id',function(req,res,next){
+  const id = req.params.id;
+  //const agenda = req.body.agenda;
+  AgendaItem.findByIdAndRemove(id,(err)=>{
+    if(err) console.log('err')
+    // console.log('deleted agenda - ',agenda);
+    // res.send('success');
+    AgendaItem.find({},'',(err,agenda)=>{
+      console.log('deleted agenda - ',agenda)
+      res.json(agenda);
+    })
+  })
+});
 // this function is the best way I could come up with to automatically migrate data from my Administrator collection into the new separate collections in a few milliseconds
 
 router.get('/after_tour_mapping',function(req,res,next){
@@ -77,44 +121,132 @@ router.get('/after_tour_md',function(req,res,next){
   });
 });
 
-router.post('/submitagenda',function(req,res,next){
-  console.log('agenda: ',req.body);
-  const agenda = req.body.agenda;
-  //Agenda.update
-  Administrator.update({},{
-      'agenda':agenda,
-      'event_date':req.body.event_date,
-      'slots_available':req.body.slots_avail
-    },function(err){
-    if(err) ()=>console.log('error: ',err);
-    res.send('success');
-  });
-});
-router.post('/delete_event',function(req,res,next){
-  console.log('agenda: ',req.body);
-  const agenda = req.body.agenda;
-  //Agenda.update
-  Administrator.update({},{
-      'agenda':agenda
-    },function(err){
-    if(err) ()=>console.log('error: ',err);
-    res.send('success');
-  });
-});
-router.post('/update_after_tour_event',function(req,res,next){
-  console.log('tour type: ',req.body.data.type);
-  const tour_type = req.body.data.type;
-  const hotlist = req.body.data.hotlist;
-  console.log('hotlist: ',hotlist);
-  if(hotlist){
-    Administrator.update({},{
-        [tour_type]:hotlist
-      },function(err){
-      if(err) ()=>console.log('error: ',err);
-      res.send(hotlist);
+
+// router.post('/submitagenda',function(req,res,next){
+//   console.log('agenda: ',req.body);
+//   const agenda = req.body.agenda;
+//   //Agenda.update
+//   Administrator.update({},{
+//       'agenda':agenda,
+//       'event_date':req.body.event_date,
+//       'slots_available':req.body.slots_avail
+//     },function(err){
+//     if(err) ()=>console.log('error: ',err);
+//     res.send('success');
+//   });
+// });
+
+
+
+router.post('/delete_after_tour_event/:tour/:id',(req,res,next)=>{
+  console.log(req.params.tour, ' - ',req.params.id);
+  const tour = req.params.tour;
+  const gid = req.params.id;
+  switch(tour){
+    case 'after_tour':
+    AfterTour.findByIdAndRemove(gid,(err)=>{
+      if(err) console.log('err - ',err)
+      res.send('success');
     });
-  }
+    break;
+    case 'after_tour_va':
+    AfterTourVa.findByIdAndRemove(gid,(err)=>{
+      if(err) console.log('err - ',err)
+      res.send('success');
+    });
+    break;
+    case 'after_tour_md':
+    AfterTourMd.findByIdAndRemove(gid,(err)=>{
+      if(err) console.log('err - ',err)
+      res.send('success');
+    });
+    break;
+  };
 });
+
+router.post('/change_after_tour_event/:id/:tour',(req,res,next)=>{
+  console.log(`tour to update: ${req.body.items}, ${req.params.id}, ${req.params.tour}`)
+  const id = req.params.id;
+  const tour = req.params.tour;
+  switch(tour){
+    case 'after_tour':
+    AfterTour.findByIdAndUpdate(
+      id,
+      req.body.items,
+      {new:true},
+      (err)=>{
+        console.log('err -',err)
+        res.send(req.body.items);
+      }
+    )
+    break;
+    case 'after_tour_va':
+    AfterTourVa.findByIdAndUpdate(
+      id,
+      req.body.items,
+      {new:true},
+      (err)=>{
+        console.log('err -',err)
+        res.send(req.body.items);
+      }
+    )
+    break;
+    case 'after_tour_md':
+    AfterTourMd.findByIdAndUpdate(
+      id,
+      req.body.items,
+      {new:true},
+      (err)=>{
+        console.log('err -',err)
+        res.send(req.body.items);
+      }
+    )
+    break;
+  };
+});
+router.post('/create_after_tour_event/:tour',(req,res,next)=>{
+  console.log(`tour to update: ${req.body.items}, ${req.params.tour}`)
+  const tour = req.params.tour;
+  let house;
+  switch(tour){
+    case 'after_tour':
+    house = new AfterTour(req.body.items);
+    house.save((err,house)=>{
+      if(err) console.log('err! - ',err);
+      res.send(req.body.items);
+    });
+    break;
+    case 'after_tour_va':
+    house = new AfterTourVa(req.body.items);
+    house.save((err,house)=>{
+      if(err) console.log('err! - ',err);
+      res.send(req.body.items);
+    });
+    break;
+    case 'after_tour_md':
+    house = new AfterTourMd(req.body.items);
+    house.save((err,house)=>{
+      if(err) console.log('err! - ',err);
+      res.send(req.body.items);
+    });
+    break;
+  };
+});
+
+// router.post('/update_after_tour_event',function(req,res,next){
+//   console.log('tour type: ',req.body.data.type);
+//   const tour_type = req.body.data.type;
+//   const hotlist = req.body.data.hotlist;
+//   console.log('hotlist: ',hotlist);
+//   if(hotlist){
+//     Administrator.update({},{
+//         [tour_type]:hotlist
+//       },function(err){
+//       if(err) ()=>console.log('error: ',err);
+//       res.send(hotlist);
+//     });
+//   }
+// });
 router.post('/change_password',function(req,res,next){
   console.log('password: ',req.body);
   const password = req.body.password;

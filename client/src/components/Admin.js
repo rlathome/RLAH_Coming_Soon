@@ -11,8 +11,9 @@ export default class Admin extends Component{
       host_password:'',
       guest_password:'',
       hotlist_password:'',
-      agenda:'',
+      dc_agenda:[],
       after_tour:[],
+      agenda_currently_editing_id:'',
       after_tour_dc:[],
       after_tour_md:[],
       after_tour_va:[],
@@ -22,12 +23,19 @@ export default class Admin extends Component{
       next_tour:'',
       footer_logo_url:'',
       footer_logo_edit:'',
-      currently_editing:'agenda'
+      currently_editing:'agenda',
+      after_tour_currently_editing_id:''
     }
     this.dataService = new DataService();
   }
   componentDidMount(){
     this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
+    this.dataService.getAgendaInfo().then(agenda=>{
+      console.log('agenda in admin! ',agenda)
+      this.setState({
+        dc_agenda:agenda
+      })
+    });
     this.dataService.getAfterTour('after_tour').then(res=>{
         this.setState({
         after_tour:res['after_tour']
@@ -55,7 +63,7 @@ export default class Admin extends Component{
       alert('Guest Form Hide: '+res.data.toUpperCase());
     }).catch(err=>console.log('error hiding guests: ',err));
   }
-  submitEvent(){
+  submit_agenda_event(){
     let event_num = 0;
     let agenda = [];
     let event_date = this.refs.event_date.value;
@@ -106,31 +114,72 @@ export default class Admin extends Component{
       console.log('err - ',err);
     });
   }
-  deleteEvent(e){
-    let event = (e.target.id !=='0') ? parseInt(e.target.id)-1 : 0;
-    let agenda = this.state.agenda.slice();
-    console.log('deleting -',e.target.id)
-    if(agenda.length===1){
-      agenda=[];
-    }else{
-      agenda.splice(event,1);
-    }
-    console.log(agenda)
+  save_agenda_event(id){
+    console.log('UPDATING EVENT!! ',id)
+    const property_no = this.refs['property_no'+id].value;
+    const arrival = this.refs['arrival'+id].value;
+    const departure = this.refs['departure'+id].value;
+    const address = this.refs['address'+id].value;
+    const listing_agt = this.refs['listing_agt'+id].value;
+    const est_price = this.refs['est_price'+id].value;
+    const est_sq_ft = this.refs['est_sq_ft'+id].value;
+    const will_sell = this.refs['will_sell'+id].value;
+    const est_live = this.refs['est_live'+id].value;
+    const listing_url = this.refs['url'+id].value;
+
     const data = {
-      agenda
+      property_no,
+      listing_url,
+      arrival,
+      departure,
+      address,
+      listing_agt,
+      est_price,
+      est_sq_ft,
+      will_sell,
+      est_live
     }
+    this.dataService.updateAgendaItem(id,data).then((dc_agenda)=>{
+      this.setState({
+        dc_agenda,
+        agenda_currently_editing_id:''
+      });
+    })
+  }
+  delete_agenda_event(id){
     if(window.confirm('Are you sure?')){
-        axios.post(url+'/info/delete_event',data).then((response)=>{
-        console.log('success -',response)
-        if(response.data ==='success'){
-          this.setState({
-            agenda
-          });
-        }
+        axios.post(url+'/info/delete_event/'+id).then((agenda)=>{
+          console.log('deleted agenda - ',agenda.data)
+        this.setState({
+          agenda_currently_editing_id:'',
+          dc_agenda:agenda.data
+        });
       }).catch((err)=>[
         console.log('err - ',err)
       ]);
     }
+  }
+  // This function adds a new editable row for the main agenda page:
+  addEvent(){
+    const data ={
+      address:"",
+      listing_url:"",
+      arrival:"",
+      departure:"",
+      est_price:"",
+      est_sq_ft:"",
+      listing_agt:"",
+      property_no:"",
+      will_sell:"",
+      est_live:""
+    };
+    this.dataService.addAgendaItem(data).then((agenda)=>{
+      console.log('AGENDA IN FUNC ',agenda)
+      this.setState({
+        dc_agenda:agenda,
+        agenda_currently_editing_id:agenda[agenda.length-1]._id
+      });
+    });
   }
   changePassword(type){
     let password;
@@ -201,80 +250,59 @@ export default class Admin extends Component{
       console.log('err - ',err);
     });
   }
-  // This function adds a new editable row for the main agenda page:
-  addEvent(){
-    let agenda = this.state.agenda;
-    console.log(agenda)
-    agenda.push({
-      address:"",
-      listing_url:"",
-      arrival:"",
-      departure:"",
-      est_price:"",
-      est_sq_ft:"",
-      listing_agt:"",
-      property_no:"",
-      will_sell:"",
-      est_live:""
-    });
-    this.setState({
-      agenda
-    });
-  }
+
 // this function will send the after tour event to the database and store/update it:
+  updateAfterTourEvent(tour,id){
 
-  submitAfterTourEvent(tour){
-    let event_num = 0;
-    let hotlist = [];
-    let amount = this.state[tour].length;
-    for(let i=1; i<=amount; i++){
-      let address_ref = `${tour}_address${i}`;
-      console.log('submitAfterTour address_ref: ',address_ref)
-      let listing_url_ref = `${tour}_url${i}`;
-      let listing_agt_ref = `${tour}_listing_agt${i}`;
-      let est_price_ref = `${tour}_est_price${i}`;
-      let est_sq_ft_ref = `${tour}_est_sq_ft${i}`;
-      let will_sell_ref = `${tour}_will_sell${i}`;
-      let est_live_ref = `${tour}_est_live${i}`;
-      const address = this.refs[address_ref].value;
-      const listing_agt = this.refs[listing_agt_ref].value;
-      const listing_url = this.refs[listing_url_ref].value;
-      const est_price = this.refs[est_price_ref].value;
-      const est_sq_ft = this.refs[est_sq_ft_ref].value;
-      const will_sell = this.refs[will_sell_ref].value;
-      const est_live = this.refs[est_live_ref].value;
+    let address_ref = `address${id}`;
+    console.log('submitAfterTour address_ref: ',address_ref)
+    let listing_url_ref = `url${id}`;
+    let listing_agt_ref = `listing_agt${id}`;
+    let est_price_ref = `est_price${id}`;
+    let est_sq_ft_ref = `est_sq_ft${id}`;
+    let will_sell_ref = `will_sell${id}`;
+    let est_live_ref = `est_live${id}`;
 
-      const id = this.refs[est_price_ref].id;
-      console.log('address ref id: ', id);
-      let items = {
-        address,
-        listing_url,
-        listing_agt,
-        est_price,
-        est_sq_ft,
-        will_sell,
-        est_live
-      }
-      hotlist.push(items);
+    const address = this.refs[address_ref].value;
+    const listing_agt = this.refs[listing_agt_ref].value;
+    const listing_url = this.refs[listing_url_ref].value;
+    const est_price = this.refs[est_price_ref].value;
+    const est_sq_ft = this.refs[est_sq_ft_ref].value;
+    const will_sell = this.refs[will_sell_ref].value;
+    const est_live = this.refs[est_live_ref].value;
+
+    let items = {
+      address,
+      listing_url,
+      listing_agt,
+      est_price,
+      est_sq_ft,
+      will_sell,
+      est_live
     }
-    console.log('our hotlist: ',hotlist);
-    const data = {
-      hotlist,
-      type:tour
-    };
-    // axios.post(url+'/info/update_after_tour_event',{data}).then((response)=>{
-    //   console.log('success: ',response);
-    //   alert('your hotlist agenda has been updated');
-    // }).catch((err)=>{
-    //   console.log('err - ',err);
-    // });
+    console.log('our submitted items, ',items);
+    if(id=="new"){
+      axios.post(url+`/info/create_after_tour_event/${tour}`,{items}).then((response)=>{
+        console.log('success: ',response);
+        alert('your hotlist agenda has been updated');
+      }).catch((err)=>{
+        console.log('err - ',err);
+      });
+    }else{
+      axios.post(url+`/info/change_after_tour_event/${id}/${tour}`,{items}).then((response)=>{
+        console.log('success: ',response);
+        alert('your hotlist agenda has been updated');
+      }).catch((err)=>{
+        console.log('err - ',err);
+      });
+    }
   }
 
-  // This function will generate a new (editable) row on whichever hotlist table its argument specifies:
   addAfterTourEvent(tour_area){
     let tour_table = this.state[tour_area];
     console.log(tour_table)
     tour_table.push({
+      _id:"new",
       address:"",
       listing_url:"",
       arrival:"",
@@ -287,43 +315,24 @@ export default class Admin extends Component{
       est_live:""
     });
     this.setState({
-      [tour_area]:tour_table
+      [tour_area]:tour_table,
+      after_tour_currently_editing_id:'new'
     });
   }
-//this function sets up a deleted row in the component state, only pressing 'UPDATE' will send request to DB.
-// first argument is event object, second object is string specifying which tour area:
-  deleteAfterTourEvent(e, tour_area){
-    let event = (e.target.id !=='0') ? parseInt(e.target.id)-1 : 0;
 
-    console.log('deleting - ',event)
-    let current_hotlist = this.state[tour_area].slice();
-    let hotlist = current_hotlist;
-    // console.log('current_hotlist - ',current_hotlist);
-    if(current_hotlist.length===1){
-      hotlist=[];
-    }else{
-      hotlist = current_hotlist.splice(event,1);
-    }
-    console.log('deleted - ',current_hotlist)
-    const data = {
-      type:tour_area,
-      hotlist:current_hotlist
-    }
-    console.log('saving - ',data)
+
+  deleteAfterTourEvent(tour,id){
     if(window.confirm('Are you sure?')){
-        axios.post(url+'/info/update_after_tour_event',{data}).then((response)=>{
-        console.log('success -',response)
-        window.alert('Your row has been deleted')
-        this.setState({
-          [tour_area]:[]
-        });
-        this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
-      }).catch((err)=>[
+      axios.post(`${url}/info/delete_after_tour_event/${tour}/${id}`).then((res)=>{
+        console.log('success - ',res);
+        //window.alert('Your event has been deleted')
+        //this.dataService.getAdminInfo(this.footerLogoEdit).then(res=>this.setState(res));
+        this.dataService.getAfterTour(tour).then(res=>this.setState(res));
+      }).catch((err)=>{
         console.log('err - ',err)
-      ]);
+      });
     }
   }
-
   footerLogoEdit(footer_logo_url){
     return (
       <div className='main_logo flex_col' >
@@ -339,15 +348,27 @@ export default class Admin extends Component{
       currently_editing:view
     });
   }
+  editAfterTourEvent(id){
+    this.setState({
+      after_tour_currently_editing_id:id
+    });
+  }
+  edit_agenda_item(id){
+    console.log('editing ',id)
+    this.setState({
+      agenda_currently_editing_id:id
+    })
+  }
   render(){
-    let { logo, footer_logo_url, after_tour, after_tour_dc, after_tour_md, after_tour_va, currently_editing } = this.state;
+    let { logo, footer_logo_url, after_tour, after_tour_dc, after_tour_md, after_tour_va, currently_editing, after_tour_currently_editing_id , dc_agenda, agenda_currently_editing_id} = this.state;
     console.log('VIRGINIA - ',after_tour_va);
     console.log('footer logo: ',footer_logo_url);
+    console.log('render agenda: ',dc_agenda)
     // const footer_logo_url = (this.state.footer_logo_url !== '')
     // const logo = (this.state.logo !=='') ? this.state.logo : '';
     // const footer_logo_url = (this.state.footer_logo_url !== '') ? this.state.footer_logo_url : '';
     let event_num = 0;
-    let ts_agenda = this.state.agenda;
+    //let ts_agenda = this.state.agenda;
     let next_tour_date = (this.state.next_tour !=='') ? (
       <section className = "admin_passwords">
         <h3>Next Tour</h3>
@@ -363,22 +384,23 @@ export default class Admin extends Component{
         <div className="admin_passwords">Hotlist password: <input ref="hotlist_pass" type="text" defaultValue={this.state.hotlist_password} /><span onClick={()=>this.changePassword('hotlist_password')} className="btn btn-primary">Update</span></div>
       </div>
     ) : '';
-    let agenda = (ts_agenda !=='' && ts_agenda !== undefined) ? ts_agenda.map((event)=>{
-      event_num++;
-      const property_no = 'property_no'+event_num;
-      const arrival = 'arrival'+event_num;
-      const departure = 'departure'+event_num;
-      const address = 'address'+event_num;
-      const listing_agt = 'listing_agt'+event_num;
-      const est_price = 'est_price'+event_num;
-      const est_sq_ft = 'est_sq_ft'+event_num;
-      const will_sell = 'will_sell'+event_num;
-      const est_live = 'est_live'+event_num;
-      const url = 'url'+event_num;
+    const agenda = dc_agenda.map((event)=>{
+      console.log('EVENT!! ',event)
+      const property_no = 'property_no'+event._id;
+      const arrival = 'arrival'+event._id;
+      const departure = 'departure'+event._id;
+      const address = 'address'+event._id;
+      const listing_agt = 'listing_agt'+event._id;
+      const est_price = 'est_price'+event._id;
+      const est_sq_ft = 'est_sq_ft'+event._id;
+      const will_sell = 'will_sell'+event._id;
+      const est_live = 'est_live'+event._id;
+      const url = 'url'+event._id;
       const listing_url = (event.listing_url) ? event.listing_url : '';
-      return(
+      return(this.state.agenda_currently_editing_id == event._id)?(
         <tr className="admin_row">
-          <button onClick={this.deleteEvent.bind(this)} id={event_num}>Delete</button>
+          <button class="admin-btn-style btn btn-success" onClick={()=>this.save_agenda_event(event._id)} id={event._id}>Save</button>
+          <button class="admin-btn-style btn btn-warning" onClick={()=>this.delete_agenda_event(event._id)} id={event._id}>Delete</button>
           <td><textarea ref={property_no} className="table_input" type="text" defaultValue={event.property_no} /></td>
           <td><textarea ref={arrival} className="table_input" type="text" defaultValue={event.arrival}/></td>
           <td><textarea ref={departure} className="table_input" type="text" defaultValue={event.departure}/></td>
@@ -390,8 +412,22 @@ export default class Admin extends Component{
           <td><textarea ref={will_sell} className="table_input" type="text" defaultValue={event.will_sell}/></td>
           <td><textarea ref={est_live} className="table_input" type="text" defaultValue={event.est_live}/></td>
         </tr>
+      ):(
+        <tr className="admin_row">
+          <button class="btn btn-default" onClick={()=>this.edit_agenda_item(event._id)} id={event_num}>Edit</button>
+          <td>{event.property_no} </td>
+          <td>{event.arrival}</td>
+          <td>{event.departure}</td>
+          <td>{listing_url}</td>
+          <td>{event.address}</td>
+          <td>{event.listing_agt}</td>
+          <td>{event.est_price}</td>
+          <td>{event.est_sq_ft}</td>
+          <td>{event.will_sell}</td>
+          <td>{event.est_live}</td>
+        </tr>
       );
-    }) : '';
+    });
 
 
     // This function generates the editable hotlist table for any tour[array] & tour_type[string] of properties passed into it:
@@ -400,30 +436,45 @@ export default class Admin extends Component{
       let evt_num = 0;
       return tour.map((event)=>{
       evt_num++;
+      const eid = event._id;
       console.log('mapping ',tour_type, event,' events now');
-      const address_ref = `${tour_type}_address`+evt_num;
+      const address_ref = `address${eid}`;
       console.log('after_tour_data address_ref: ',address_ref);
-      const listing_agt_ref = `${tour_type}_listing_agt`+evt_num;
-      const est_price_ref = `${tour_type}_est_price`+evt_num;
-      const est_sq_ft_ref = `${tour_type}_est_sq_ft`+evt_num;
-      const will_sell_ref = `${tour_type}_will_sell`+evt_num;
-      const est_live_ref = `${tour_type}_est_live`+evt_num;
-      const url_ref = `${tour_type}_url`+evt_num;
+      const listing_agt_ref = `listing_agt${eid}`;
+      const est_price_ref = `est_price${eid}`;
+      const est_sq_ft_ref = `est_sq_ft${eid}`;
+      const will_sell_ref = `will_sell${eid}`;
+      const est_live_ref = `est_live${eid}`;
+      const url_ref = `url${eid}`;
       console.log('my url_ref: ',url_ref)
       const listing_url = (event.listing_url) ? event.listing_url : '';
-      return(
-        <tr>
-          <button onClick={(e)=>this.deleteAfterTourEvent(e,tour_type)} id={evt_num}>Delete</button>
-          <td id="aftertour_address"><textarea ref={address_ref} className="table_input" type="text" defaultValue={event.address}/></td>
-          <td id="aftertour_url"><textarea ref={url_ref} className="table_input" type="text" defaultValue={listing_url}/></td>
-          <td><textarea ref={listing_agt_ref} className="table_input" type="text" defaultValue={event.listing_agt}/></td>
-          <td className="aftertour_price"><textarea ref={est_price_ref} className="table_input" type="text" defaultValue={event.est_price} id={event._id}/></td>
-          <td className="aftertour_sqft"><textarea ref={est_sq_ft_ref} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
-          <td className="aftertour_willsell"><textarea ref={will_sell_ref} className="table_input" type="text" defaultValue={event.will_sell}/></td>
-          <td className="aftertour_willsell"><textarea ref={est_live_ref} className="table_input" type="text" defaultValue={event.est_live}/></td>
-        </tr>
-      );
-    });}
+      return (after_tour_currently_editing_id==event._id) ? (
+            <tr>
+              <button class="btn btn-warning admin-btn-style" onClick={(e)=>this.deleteAfterTourEvent(tour_type,eid)} id={event._id}>Delete</button>
+              <button class="btn btn-success admin-btn-style" onClick={(e)=>this.updateAfterTourEvent(tour_type,event._id)} id={event._id}>Save</button>
+
+              <td id="aftertour_address"><textarea ref={address_ref} className="table_input" type="text" defaultValue={event.address}/></td>
+              <td id="aftertour_url"><textarea ref={url_ref} className="table_input" type="text" defaultValue={listing_url}/></td>
+              <td><textarea ref={listing_agt_ref} className="table_input" type="text" defaultValue={event.listing_agt}/></td>
+              <td className="aftertour_price"><textarea ref={est_price_ref} className="table_input" type="text" defaultValue={event.est_price} id={event._id}/></td>
+              <td className="aftertour_sqft"><textarea ref={est_sq_ft_ref} className="table_input" type="text" defaultValue={event.est_sq_ft}/></td>
+              <td className="aftertour_willsell"><textarea ref={will_sell_ref} className="table_input" type="text" defaultValue={event.will_sell}/></td>
+              <td className="aftertour_willsell"><textarea ref={est_live_ref} className="table_input" type="text" defaultValue={event.est_live}/></td>
+            </tr>
+          ):(
+            <tr>
+              <button class="btn btn-default admin-btn-style" onClick={(e)=>this.editAfterTourEvent(event._id)} id={event._id}>Edit</button>
+              <td id="aftertour_address">{event.address}</td>
+              <td id="aftertour_url">{listing_url}</td>
+              <td>{event.listing_agt}</td>
+              <td className="aftertour_price">{event.est_price}</td>
+              <td className="aftertour_sqft">{event.est_sq_ft}</td>
+              <td className="aftertour_willsell">{event.will_sell}</td>
+              <td className="aftertour_willsell">{event.est_live}</td>
+            </tr>
+          );
+        });
+      }
 
     let agenda_date = (this.state.event_date !=='') ? (
       <div className="agenda_date">
@@ -509,7 +560,8 @@ export default class Admin extends Component{
               </div>
               { agenda_date }
               { slots_avail }
-              <section className="agenda_table_container">
+
+                <section className="agenda_table_container">
                 <table className="agenda_table admin_agenda_table admin_container">
                   <tbody>
                     <tr>
@@ -527,10 +579,13 @@ export default class Admin extends Component{
                     </tr>
                     { agenda }
                 </tbody>
-                <button className="add_event" onClick={this.addEvent.bind(this)}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
+                <button className="add_event btn btn-default" onClick={this.addEvent.bind(this)}>Add Row</button>
                 </table>
               </section>
-                <span onClick={this.submitEvent.bind(this)} className="main_submit adm_submit">UPDATE</span>
+
+            {
+
+            }
                 <span onClick={()=>window.print()} className="main_submit">PRINT</span>
             </div>
         )}
@@ -588,9 +643,8 @@ export default class Admin extends Component{
                   { hotlist_header }
                   { after_tour_data(after_tour,'after_tour') }
                 </tbody>
-                <button className="add_event" onClick={()=>this.addAfterTourEvent('after_tour')}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
+                <button className="add_event btn btn-default" onClick={()=>this.addAfterTourEvent('after_tour')}>Add Row</button>
               </table><br/>
-              <span onClick={()=>this.submitAfterTourEvent('after_tour')} className="main_submit adm_submit">UPDATE DC</span>
             </section>
           )}
           {/*Maryland Hotlist:*/}
@@ -602,9 +656,8 @@ export default class Admin extends Component{
                   { hotlist_header }
                   { after_tour_data(after_tour_md,'after_tour_md') }
                 </tbody>
-                <button className="add_event" onClick={()=>this.addAfterTourEvent('after_tour_md')}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
+                <button className="add_event btn btn-default" onClick={()=>this.addAfterTourEvent('after_tour_md')}>Add Row</button>
               </table><br/>
-              <span onClick={()=>this.submitAfterTourEvent('after_tour_md')} className="main_submit adm_submit">UPDATE MD</span>
             </section>
           )}
           {/*Virginia Hotlist:*/}
@@ -618,7 +671,6 @@ export default class Admin extends Component{
                 </tbody>
                 <button className="add_event" onClick={()=>this.addAfterTourEvent('after_tour_va')}>Add Row</button><span className="add_event">(Press Update after adding event information)</span>
               </table><br/>
-              <span onClick={()=>this.submitAfterTourEvent('after_tour_va')} className="main_submit adm_submit">UPDATE VA</span>
             </section>
           )}
           <div className="bottom_buffer"></div>

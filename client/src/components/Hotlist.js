@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import LogoArea from './LogoArea';
 import Footer from './Footer';
 import { APIService } from '../APIs/apiService';
+import { DataService } from '../APIs/dataService';
 
 export default class Hotlist extends Component{
   constructor(props){
@@ -13,20 +14,35 @@ export default class Hotlist extends Component{
       after_tour_md:'',
       after_tour_va:''
     }
-    this.api = new APIService();
+    this.dataService = new DataService();
   }
   componentDidMount(){
-    this.api.get('info/admin_info').then((agenda)=>{
+    this.dataService.getAdminInfo().then((agenda)=>{
       console.log('the agenda: ',agenda.data[0].after_tour);
       this.setState({
-        agenda:agenda.data[0],
-        after_tour:agenda.data[0].after_tour,
-        after_tour_va:agenda.data[0].after_tour_va,
-        after_tour_md:agenda.data[0].after_tour_md
+        agenda:agenda.data[0]
       });
     }).catch((err)=>{
       console.log('err - ',err);
     })
+    this.dataService.getAfterTour('after_tour').then(res=>{
+        this.setState({
+        after_tour:res['after_tour']
+      });
+    });
+    this.dataService.getAfterTour('after_tour_va').then(res=>{
+      console.log('setting va listings: ',res['after_tour_va'])
+        this.setState({
+        after_tour_va:res['after_tour_va']
+      });
+    });
+
+    this.dataService.getAfterTour('after_tour_md').then(res=>{
+      console.log('setting md listings: ',res['after_tour_md'])
+        this.setState({
+        after_tour_md:res['after_tour_md']
+      });
+    });
   }
   componentDidUpdate() {
     let hash = this.props.location.hash.replace('#', '');

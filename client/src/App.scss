@@ -462,7 +462,9 @@ body{
     margin-left:1.75vw;
   }
 }
-
+.admin-btn-style{
+  min-width:10vw;
+}
 .agenda_date{
   font-size:2.75em;
   // iphone 6 portrait
@@ -518,7 +520,7 @@ table{
   }
 }
 .table_input{
-  width:80%;
+  width:100%;
 }
 .admin_passwords{
   input{

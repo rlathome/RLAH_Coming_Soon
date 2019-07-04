@@ -30,6 +30,34 @@ export class DataService{
       });
     })
   }
+  addAgendaItem(data){
+    return new Promise((res,rej)=>{
+      this.api.post('info/add_agenda_item',data).then((agenda)=>
+      {
+        res(agenda.data);
+      });
+    });
+  }
+  updateAgendaItem(id,data){
+    return new Promise((res,rej)=>{
+      this.api.post('info/update_agenda_item/'+id,data).then((agenda)=>{
+        console.log('updated agenda: ',agenda);
+        res(agenda.data);
+      }).catch((err)=>{
+        console.log('err - ',err);
+      })
+    })
+  }
+  getAgendaInfo(){
+    return new Promise((res,rej)=>{
+      this.api.get('info/agenda_items').then((agenda)=>{
+        console.log('our agenda in dataservice: ',agenda);
+        res(agenda.data);
+      }).catch((err)=>{
+        console.log('err -',err);
+      })
+    });
+  }
   getAfterTour(type){
       return new Promise((res,rej)=>{
         this.api.get(`info/${type}`).then((after_tour)=>{

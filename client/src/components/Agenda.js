@@ -9,21 +9,19 @@ export default class Agenda extends Component{
   constructor(props){
     super(props);
     this.state={
-      agenda:'',
+      agenda:[],
       after_tour:''
     }
     this.api = new APIService();
     this.dataService = new DataService();
   }
   componentDidMount(){
-    // this.api.get('info/admin_info').then((agenda)=>{
-    this.dataService.getAdminInfo().then((admin_info)=>{
+    this.dataService.getAgendaInfo().then((agenda)=>{
 
-      console.log('Admin getting back: ',admin_info.agenda)
-      const agenda = admin_info.agenda;
+      console.log('Agenda getting back: ',agenda)
+
       this.setState({
-        agenda,
-        after_tour:agenda.after_tour
+        agenda
       });
     }).catch((err)=>{
       console.log('err - ',err);

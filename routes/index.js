@@ -122,21 +122,6 @@ router.get('/after_tour_md',function(req,res,next){
 });
 
 
-// router.post('/submitagenda',function(req,res,next){
-//   console.log('agenda: ',req.body);
-//   const agenda = req.body.agenda;
-//   //Agenda.update
-//   Administrator.update({},{
-//       'agenda':agenda,
-//       'event_date':req.body.event_date,
-//       'slots_available':req.body.slots_avail
-//     },function(err){
-//     if(err) ()=>console.log('error: ',err);
-//     res.send('success');
-//   });
-// });
-
-
 
 router.post('/delete_after_tour_event/:tour/:id',(req,res,next)=>{
   console.log(req.params.tour, ' - ',req.params.id);
@@ -233,20 +218,6 @@ router.post('/create_after_tour_event/:tour',(req,res,next)=>{
   };
 });
 
-// router.post('/update_after_tour_event',function(req,res,next){
-//   console.log('tour type: ',req.body.data.type);
-//   const tour_type = req.body.data.type;
-//   const hotlist = req.body.data.hotlist;
-//   console.log('hotlist: ',hotlist);
-//   if(hotlist){
-//     Administrator.update({},{
-//         [tour_type]:hotlist
-//       },function(err){
-//       if(err) ()=>console.log('error: ',err);
-//       res.send(hotlist);
-//     });
-//   }
-// });
 router.post('/change_password',function(req,res,next){
   console.log('password: ',req.body);
   const password = req.body.password;

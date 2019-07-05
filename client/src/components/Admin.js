@@ -357,8 +357,16 @@ export default class Admin extends Component{
     console.log('editing ',id)
     this.setState({
       agenda_currently_editing_id:id
-    })
+    });
+    // setTimeout(()=>{
+    //   document.getElementById(id).addEventListener("blur",()=>this.setState({agenda_currently_editing_id:''}));
+    // },1000);
   }
+  // end_editing(){
+  //   this.setState({
+  //     agenda_currently_editing_id:''
+  //   });
+  // }
   render(){
     let { logo, footer_logo_url, after_tour, after_tour_dc, after_tour_md, after_tour_va, currently_editing, after_tour_currently_editing_id , dc_agenda, agenda_currently_editing_id} = this.state;
     console.log('VIRGINIA - ',after_tour_va);
@@ -398,9 +406,9 @@ export default class Admin extends Component{
       const url = 'url'+event._id;
       const listing_url = (event.listing_url) ? event.listing_url : '';
       return(this.state.agenda_currently_editing_id == event._id)?(
-        <tr className="admin_row">
-          <button class="admin-btn-style btn btn-success" onClick={()=>this.save_agenda_event(event._id)} id={event._id}>Save</button>
-          <button class="admin-btn-style btn btn-warning" onClick={()=>this.delete_agenda_event(event._id)} id={event._id}>Delete</button>
+        <tr id={event._id} className="admin_row">
+          <button class="admin-btn-style btn btn-success" onClick={()=>this.save_agenda_event(event._id)} >Save</button>
+          <button class="admin-btn-style btn btn-warning" onClick={()=>this.delete_agenda_event(event._id)} >Delete</button>
           <td><textarea ref={property_no} className="table_input" type="text" defaultValue={event.property_no} /></td>
           <td><textarea ref={arrival} className="table_input" type="text" defaultValue={event.arrival}/></td>
           <td><textarea ref={departure} className="table_input" type="text" defaultValue={event.departure}/></td>
@@ -414,7 +422,7 @@ export default class Admin extends Component{
         </tr>
       ):(
         <tr className="admin_row">
-          <button class="btn btn-default" onClick={()=>this.edit_agenda_item(event._id)} id={event_num}>Edit</button>
+          <button class="btn btn-default" onClick={()=>this.edit_agenda_item(event._id)}>Edit</button>
           <td>{event.property_no} </td>
           <td>{event.arrival}</td>
           <td>{event.departure}</td>

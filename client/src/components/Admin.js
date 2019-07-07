@@ -594,6 +594,7 @@ export default class Admin extends Component{
             {
 
             }
+                <span onClick={this.submitEvent.bind(this)} className="main_submit adm_submit">UPDATE</span>
                 <span onClick={()=>window.print()} className="main_submit">PRINT</span>
             </div>
         )}

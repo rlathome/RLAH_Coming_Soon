@@ -4,6 +4,8 @@ import LogoArea from './LogoArea';
 import Footer from './Footer';
 import { APIService } from '../APIs/apiService';
 import { DataService } from '../APIs/dataService';
+import HotlistMap from './HotlistMap';
+
 
 export default class Hotlist extends Component{
   constructor(props){
@@ -14,7 +16,8 @@ export default class Hotlist extends Component{
       after_tour_md:'',
       after_tour_va:'',
       just_sorted:'',
-      arrow:true
+      arrow:true,
+      view:'list'
     }
     this.dataService = new DataService();
   }
@@ -97,9 +100,14 @@ export default class Hotlist extends Component{
       just_sorted:column_name
     });
   }
+  changeView(view){
+    this.setState({
+      view
+    });
+  }
 
   render(){
-    const {after_tour, after_tour_md, after_tour_va, just_sorted, arrow} = this.state;
+    const {after_tour, after_tour_md, after_tour_va, just_sorted, arrow, view} = this.state;
     const table_contents = (type) => {
       return this.state[type].map((event)=>{
         const address = (event.listing_url) ? (
@@ -120,6 +128,14 @@ export default class Hotlist extends Component{
       });
     }
     let sort_arrow = (arrow==true) ? (<span><i className="fa fa-angle-up"></i></span>) : (<span><i className="fa fa-angle-down"></i></span>);
+
+    const map_props = {
+      center:{lat:38.910136,lng:-77.042510},
+      after_tour,
+      after_tour_md,
+      after_tour_va
+    }
+
     return(
       <main>
       <div className="comingsoon_logo">
@@ -128,19 +144,32 @@ export default class Hotlist extends Component{
       <div ref="after_tour" className="host_title">
         HOT LIST
       </div>
-      <section className="qualifications_msg">
-        <ul className="hotlist_title_list">
-          <li>To submit a property to the Hot List<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform"> click here</a></li>
-          <li>Additional off-market properties that may not be on the sponsored tour</li>
-          <li>Scroll down to view the complete list sorted by DC, MD, & VA</li>
-          <li>If a property address is blue, click for additional media</li>
-        </ul>
-      </section>
 
-      <div className="click_to_sort">Click a column to sort by</div>
+      <div>View by</div>
+      <div>
+        <span className='view-by-btn' onClick={()=>this.changeView('list')}>List</span>
+        <span className='view-by-btn' onClick={()=>this.changeView('map')}>Map</span>
+      </div>
 
+      {
+          view === 'list' && (  <section className="qualifications_msg">
+              <ul className="hotlist_title_list">
+                <li>To submit a property to the Hot List<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform"> click here</a></li>
+                <li>Additional off-market properties that may not be on the sponsored tour</li>
+                <li>Scroll down to view the complete list sorted by DC, MD, & VA</li>
+                <li>If a property address is blue, click for additional media</li>
+              </ul>
+            </section>)
+      }
+      {
+        view === 'list' && (
+          <div className="click_to_sort">Click a column to sort by</div>
+        )
+      }
+
+      <section>
         {
-          after_tour && (
+          after_tour && view === 'list' && (
           <div>
             <section className="agenda_table_container after_tour_table">
 
@@ -153,12 +182,12 @@ export default class Hotlist extends Component{
                 <tbody>
                 <div className="row_header">DC</div>
                   <tr>
-                    <th onClick={(e)=>this.onSort(e,'address','after_tour')}>Address {(sort_arrow)}</th>
-                    <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour')} className="aftertour_agent">Listing Agent</th>
-                    <th onClick={(e)=>this.onSort(e,'est_price','after_tour')} className="aftertour_price">Est. Price</th>
-                    <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour')} className="aftertour_sqft">BR/BA</th>
-                    <th onClick={(e)=>this.onSort(e,'will_sell','after_tour')} className="aftertour_willsell">Sell Off Mkt?</th>
-                    <th onClick={(e)=>this.onSort(e,'est_live','after_tour')} className="aftertour_est_live">Est. Live Date</th>
+                  <th onClick={(e)=>this.onSort(e,'address','after_tour')}>Address {(sort_arrow)}</th>
+                  <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour')} className="aftertour_agent">Listing Agent</th>
+                  <th onClick={(e)=>this.onSort(e,'est_price','after_tour')} className="aftertour_price">Est. Price</th>
+                  <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour')} className="aftertour_sqft">BR/BA</th>
+                  <th onClick={(e)=>this.onSort(e,'will_sell','after_tour')} className="aftertour_willsell">Sell Off Mkt?</th>
+                  <th onClick={(e)=>this.onSort(e,'est_live','after_tour')} className="aftertour_est_live">Est. Live Date</th>
                   </tr>
 
                   {
@@ -178,12 +207,12 @@ export default class Hotlist extends Component{
                   }
                   <div className="row_header">VA</div>
                   <tr>
-                    <th onClick={(e)=>this.onSort(e,'address','after_tour_va')}>Address</th>
-                    <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour_va')} className="aftertour_agent">Listing Agent</th>
-                    <th onClick={(e)=>this.onSort(e,'est_price','after_tour_va')} className="aftertour_price">Est. Price</th>
-                    <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour_va')} className="aftertour_sqft">BR/BA</th>
-                    <th onClick={(e)=>this.onSort(e,'will_sell','after_tour_va')} className="aftertour_willsell">Sell Off Mkt?</th>
-                    <th onClick={(e)=>this.onSort(e,'est_live','after_tour_va')} className="aftertour_est_live">Est. Live Date</th>
+                  <th onClick={(e)=>this.onSort(e,'address','after_tour_va')}>Address</th>
+                  <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour_va')} className="aftertour_agent">Listing Agent</th>
+                  <th onClick={(e)=>this.onSort(e,'est_price','after_tour_va')} className="aftertour_price">Est. Price</th>
+                  <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour_va')} className="aftertour_sqft">BR/BA</th>
+                  <th onClick={(e)=>this.onSort(e,'will_sell','after_tour_va')} className="aftertour_willsell">Sell Off Mkt?</th>
+                  <th onClick={(e)=>this.onSort(e,'est_live','after_tour_va')} className="aftertour_est_live">Est. Live Date</th>
                   </tr>
                   {
                     after_tour_va && table_contents('after_tour_va')
@@ -195,10 +224,18 @@ export default class Hotlist extends Component{
           </div>
           )
         }
-        <section className="submit_btn hidden-xs">
-          <span onClick={()=>window.print()} className="main_submit">PRINT</span>
-        </section>
-        <LogoArea />
+      </section>
+      <section>
+      {
+        view === 'map' && (
+          <HotlistMap {...map_props} />
+        )
+      }
+      </section>
+      <section className="submit_btn hidden-xs">
+        <span onClick={()=>window.print()} className="main_submit">PRINT</span>
+      </section>
+      <LogoArea />
       <Footer/>
       </main>
     );

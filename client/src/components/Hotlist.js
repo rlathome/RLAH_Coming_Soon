@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import LogoArea from './LogoArea';
 import Footer from './Footer';
+import HotlistMap from './HotlistMap';
 import { APIService } from '../APIs/apiService';
 import { DataService } from '../APIs/dataService';
 
@@ -12,7 +13,8 @@ export default class Hotlist extends Component{
       agenda:'',
       after_tour:'',
       after_tour_md:'',
-      after_tour_va:''
+      after_tour_va:'',
+      view:'list'
     }
     this.dataService = new DataService();
   }
@@ -53,8 +55,13 @@ export default class Hotlist extends Component{
           }
       }
   }
+  changeView(view){
+    this.setState({
+      view
+    });
+  }
   render(){
-    const {after_tour, after_tour_md, after_tour_va} = this.state;
+    const {after_tour, after_tour_md, after_tour_va, view} = this.state;
     const table_contents = (type) => {
       return this.state[type].map((event)=>{
         const address = (event.listing_url) ? (
@@ -74,6 +81,12 @@ export default class Hotlist extends Component{
         );
       });
     }
+    const map_props = {
+      center:{lat:38.910136,lng:-77.042510},
+      after_tour,
+      after_tour_md,
+      after_tour_va
+    }
     return(
       <main>
       <div className="comingsoon_logo">
@@ -81,6 +94,10 @@ export default class Hotlist extends Component{
       </div>
       <div ref="after_tour" className="host_title">
         HOT LIST
+      </div>
+      <div>View by</div>
+      <div>
+      <span onClick={()=>this.changeView('list')}>List</span><span onClick={()=>this.changeView('map')}>Map</span>
       </div>
       <section className="qualifications_msg">
         <ul className="hotlist_title_list">
@@ -90,7 +107,7 @@ export default class Hotlist extends Component{
           <li>If a property address is blue, click for additional media</li>
         </ul>
       </section>
-
+      <section>
         {
           after_tour && (
           <div>
@@ -147,6 +164,14 @@ export default class Hotlist extends Component{
           </div>
           )
         }
+      </section>
+      <section>
+        {
+          view === 'map' && (
+            <HotlistMap {...map_props} />
+          )
+        }
+      </section>
         <section className="submit_btn hidden-xs">
           <span onClick={()=>window.print()} className="main_submit">PRINT</span>
         </section>

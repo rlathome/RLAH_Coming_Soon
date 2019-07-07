@@ -1300,3 +1300,13 @@ tbody > tr:nth-child(1) {
 .privacy_policy:hover {
   color: #000;
 }
+
+.hotlist_map_container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.hotlist_object {
+  width: 90vw;
+  height: 100vh;
+}

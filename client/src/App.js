@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import HostMap from './components/HostMap';
 import Hotlist from './components/Hotlist';
+import Sortlist from './components/Sortlist';
 import GuestLoginReact from './components/GuestLoginReact';
 import Login from './components/Login';
 import GuestRegistration from './components/GuestRegistration';
@@ -264,7 +265,8 @@ class App extends Component {
             <Route path='/agenda' component = { Agenda }/>
 
             {/*<HotlistRoute path='/hotlist' component = { Hotlist } />*/}
-            <Route path='/hotlist' component = { Hotlist }/>
+            {/* <Route path='/hotlist' component = { Hotlist }/> */}
+            <Route path='/hotlist' component = { Sortlist }/>
 
             {/*<HotlistRoute path='/hotlist' component = { Hotlist } />*/}
             <Route path='/privacy_policy' component = { PrivacyPolicy }/>

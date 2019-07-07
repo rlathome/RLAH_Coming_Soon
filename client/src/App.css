@@ -836,6 +836,17 @@ th, td {
   text-align: center !important;
 }
 
+.selected_header {
+  background-color: #5cbda4 !important;
+  color: white !important;
+}
+
+.click_to_sort {
+  font-size: 1.65vw;
+  font-weight: bold;
+  margin: 2.5vw;
+}
+
 .row_header {
   padding: .5vw;
   font-size: 2vw;

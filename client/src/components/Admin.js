@@ -63,6 +63,17 @@ export default class Admin extends Component{
       alert('Guest Form Hide: '+res.data.toUpperCase());
     }).catch(err=>console.log('error hiding guests: ',err));
   }
+  submitEvent(){
+    let event_date = this.refs.event_date.value;
+    let slots_avail = this.refs.slots_avail.value.toString();
+    axios.post(url+'/info/submitagenda',{event_date,slots_avail}).then((response)=>{
+      console.log('success: ',response);
+      alert('your agenda has been updated');
+    }).catch((err)=>{
+      console.log('err - ',err);
+    });
+  }
+
   submit_agenda_event(){
     let event_num = 0;
     let agenda = [];

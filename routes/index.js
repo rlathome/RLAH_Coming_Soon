@@ -30,6 +30,16 @@ router.get('/agenda_items',(req,res,next)=>{
     res.json(agenda);
   })
 });
+router.post('/submitagenda',function(req,res,next){
+  console.log('agenda: ',req.body);
+  Administrator.update({},{
+      'event_date':req.body.event_date,
+      'slots_available':req.body.slots_avail
+    },function(err){
+    if(err) ()=>console.log('error: ',err);
+    res.send('success');
+  });
+});
 
 router.post('/update_agenda_item/:id',(req,res,next)=>{
   AgendaItem.findByIdAndUpdate(req.params.id,req.body,(err)=>{

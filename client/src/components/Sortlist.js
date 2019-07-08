@@ -100,7 +100,8 @@ export default class Hotlist extends Component{
       just_sorted:column_name
     });
   }
-  changeView(view){
+  changeView(event,view){
+    event.target.setAttribute('class','view-by-btn view-by-btn-clicked');
     this.setState({
       view
     });
@@ -135,6 +136,8 @@ export default class Hotlist extends Component{
       after_tour_md,
       after_tour_va
     }
+    const list_btn_style = (view==='list') ? 'view-by-btn view-by-btn-clicked' : 'view-by-btn';
+    const map_btn_style = (view==='map') ? 'view-by-btn view-by-btn-clicked' : 'view-by-btn';
 
     return(
       <main>
@@ -147,8 +150,8 @@ export default class Hotlist extends Component{
 
       <div>View by</div>
       <div>
-        <span className='view-by-btn' onClick={()=>this.changeView('list')}>List</span>
-        <span className='view-by-btn' onClick={()=>this.changeView('map')}>Map</span>
+        <span className={list_btn_style} onClick={(e)=>this.changeView(e,'list')}>List</span>
+        <span className={map_btn_style} onClick={(e)=>this.changeView(e,'map')}>Map</span>
       </div>
 
       {

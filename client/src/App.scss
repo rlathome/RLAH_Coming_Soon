@@ -821,7 +821,8 @@ td{
 .second_table{
   th{
     @include header_bkgd;
-    padding:1vw
+    padding:1vw;
+    cursor: pointer;
   }
   .row_header:nth-child(n+2){
     margin-top:1.5vw;
@@ -946,4 +947,17 @@ tbody>tr:nth-child(1){
 .hotlist_object{
   width:90vw;
   height:100vh;
+}
+.view-by-btn{
+  display: inline-block;
+  background-color:#363636;
+  color:white;
+  font-size:2.5vw;
+  cursor:pointer;
+  padding:1.5vw 5vw;
+  margin:$section_padding 0vw;
+  &-clicked{
+    background-color:#5cbda4;
+    color:#fff;
+  }
 }

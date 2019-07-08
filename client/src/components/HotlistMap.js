@@ -10,6 +10,8 @@ class HotlistMap extends Component{
     super(props)
   }
   render(){
+    const { googleMaps, after_tour, after_tour_md, after_tour_va } = this.props;
+    console.log('after tour in map: ',after_tour);
     let pt_center = {lat:38.893534,lng:-77.0215994};
     const marcelMapType = new google.maps.StyledMapType(
       [
@@ -131,11 +133,10 @@ class HotlistMap extends Component{
                   lng:0
                 },
                 onLoaded: (googleMaps, map, marker) => {
-
-                  // Set Marker animation
-                  marker.setAnimation(googleMaps.Animation.DROP)
                   map.mapTypes.set('styled_map',marcelMapType);
                   map.setMapTypeId('styled_map');
+
+
                 }
               }
 
@@ -144,11 +145,72 @@ class HotlistMap extends Component{
             zoom = {11}
 
             onLoaded = {
-              (googleMaps,map)=>{
+              (googleMaps,map,marker)=>{
+                // Set Marker animation
+
                 var goo = google.maps,
                 service = new goo.places.PlacesService(map),
                 request,
                 markers=[];
+                var service = new goo.places.PlacesService(map);
+                var geocoder = new goo.Geocoder();
+                var infowindow = new goo.InfoWindow();
+                var bounds = new google.maps.LatLngBounds();
+                var nextAddress = 0;
+                let delay = 100;
+                function createMarker(add,lat,lng) {
+                  var contentString = add;
+                  var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat,lng),
+                    map: map,
+                          });
+                marker.setAnimation(googleMaps.Animation.DROP);
+                 google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(contentString);
+                    infowindow.open(map,marker);
+                  });
+
+                  bounds.extend(marker.position);
+
+                }
+                function geocodeAddress(address, next) {
+                  geocoder.geocode({address:address}, function (results,status)
+                    {
+                       if (status == google.maps.GeocoderStatus.OK) {
+                        var p = results[0].geometry.location;
+                        //console.log('GEO LOC - ',p)
+                        var lat=p.lat();
+                        var lng=p.lng();
+                        createMarker(address,lat,lng);
+                      }
+                      else {
+                         if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                          nextAddress--;
+                          delay++;
+                          //console.log('delay NOW - ',delay)
+                        } else {
+                                      }
+                      }
+                      next();
+                    }
+                  );
+                }
+                var locations = after_tour.concat(after_tour_va).concat(after_tour_md);
+                console.log('after tour in MAP ',locations)
+                var nextAddress = 0;
+                function theNext() {
+
+                  if(nextAddress < locations.length){
+                    setTimeout(()=>{
+                      geocodeAddress(locations[nextAddress].address,theNext);
+                      nextAddress++;
+                    },delay);
+
+                  }else{
+                    map.fitBounds(bounds);
+                  }
+                }
+                theNext();
               }
           }
           />

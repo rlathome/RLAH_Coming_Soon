@@ -1195,6 +1195,7 @@ td:nth-child(1) {
   background-color: #4c4b4b;
   color: white;
   padding: 1vw;
+  cursor: pointer;
 }
 
 .second_table .row_header:nth-child(n+2) {
@@ -1309,4 +1310,19 @@ tbody > tr:nth-child(1) {
 .hotlist_object {
   width: 90vw;
   height: 100vh;
+}
+
+.view-by-btn {
+  display: inline-block;
+  background-color: #363636;
+  color: white;
+  font-size: 2.5vw;
+  cursor: pointer;
+  padding: 1.5vw 5vw;
+  margin: 2.5vh 0vw;
+}
+
+.view-by-btn-clicked {
+  background-color: #5cbda4;
+  color: #fff;
 }

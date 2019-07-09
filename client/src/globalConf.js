@@ -1,5 +1,5 @@
-const status = 'development';
- // const status = 'production';
+//const status = 'development';
+ const status = 'production';
 
 const getApi = () =>{
   if(status === 'development'){

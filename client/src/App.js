@@ -250,8 +250,8 @@ class App extends Component {
 
 
             {/*// Switch out these links during development:*/}
-            <Route path='/admin' component = { Admin } />
-            {/* <AdminRoute path='/admin' component = { Admin } /> */}
+            {/*<Route path='/admin' component = { Admin } /> */}
+             <AdminRoute path='/admin' component = { Admin } />
 
             <Route exact path='/guest' component = { GuestRegistration } />
             {/* <GuestRoute exact path='/guest' component = { GuestRegistration } /> */}

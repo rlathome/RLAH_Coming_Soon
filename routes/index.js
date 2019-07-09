@@ -76,7 +76,7 @@ router.get('/after_tour_mapping',function(req,res,next){
     //Change this definiton
     const after_tour = admin[0].after_tour_va;
 
-    console.log('AFTER TOUR: ',after_tour);
+    console.log('AFTER TOUR: ',after_tour.length);
     after_tour.forEach((item)=>{
       console.log('TO CREATE: ',item);
 

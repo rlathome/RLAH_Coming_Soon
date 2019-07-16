@@ -16,7 +16,7 @@ export default class Hotlist extends Component{
       after_tour_md:'',
       after_tour_va:'',
       just_sorted:'',
-      arrow:true,
+      arrow:'down',
       view:'list'
     }
     this.dataService = new DataService();
@@ -61,19 +61,30 @@ export default class Hotlist extends Component{
 
   onSort(event, sortKey,tour){
     console.log('sorting ',sortKey)
+
     const column_name = tour+sortKey;
-    this.setState({
-      arrow:!this.state.arrow
-    })
+    // this.setState({
+    //   arrow:!this.state.arrow
+    // })
+
+    //remove sorting color if new column clicked:
     if(this.state.just_sorted !='' && this.state.just_sorted !=column_name){
       let target = document.getElementsByClassName('selected_header')[0];
       target && target.setAttribute('class','')
+      this.setState({
+        arrow:'down'
+      })
     }
     if(this.state.just_sorted==column_name){
       let to_reverse = this.state[tour];
       to_reverse = to_reverse.reverse();
+      let new_arrow = 'up'
+      if(this.state.arrow=='up'){
+        new_arrow = 'down'
+      }
       this.setState({
-        [tour]:to_reverse
+        [tour]:to_reverse,
+        arrow:new_arrow
       });
       return;
     }
@@ -128,7 +139,7 @@ export default class Hotlist extends Component{
         );
       });
     }
-    let sort_arrow = (arrow==true) ? (<span><i className="fa fa-angle-up"></i></span>) : (<span><i className="fa fa-angle-down"></i></span>);
+    let sort_arrow = (arrow=='up') ? (<span><i className="fa fa-arrow-up"></i></span>) : (<span><i className="fa fa-arrow-down"></i></span>);
 
     const map_props = {
       center:{lat:38.910136,lng:-77.042510},
@@ -157,7 +168,7 @@ export default class Hotlist extends Component{
       {
           view === 'list' && (  <section className="qualifications_msg">
               <ul className="hotlist_title_list">
-                <li>To submit a property to the Hot List<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfkUnV09CSId-qYSzaop9Wt5LObd9Auv4fFaIxBgm_TVakutA/viewform"> click here</a></li>
+                <li>To submit a property to the Hot List<a href="./hotlist_signup"> click here</a></li>
                 <li>Additional off-market properties that may not be on the sponsored tour</li>
                 <li>Scroll down to view the complete list sorted by DC, MD, & VA</li>
                 <li>If a property address is blue, click for additional media</li>
@@ -185,12 +196,12 @@ export default class Hotlist extends Component{
                 <tbody>
                 <div className="row_header">DC</div>
                   <tr>
-                  <th onClick={(e)=>this.onSort(e,'address','after_tour')}>Address {(sort_arrow)}</th>
-                  <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour')} className="aftertour_agent">Listing Agent</th>
-                  <th onClick={(e)=>this.onSort(e,'est_price','after_tour')} className="aftertour_price">Est. Price</th>
-                  <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour')} className="aftertour_sqft">BR/BA</th>
-                  <th onClick={(e)=>this.onSort(e,'will_sell','after_tour')} className="aftertour_willsell">Sell Off Mkt?</th>
-                  <th onClick={(e)=>this.onSort(e,'est_live','after_tour')} className="aftertour_est_live">Est. Live Date</th>
+                  <th onClick={(e)=>this.onSort(e,'address','after_tour')}>Address {just_sorted=='after_touraddress' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour')} className="aftertour_agent">Listing Agent {just_sorted=='after_tourlisting_agt' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'est_price','after_tour')} className="aftertour_price">Est. Price {just_sorted=='after_tourest_price' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour')} className="aftertour_sqft">BR/BA {just_sorted=='after_tourest_sq_ft' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'will_sell','after_tour')} className="aftertour_willsell">Sell Off Mkt? {just_sorted=='after_tourwill_sell' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'est_live','after_tour')} className="aftertour_est_live">Est. Live Date {just_sorted=='after_tourest_live' && sort_arrow}</th>
                   </tr>
 
                   {
@@ -198,24 +209,24 @@ export default class Hotlist extends Component{
                   }
                  <div className="row_header">MD</div>
                  <tr>
-                   <th onClick={(e)=>this.onSort(e,'address','after_tour_md')}>Address</th>
-                   <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour_md')} className="aftertour_agent">Listing Agent</th>
-                   <th onClick={(e)=>this.onSort(e,'est_price','after_tour_md')} className="aftertour_price">Est. Price</th>
-                   <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour_md')} className="aftertour_sqft">BR/BA</th>
-                   <th onClick={(e)=>this.onSort(e,'will_sell','after_tour_md')} className="aftertour_willsell">Sell Off Mkt?</th>
-                   <th onClick={(e)=>this.onSort(e,'est_live','after_tour_md')} className="aftertour_est_live">Est. Live Date</th>
+                   <th onClick={(e)=>this.onSort(e,'address','after_tour_md')}>Address {just_sorted=='after_tour_mdaddress' && sort_arrow}</th>
+                   <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour_md')} className="aftertour_agent">Listing Agent {just_sorted=='after_tour_mdlisting_agt' && sort_arrow}</th>
+                   <th onClick={(e)=>this.onSort(e,'est_price','after_tour_md')} className="aftertour_price">Est. Price {just_sorted=='after_tour_mdest_price' && sort_arrow}</th>
+                   <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour_md')} className="aftertour_sqft">BR/BA {just_sorted=='after_tour_mdest_sq_ft' && sort_arrow}</th>
+                   <th onClick={(e)=>this.onSort(e,'will_sell','after_tour_md')} className="aftertour_willsell">Sell Off Mkt? {just_sorted=='after_tour_mdwill_sell' && sort_arrow}</th>
+                   <th onClick={(e)=>this.onSort(e,'est_live','after_tour_md')} className="aftertour_est_live">Est. Live Date {just_sorted=='after_tour_mdest_live' && sort_arrow}</th>
                  </tr>
                   {
                     after_tour_md && table_contents('after_tour_md')
                   }
                   <div className="row_header">VA</div>
                   <tr>
-                  <th onClick={(e)=>this.onSort(e,'address','after_tour_va')}>Address</th>
-                  <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour_va')} className="aftertour_agent">Listing Agent</th>
-                  <th onClick={(e)=>this.onSort(e,'est_price','after_tour_va')} className="aftertour_price">Est. Price</th>
-                  <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour_va')} className="aftertour_sqft">BR/BA</th>
-                  <th onClick={(e)=>this.onSort(e,'will_sell','after_tour_va')} className="aftertour_willsell">Sell Off Mkt?</th>
-                  <th onClick={(e)=>this.onSort(e,'est_live','after_tour_va')} className="aftertour_est_live">Est. Live Date</th>
+                  <th onClick={(e)=>this.onSort(e,'address','after_tour_va')}>Address {just_sorted=='after_tour_vaaddress' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'listing_agt','after_tour_va')} className="aftertour_agent">Listing Agent {just_sorted=='after_tour_valisting_agt' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'est_price','after_tour_va')} className="aftertour_price">Est. Price {just_sorted=='after_tour_vaest_price' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'est_sq_ft','after_tour_va')} className="aftertour_sqft">BR/BA {just_sorted=='after_tour_vaest_sq_ft' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'will_sell','after_tour_va')} className="aftertour_willsell">Sell Off Mkt? {just_sorted=='after_tour_vawill_sell' && sort_arrow}</th>
+                  <th onClick={(e)=>this.onSort(e,'est_live','after_tour_va')} className="aftertour_est_live">Est. Live Date {just_sorted=='after_tour_vaest_live' && sort_arrow}</th>
                   </tr>
                   {
                     after_tour_va && table_contents('after_tour_va')

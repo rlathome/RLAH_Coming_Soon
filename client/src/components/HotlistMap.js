@@ -158,6 +158,10 @@ class HotlistMap extends Component{
                 var bounds = new google.maps.LatLngBounds();
                 var nextAddress = 0;
                 let delay = 100;
+
+                var locations = after_tour.concat(after_tour_va).concat(after_tour_md);
+                console.log('after tour in MAP ',locations)
+
                 function createMarker(add,lat,lng) {
                   var contentString = add;
                   var marker = new google.maps.Marker({
@@ -195,9 +199,6 @@ class HotlistMap extends Component{
                     }
                   );
                 }
-                var locations = after_tour.concat(after_tour_va).concat(after_tour_md);
-                console.log('after tour in MAP ',locations)
-                var nextAddress = 0;
                 function theNext() {
 
                   if(nextAddress < locations.length){
@@ -210,6 +211,7 @@ class HotlistMap extends Component{
                     map.fitBounds(bounds);
                   }
                 }
+                
                 theNext();
               }
           }

@@ -12,7 +12,8 @@ export default class HostRegistration extends Component{
     this.state={
       out_of_bounds:false,
       address_entered:false,
-      slots_available:''
+      slots_available:'',
+      coords:{}
     }
   }
   componentWillMount(){
@@ -48,6 +49,12 @@ export default class HostRegistration extends Component{
       address
     })
   }
+  enterCoords(coords){
+    console.log('ENTERING COORDS!! ',coords)
+    this.setState({
+      coords
+    });
+  }
   no_address_entered(){
     this.setState({
       address_entered:false
@@ -55,6 +62,7 @@ export default class HostRegistration extends Component{
   }
   next(){
     this.props.history.push('/host/registration/'+this.state.address);
+    this.props.history.push(`/host/registration/${this.state.address}/${this.state.coords.lng}/${this.state.coords.lat}`)
   }
   render(){
     const out_of_bounds = (this.state.address_entered && this.state.out_of_bounds) ? (
@@ -78,6 +86,7 @@ export default class HostRegistration extends Component{
       address_form = '';
     }
     const map_props = {
+      sendCoords:this.enterCoords.bind(this),
       out_of_bounds:this.out_of_bounds.bind(this),
       not_out_of_bounds:this.not_out_of_bounds.bind(this),
       no_address_entered :this.no_address_entered.bind(this),

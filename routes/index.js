@@ -15,10 +15,10 @@ router.get('/test',function(req,res,next){
 router.get('/admin_info',function(req,res,next){
   Administrator.find({},'',function(err,admin){
     if(err) console.log('err! - , ',err)
-    //console.log('admin: ',admin);
-    admin[0].after_tour.forEach((item)=>{
-      console.log(JSON.stringify(item));
-    })
+    console.log('admin: ',admin);
+    // admin[0].after_tour.forEach((item)=>{
+    //   console.log(JSON.stringify(item));
+    // })
     res.json(admin);
   })
 });
@@ -199,6 +199,9 @@ router.post('/change_after_tour_event/:id/:tour',(req,res,next)=>{
     break;
   };
 });
+router.post('/new_hotlist',(req,res,next)=>{
+  console.log('hotlist to create: ',req.body);
+})
 router.post('/create_after_tour_event/:tour',(req,res,next)=>{
   console.log(`tour to update: ${req.body.items}, ${req.params.tour}`)
   const tour = req.params.tour;

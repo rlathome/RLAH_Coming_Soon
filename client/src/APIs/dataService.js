@@ -4,6 +4,17 @@ export class DataService{
   constructor(){
     this.api = new APIService();
   }
+  submitHotlist(data){
+    console.log('data to submit: ',data)
+    return new Promise((res,rej)=>{
+      this.api.post('info/new_hotlist',data).then((resp)=>{
+        console.log('success posting! ',resp.data);
+        res(resp.data);
+      })
+    }).catch((err)=>{
+      console.log('err - ',err);
+    });
+  }
   getAdminInfo(footerLogoEdit = null){
     return new Promise((res,rej)=>{
       this.api.get('info/admin_info').then((admin)=>{

@@ -5,6 +5,7 @@ import Home from './components/Home';
 import HostMap from './components/HostMap';
 import Hotlist from './components/Hotlist';
 import Sortlist from './components/Sortlist';
+import HotlistForm from './components/forms/HotlistForm';
 import GuestLoginReact from './components/GuestLoginReact';
 import Login from './components/Login';
 import GuestRegistration from './components/GuestRegistration';
@@ -239,7 +240,7 @@ class App extends Component {
       <div>
         <Router>
           <div>
-          {["/home", "/guest", "/host", "/host/registration/:addr","/admin","/agenda","/hotlist","/privacy_policy"].map((path) =>
+          {["/home", "/guest", "/host", "/host/registration/:addr","/admin","/agenda","/hotlist","/privacy_policy","/hotlist_signup"].map((path) =>
               <Route exact path={path} component={Header} />
           )}
             <Route exact path='/' component = { Home } />
@@ -258,7 +259,7 @@ class App extends Component {
             {/* <GuestRoute exact path='/guest' component = { GuestRegistration } /> */}
 
             <Route exact path='/host' component = { HostMap } />
-            <Route path='/host/registration/:addr' component = { HostRegistration } />
+            <Route path='/host/registration/:addr/:lng/:lat' component = { HostRegistration } />
             {/* <HostRoute exact path='/host' component = { HostMap } />
             <HostRoute path='/host/registration/:addr' component = { HostRegistration } /> */}
 
@@ -267,6 +268,8 @@ class App extends Component {
             {/*<HotlistRoute path='/hotlist' component = { Hotlist } />*/}
             {/* <Route path='/hotlist' component = { Hotlist }/> */}
             <Route path='/hotlist' component = { Sortlist }/>
+
+            <Route path='/hotlist_signup' component = { HotlistForm }/>
 
             {/*<HotlistRoute path='/hotlist' component = { Hotlist } />*/}
             <Route path='/privacy_policy' component = { PrivacyPolicy }/>

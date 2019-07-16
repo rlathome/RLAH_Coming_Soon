@@ -1326,3 +1326,65 @@ tbody > tr:nth-child(1) {
   background-color: #5cbda4;
   color: #fff;
 }
+
+.hotlistform-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.hotlistform {
+  margin-top: 2.5vh;
+  border-top: 10px solid #888888;
+  text-align: left;
+  width: 50vw;
+  padding: 2.5vw;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .hotlistform {
+    width: 95vw;
+  }
+}
+
+.hotlist-inst {
+  text-align: left;
+}
+
+.hotlistform-label {
+  font-size: 1.8em;
+  margin-bottom: 2.5vh;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .hotlistform-label {
+    font-size: 1em;
+  }
+}
+
+.hotlistform-input {
+  width: 55%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #888888;
+  height: 3.5vw;
+}
+
+.hotlistform-input-long {
+  width: 100%;
+}
+
+@media only screen and (min-width: 355px) and (max-width: 668px) {
+  .hotlistform-input {
+    height: 10vw;
+    width: 100%;
+  }
+}
+
+.hotlistform-submit {
+  margin-top: 2.5vh;
+}
+
+.hotlistform-entry {
+  margin: 2.5vh 0vw;
+}
